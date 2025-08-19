@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Updated Title -->
+    <title>Sandheep Gopinath - Product Manager</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles & Tailwind Config -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #e2e2e2;
+        }
+        /* Custom gradient for hero and CTA */
+        .gradient-text {
+            background: linear-gradient(90deg, #4f46e5, #c026d3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-bg {
+            background: linear-gradient(90deg, #4f46e5, #c026d3);
+        }
+        /* Subtle border gradient */
+        .border-gradient {
+            border: 1px solid;
+            border-image-slice: 1;
+            border-image-source: linear-gradient(to right, #4f46e5, #c026d3);
+        }
+        /* Animation for scroll-in effect */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Glassmorphism effect for skill pills */
+        .glass-pill {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); /* For Safari */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+        }
+        .glass-pill:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-dark': '#0a0a0a',
+                        'brand-gray': '#1a1a1a',
+                        'brand-light': '#e2e2e2',
+                        'brand-primary': '#4f46e5',
+                        'brand-secondary': '#c026d3',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-brand-dark/80 backdrop-blur-sm">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Updated Name -->
+            <a href="#" class="text-2xl font-bold tracking-tighter">Sandheep Gopinath.</a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="text-brand-light hover:text-brand-primary transition-colors">About</a>
+                <a href="#work" class="text-brand-light hover:text-brand-primary transition-colors">Work</a>
+                <a href="#insights" class="text-brand-light hover:text-brand-primary transition-colors">Insights</a>
+                <a href="#contact" class="text-brand-light hover:text-brand-primary transition-colors">Contact</a>
+            </nav>
+            <a href="#contact" class="hidden md:block px-5 py-2.5 text-sm font-medium text-white gradient-bg rounded-lg hover:opacity-90 transition-opacity">
+                Let's Talk
+            </a>
+            <button id="mobile-menu-button" class="md:hidden text-brand-light">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
+            <a href="#about" class="block text-brand-light hover:text-brand-primary transition-colors py-2">About</a>
+            <a href="#work" class="block text-brand-light hover:text-brand-primary transition-colors py-2">Work</a>
+            <a href="#insights" class="block text-brand-light hover:text-brand-primary transition-colors py-2">Insights</a>
+            <a href="#contact" class="block text-brand-light hover:text-brand-primary transition-colors py-2">Contact</a>
+            <a href="#contact" class="block mt-2 px-5 py-2.5 text-sm font-medium text-white gradient-bg rounded-lg text-center">
+                Let's Talk
+            </a>
+        </div>
+    </header>
+
+    <main class="pt-24">
+
+        <!-- Hero Section -->
+        <section id="home" class="py-20 md:py-32">
+            <div class="container mx-auto px-6 text-center">
+                <div class="max-w-4xl mx-auto">
+                    <!-- Updated Headline -->
+                    <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter mb-6 reveal">
+                        Driving <span class="gradient-text">Product Innovation</span> with AI & Data.
+                    </h1>
+                    <!-- Updated Sub-headline -->
+                    <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 reveal" style="transition-delay: 150ms;">
+                        As a Product Manager with over 10 years of experience, I specialize in launching and scaling data-intensive products that enhance operational efficiency and create measurable business value.
+                    </p>
+                    <!-- Updated Buttons with Download Resume -->
+                    <div class="flex flex-wrap justify-center items-center gap-4 reveal" style="transition-delay: 300ms;">
+                        <a href="#contact" class="px-8 py-3.5 text-base font-medium text-white gradient-bg rounded-lg hover:opacity-90 transition-opacity">
+                            Work With Me
+                        </a>
+                        <!-- ADD YOUR RESUME PDF FILE to the same folder as this HTML file -->
+                        <a href="Sandheep Gopinath Resume June 2025.pdf" download class="px-8 py-3.5 text-base font-medium text-brand-light bg-brand-gray rounded-lg hover:bg-gray-800 transition-colors">
+                            Download Resume
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section - UPDATED -->
+        <section class="py-20 reveal">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight">My Toolkit</h2>
+                    <p class="text-lg text-gray-400 mt-4 max-w-2xl mx-auto">The skills and technologies I use to build successful products.</p>
+                </div>
+                <div class="max-w-4xl mx-auto">
+                    <!-- Technical Skills -->
+                    <div class="mb-12">
+                        <h3 class="text-xl font-semibold text-center mb-6 text-brand-light">Technical Skills</h3>
+                        <div class="flex flex-wrap justify-center gap-3">
+                            <a href="https://en.wikipedia.org/wiki/SQL" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">SQL</a>
+                            <a href="https://prestodb.io/" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Presto SQL</a>
+                            <a href="https://www.python.org/" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Python</a>
+                            <a href="https://en.wikipedia.org/wiki/Machine_learning" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Machine Learning</a>
+                            <a href="https://en.wikipedia.org/wiki/Artificial_intelligence" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Artificial Intelligence</a>
+                            <a href="https://en.wikipedia.org/wiki/Data_analysis" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Data Analysis</a>
+                            <a href="https://en.wikipedia.org/wiki/Computer_vision" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Computer Vision</a>
+                            <a href="https://en.wikipedia.org/wiki/Natural_language_processing" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">NLP</a>
+                            <a href="https://git-scm.com/" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Git</a>
+                            <a href="https://www.raspberrypi.org/" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Raspberry Pi</a>
+                        </div>
+                    </div>
+                    <!-- Tools & Platforms -->
+                    <div>
+                        <h3 class="text-xl font-semibold text-center mb-6 text-brand-light">Tools & Platforms</h3>
+                        <div class="flex flex-wrap justify-center gap-3">
+                            <a href="https://www.pendo.io/" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Pendo</a>
+                            <a href="https://www.microstrategy.com/" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">MicroStrategy</a>
+                            <a href="https://analytics.google.com/" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Google Analytics</a>
+                            <a href="https://www.tableau.com/" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Tableau</a>
+                            <a href="https://powerbi.microsoft.com/" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Power BI</a>
+                            <a href="https://www.atlassian.com/software/jira" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Jira</a>
+                            <a href="https://www.atlassian.com/software/confluence" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Confluence</a>
+                            <a href="https://miro.com/" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Miro</a>
+                            <a href="https://balsamiq.com/" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Balsamiq</a>
+                            <a href="https://docs.microsoft.com/en-us/sql/ssms/sql-server-management-studio-ssms" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">SSMS</a>
+                            <a href="https://github.com/" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About / Services Section -->
+        <section id="about" class="py-20 md:py-32">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight">What I Do</h2>
+                    <p class="text-lg text-gray-400 mt-4 max-w-2xl mx-auto">I leverage a decade of experience to transform complex challenges into successful products.</p>
+                </div>
+                <!-- Updated Services -->
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-brand-gray p-8 rounded-xl reveal" style="transition-delay: 100ms;">
+                        <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-6">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M12 6V3m0 18v-3m6-9h3m-18 0h3m12 5.333A8.958 8.958 0 0112 18c-4.95 0-8.958-4.008-8.958-8.958S7.05 .083 12 .083s8.958 4.008 8.958 8.958z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Product Leadership</h3>
+                        <p class="text-gray-400">Owning the product vision and strategic roadmap, leading cross-functional teams, and driving GTM strategy to achieve strong user adoption and enterprise business.</p>
+                    </div>
+                    <div class="bg-brand-gray p-8 rounded-xl reveal" style="transition-delay: 200ms;">
+                        <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Data-Driven Strategy</h3>
+                        <p class="text-gray-400">Defining and launching analytics dashboards to track usage, diagnose adoption barriers, and enable data-driven prioritization for continuous improvement.</p>
+                    </div>
+                    <div class="bg-brand-gray p-8 rounded-xl reveal" style="transition-delay: 300ms;">
+                        <div class="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Digital Transformation</h3>
+                        <p class="text-gray-400">Leading product discovery for internal digital products, engaging users across global factories to solve operational challenges and deliver measurable efficiency gains.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Work / Case Studies Section -->
+        <section id="work" class="py-20 md:py-32 bg-brand-gray">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Professional Experience</h2>
+                    <p class="text-lg text-gray-400 mt-4 max-w-2xl mx-auto">A summary of my recent roles and accomplishments.</p>
+                </div>
+                <!-- Updated Work Experience -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="group reveal" style="transition-delay: 100ms;">
+                        <div class="bg-brand-dark p-8 rounded-xl h-full">
+                            <h3 class="text-xl font-bold mb-2">Product Manager | Verint Systems</h3>
+                            <p class="text-sm text-gray-400 mb-4">March 2024 - Present</p>
+                            <ul class="list-disc list-inside text-gray-400 space-y-2">
+                                <li>Launched and scaled "Request Anything" to 1,200+ MAU and 10K+ monthly requests.</li>
+                                <li>Owned product roadmap and streamlined execution, improving velocity by 20% via Agile processes.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="group reveal" style="transition-delay: 200ms;">
+                         <div class="bg-brand-dark p-8 rounded-xl h-full">
+                            <h3 class="text-xl font-bold mb-2">Product Manager | HRS Group</h3>
+                            <p class="text-sm text-gray-400 mb-4">Aug 2022 - March 2024</p>
+                            <ul class="list-disc list-inside text-gray-400 space-y-2">
+                                <li>Led 3 product teams, driving monetization and adoption for B2B clients.</li>
+                                <li>Transformed platforms to self-service, reducing onboarding time by 99% and increasing revenue by 12%.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="group reveal" style="transition-delay: 300ms;">
+                         <div class="bg-brand-dark p-8 rounded-xl h-full">
+                            <h3 class="text-xl font-bold mb-2">Product Manager, Digital Transformation | Danfoss</h3>
+                            <p class="text-sm text-gray-400 mb-4">Sep 2017 - Aug 2021</p>
+                            <ul class="list-disc list-inside text-gray-400 space-y-2">
+                                <li>Led product discovery for internal digital tools across global factories.</li>
+                                <li>Delivered a vision-based quality system (+17% efficiency) and a SCADA reporting platform (+2.4% productivity).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Insights / Blog Section -->
+        <section id="insights" class="py-20 md:py-32">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Latest Insights</h2>
+                    <p class="text-lg text-gray-400 mt-4 max-w-2xl mx-auto">Sharing my thoughts on AI, technology, and the future of business.</p>
+                </div>
+                <div class="space-y-12 max-w-3xl mx-auto">
+                    <!-- Blog Post 1 -->
+                    <div class="group reveal">
+                        <p class="text-sm text-gray-400 mb-2">August 19, 2025</p>
+                        <h3 class="text-2xl font-bold mb-3 group-hover:text-brand-primary transition-colors"><a href="#">The Fallacy of 'Unbiased' AI</a></h3>
+                        <p class="text-gray-400 mb-4">Exploring the hidden biases in machine learning models and how we can work towards a more equitable future.</p>
+                        <a href="#" class="font-medium text-brand-primary hover:text-brand-secondary transition-colors">Read More &rarr;</a>
+                    </div>
+                    <!-- Blog Post 2 -->
+                    <div class="group reveal">
+                        <p class="text-sm text-gray-400 mb-2">July 28, 2025</p>
+                        <h3 class="text-2xl font-bold mb-3 group-hover:text-brand-primary transition-colors"><a href="#">Beyond the Hype: Practical AI for Small Businesses</a></h3>
+                        <p class="text-gray-400 mb-4">You don't need a massive budget to leverage AI. Here are five practical ways small businesses can start today.</p>
+                        <a href="#" class="font-medium text-brand-primary hover:text-brand-secondary transition-colors">Read More &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section id="contact" class="py-20 md:py-32 bg-brand-gray">
+            <div class="container mx-auto px-6 text-center">
+                <div class="max-w-2xl mx-auto reveal">
+                    <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-6">
+                        Have a project in mind? <br> <span class="gradient-text">Let's create something great.</span>
+                    </h2>
+                    <p class="text-lg text-gray-400 mb-10">
+                        I'm currently available for select product leadership and consulting opportunities.
+                    </p>
+                    <!-- Updated mailto link -->
+                    <a href="mailto:me@sandheepgopinath.com" class="inline-block px-10 py-4 text-lg font-medium text-white gradient-bg rounded-lg hover:opacity-90 transition-opacity">
+                        Get In Touch
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark">
+        <div class="container mx-auto px-6 py-12">
+            <div class="md:flex md:justify-between md:items-center">
+                <div class="mb-8 md:mb-0">
+                    <!-- Updated Name -->
+                    <a href="#" class="text-2xl font-bold tracking-tighter">Sandheep Gopinath.</a>
+                    <p class="text-gray-400 mt-2">Product Manager</p>
+                </div>
+                <!-- Updated Social Links -->
+                <div class="flex items-center space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors" aria-label="GitHub">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.942.359.308.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors" aria-label="LinkedIn">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.47 1.344h2.94v8.59H3.535v-8.59z" clip-rule="evenodd" /></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
+                <p>&copy; 2025 Sandheep Gopinath. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-lg');
+            } else {
+                header.classList.remove('shadow-lg');
+            }
+        });
+
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Optional: unobserve after revealing
+                    // observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1 // Trigger when 10% of the element is visible
+        });
+
+        revealElements.forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>
