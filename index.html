@@ -53,18 +53,37 @@
             border-color: rgba(255, 255, 255, 0.2);
             transform: translateY(-3px);
         }
-        /* Loader for Gemini API */
-        .loader {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #4f46e5;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
+        /* Chatbot styles */
+        .chat-bubble {
+            max-width: 75%;
+            padding: 10px 15px;
+            border-radius: 20px;
         }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .user-bubble {
+            background-color: #4f46e5;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+        .ai-bubble {
+            background-color: #2a2a2a;
+            color: #e2e2e2;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+        .typing-indicator span {
+            height: 8px;
+            width: 8px;
+            background-color: #9ca3af;
+            border-radius: 50%;
+            display: inline-block;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1.0); }
         }
     </style>
     <script>
@@ -93,7 +112,7 @@
                 <a href="#about" class="text-brand-light hover:text-brand-primary transition-colors">About</a>
                 <a href="#work" class="text-brand-light hover:text-brand-primary transition-colors">Work</a>
                 <a href="#achievements" class="text-brand-light hover:text-brand-primary transition-colors">Achievements</a>
-                <a href="#ai-simulator" class="text-brand-light hover:text-brand-primary transition-colors">AI Simulator</a>
+                <a href="#ai-chatbot" class="text-brand-light hover:text-brand-primary transition-colors">AI Chatbot</a>
                 <a href="#contact" class="text-brand-light hover:text-brand-primary transition-colors">Contact</a>
             </nav>
             <a href="#contact" class="hidden md:block px-5 py-2.5 text-sm font-medium text-white gradient-bg rounded-lg hover:opacity-90 transition-opacity">
@@ -108,7 +127,7 @@
             <a href="#about" class="block text-brand-light hover:text-brand-primary transition-colors py-2">About</a>
             <a href="#work" class="block text-brand-light hover:text-brand-primary transition-colors py-2">Work</a>
             <a href="#achievements" class="block text-brand-light hover:text-brand-primary transition-colors py-2">Achievements</a>
-            <a href="#ai-simulator" class="block text-brand-light hover:text-brand-primary transition-colors py-2">AI Simulator</a>
+            <a href="#ai-chatbot" class="block text-brand-light hover:text-brand-primary transition-colors py-2">AI Chatbot</a>
             <a href="#contact" class="block text-brand-light hover:text-brand-primary transition-colors py-2">Contact</a>
             <a href="#contact" class="block mt-2 px-5 py-2.5 text-sm font-medium text-white gradient-bg rounded-lg text-center">
                 Let's Talk
@@ -300,23 +319,36 @@
             </div>
         </section>
 
-        <!-- AI Project Simulator Section -->
-        <section id="ai-simulator" class="py-24 md:py-40">
+        <!-- AI Chatbot Section -->
+        <section id="ai-chatbot" class="py-24 md:py-40">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16 reveal">
-                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight">AI Project Simulator</h2>
-                    <p class="text-lg text-gray-400 mt-4 max-w-2xl mx-auto">Have a business problem? Describe it below and my AI assistant will generate a high-level project plan, just like I would.</p>
+                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Chat with my AI Twin</h2>
+                    <p class="text-lg text-gray-400 mt-4 max-w-2xl mx-auto">Ask questions about my professional background, and my AI assistant will answer based on my resume.</p>
                 </div>
                 <div class="max-w-2xl mx-auto reveal">
-                    <div class="bg-brand-gray p-8 rounded-xl">
-                        <textarea id="problem-input" class="w-full h-32 bg-brand-dark text-brand-light p-4 rounded-lg focus:ring-2 focus:ring-brand-primary focus:outline-none" placeholder="e.g., Reduce customer churn for a subscription-based SaaS product..."></textarea>
-                        <button id="simulate-button" class="mt-4 w-full px-8 py-3.5 text-base font-medium text-white gradient-bg rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center">
-                            ✨ Simulate Project Plan
-                        </button>
-                    </div>
-                    <div id="simulator-output" class="mt-8 bg-brand-gray p-8 rounded-xl hidden">
-                        <div id="loader" class="mx-auto loader hidden"></div>
-                        <div id="plan-content" class="text-left"></div>
+                    <div class="bg-brand-gray rounded-xl shadow-lg">
+                        <div id="chat-window" class="h-96 p-4 overflow-y-auto flex flex-col space-y-4">
+                            <!-- Initial AI message -->
+                            <div class="chat-bubble ai-bubble">
+                                <p>Hello! I'm Sandheep's AI Twin. Feel free to ask me anything about his skills, experience, or projects.</p>
+                            </div>
+                        </div>
+                        <div id="typing-indicator-container" class="p-4 hidden">
+                            <div class="chat-bubble ai-bubble inline-block">
+                                <div class="typing-indicator">
+                                    <span></span><span></span><span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 border-t border-brand-dark">
+                            <div class="flex items-center space-x-2">
+                                <input type="text" id="chat-input" class="w-full bg-brand-dark text-brand-light p-3 rounded-lg focus:ring-2 focus:ring-brand-primary focus:outline-none" placeholder="e.g., What was his role at Danfoss?">
+                                <button id="send-button" class="px-5 py-3 text-white gradient-bg rounded-lg hover:opacity-90 transition-opacity">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" /></svg>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -367,37 +399,55 @@
     </footer>
 
     <script>
-        // --- Gemini API Integration ---
-        const simulateButton = document.getElementById('simulate-button');
-        const problemInput = document.getElementById('problem-input');
-        const simulatorOutput = document.getElementById('simulator-output');
-        const loader = document.getElementById('loader');
-        const planContent = document.getElementById('plan-content');
+        // --- Gemini API Chatbot Integration ---
+        const sendButton = document.getElementById('send-button');
+        const chatInput = document.getElementById('chat-input');
+        const chatWindow = document.getElementById('chat-window');
+        const typingIndicatorContainer = document.getElementById('typing-indicator-container');
 
-        simulateButton.addEventListener('click', async () => {
-            const problem = problemInput.value;
-            if (!problem.trim()) {
-                alert('Please describe a business problem.');
-                return;
-            }
+        const resumeContext = `
+            SANDHEEP GOPINATH - PRODUCT MANAGER
+            Contact: +91-9745355256, me@sandheepgopinath.com, Bangalore
+            Experience: 10 years 1 month
 
-            // Show loader and output container
-            simulatorOutput.classList.remove('hidden');
-            loader.classList.remove('hidden');
-            planContent.innerHTML = '';
-            simulateButton.disabled = true;
+            EDUCATION:
+            - Post Graduate Diploma in Leadership & AI-ML, Plaksha University (2021-22)
+            - Post Graduate Program in Artificial Intelligence, McCombs School of Business, University of Texas (2020-21)
+            - Post Graduate Diploma in Embedded System, Accel IT Academy (2016-17)
+            - B. Tech Electronics and Communication, Sree Chitra Tirunal College of Engineering (2012-16)
 
-            const prompt = `
-                As an expert Product Manager, create a high-level project plan for the following business problem: "${problem}".
+            EXPERIENCE:
+            - Product Manager | Verint Systems (March' 24-Present): Spearheaded "Request Anything," growing to 1,200+ MAU and 10K+ monthly requests. Owned product roadmap, improved velocity by 20% via Agile. Launched a real-time analytics dashboard.
+            - Product Manager | HRS Group (Aug '22-March '24): Led 3 product teams (Rebooking, Recommendation Engine, AI/Data Products). Transformed platforms to self-service, reducing onboarding time by 99% and increasing revenue by 12%. Reduced customer complaints by 80% and generated $0.5M in additional revenue by removing low-quality hotels.
+            - Product Manager, Digital Transformation | Danfoss (Sep '17-Aug '21): Led discovery for internal digital products. Delivered MVPs and scaled solutions. Achieved +17% efficiency with a vision-based quality system (won CII Kaizen Gold Award), +2.4% annual productivity with a SCADA reporting platform, and saved $6,672/year per machine with a preventive maintenance solution.
+            - Founding Member, Head of Products and Operation | Synapse Technologies (Aug '14-Sep '17): Defined product vision and strategy for IoT and industrial automation products. Owned product backlog and led GTM strategy.
 
-                Structure the response with the following sections:
-                - **Project Title:** A concise, descriptive title.
-                - **Key Objectives:** 3-4 bullet points outlining the main goals.
-                - **Success Metrics (KPIs):** 3-4 bullet points of measurable key performance indicators.
-                - **Potential Milestones:** A brief, 4-step timeline of major project phases (e.g., Discovery, MVP Development, etc.).
+            OTHER ACHIEVEMENTS:
+            - Led product discovery for Qure.ai's entry into radiology AI.
+            - Built a legal search tool with Manupatra.
+            - Educational Mentor at Great Learning for AI/ML program.
 
-                Keep the language professional, clear, and concise. Format the output cleanly using markdown-style headings and bullet points.
-            `;
+            SKILLS:
+            - Technical: SQL, Presto SQL, Python, Machine Learning, AI, Data Analysis, Computer Vision, NLP, Git, Raspberry Pi.
+            - Tools & Platforms: Pendo, MicroStrategy, Google Analytics, Tableau, Power BI, Jira, Confluence, Miro, Balsamiq, SSMS, GitHub.
+        `;
+
+        const sendMessage = async () => {
+            const userMessage = chatInput.value.trim();
+            if (!userMessage) return;
+
+            // Add user message to chat window
+            const userBubble = document.createElement('div');
+            userBubble.className = 'chat-bubble user-bubble';
+            userBubble.textContent = userMessage;
+            chatWindow.appendChild(userBubble);
+            chatInput.value = '';
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+
+            // Show typing indicator
+            typingIndicatorContainer.classList.remove('hidden');
+
+            const prompt = `You are Sandheep Gopinath's AI Twin, a helpful assistant integrated into his personal website. Your purpose is to answer questions about Sandheep's professional background based ONLY on the information provided below. Do not invent any information or answer questions outside of this context. If a question cannot be answered from the context, politely state that you don't have that specific information. Keep your answers conversational and concise. Here is Sandheep's resume context: \n\n${resumeContext}\n\nNow, answer the following question: "${userMessage}"`;
 
             try {
                 let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
@@ -416,29 +466,37 @@
                 }
 
                 const result = await response.json();
-                
+                let aiResponse = "Sorry, I couldn't process that request. Please try again.";
+
                 if (result.candidates && result.candidates.length > 0 &&
                     result.candidates[0].content && result.candidates[0].content.parts &&
                     result.candidates[0].content.parts.length > 0) {
-                    
-                    let text = result.candidates[0].content.parts[0].text;
-                    
-                    // Basic Markdown to HTML conversion
-                    text = text.replace(/\*\*(.*?)\*\*/g, '<h3 class="text-xl font-bold mt-4 mb-2 text-brand-light">$1</h3>');
-                    text = text.replace(/-\s(.*?)(?:\n|$)/g, '<li class="ml-5 list-disc text-gray-400">$1</li>');
-                    text = text.replace(/<\/li>\s*<li/g, '</li><li'); // Fix list spacing
-                    
-                    planContent.innerHTML = text;
-                } else {
-                    planContent.innerHTML = '<p class="text-red-400">Sorry, the AI could not generate a plan. Please try again.</p>';
+                    aiResponse = result.candidates[0].content.parts[0].text;
                 }
+                
+                // Hide typing indicator and add AI response
+                typingIndicatorContainer.classList.add('hidden');
+                const aiBubble = document.createElement('div');
+                aiBubble.className = 'chat-bubble ai-bubble';
+                aiBubble.textContent = aiResponse;
+                chatWindow.appendChild(aiBubble);
+                chatWindow.scrollTop = chatWindow.scrollHeight;
 
             } catch (error) {
                 console.error('Error calling Gemini API:', error);
-                planContent.innerHTML = '<p class="text-red-400">An error occurred. Please check the console for details.</p>';
-            } finally {
-                loader.classList.add('hidden');
-                simulateButton.disabled = false;
+                typingIndicatorContainer.classList.add('hidden');
+                const errorBubble = document.createElement('div');
+                errorBubble.className = 'chat-bubble ai-bubble';
+                errorBubble.textContent = 'An error occurred. Please try again later.';
+                chatWindow.appendChild(errorBubble);
+                chatWindow.scrollTop = chatWindow.scrollHeight;
+            }
+        };
+
+        sendButton.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
             }
         });
 
