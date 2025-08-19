@@ -30,12 +30,6 @@
         .gradient-bg {
             background: linear-gradient(90deg, #4f46e5, #c026d3);
         }
-        /* Subtle border gradient */
-        .border-gradient {
-            border: 1px solid;
-            border-image-slice: 1;
-            border-image-source: linear-gradient(to right, #4f46e5, #c026d3);
-        }
         /* Animation for scroll-in effect */
         .reveal {
             opacity: 0;
@@ -58,6 +52,19 @@
             background: rgba(255, 255, 255, 0.1);
             border-color: rgba(255, 255, 255, 0.2);
             transform: translateY(-3px);
+        }
+        /* Loader for Gemini API */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4f46e5;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
     <script>
@@ -86,6 +93,7 @@
                 <a href="#about" class="text-brand-light hover:text-brand-primary transition-colors">About</a>
                 <a href="#work" class="text-brand-light hover:text-brand-primary transition-colors">Work</a>
                 <a href="#achievements" class="text-brand-light hover:text-brand-primary transition-colors">Achievements</a>
+                <a href="#ai-simulator" class="text-brand-light hover:text-brand-primary transition-colors">AI Simulator</a>
                 <a href="#contact" class="text-brand-light hover:text-brand-primary transition-colors">Contact</a>
             </nav>
             <a href="#contact" class="hidden md:block px-5 py-2.5 text-sm font-medium text-white gradient-bg rounded-lg hover:opacity-90 transition-opacity">
@@ -100,6 +108,7 @@
             <a href="#about" class="block text-brand-light hover:text-brand-primary transition-colors py-2">About</a>
             <a href="#work" class="block text-brand-light hover:text-brand-primary transition-colors py-2">Work</a>
             <a href="#achievements" class="block text-brand-light hover:text-brand-primary transition-colors py-2">Achievements</a>
+            <a href="#ai-simulator" class="block text-brand-light hover:text-brand-primary transition-colors py-2">AI Simulator</a>
             <a href="#contact" class="block text-brand-light hover:text-brand-primary transition-colors py-2">Contact</a>
             <a href="#contact" class="block mt-2 px-5 py-2.5 text-sm font-medium text-white gradient-bg rounded-lg text-center">
                 Let's Talk
@@ -107,16 +116,15 @@
         </div>
     </header>
 
-    <main class="pt-24">
+    <main>
 
         <!-- Hero Section -->
-        <section id="home" class="py-20 md:py-32">
+        <section id="home" class="min-h-screen flex items-center justify-center">
             <div class="container mx-auto px-6 text-center">
                 <div class="max-w-4xl mx-auto">
                     <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter mb-6 reveal">
                         I build and scale <span class="gradient-text">products that customers love.</span>
                     </h1>
-                    <!-- UPDATED SUB-HEADLINE -->
                     <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 reveal" style="transition-delay: 150ms;">
                         I specialize in launching and scaling data-intensive products that enhance operational efficiency and create measurable business value.
                     </p>
@@ -132,13 +140,12 @@
             </div>
         </section>
 
-        <!-- About Section - MOVED & UPDATED -->
-        <section id="about" class="py-20 md:py-32 bg-brand-gray">
+        <!-- About Section -->
+        <section id="about" class="py-24 md:py-40 bg-brand-gray">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16 reveal">
                     <h2 class="text-3xl md:text-4xl font-bold tracking-tight">About Me</h2>
                 </div>
-                <!-- UPDATED TEXT -->
                 <div class="max-w-3xl mx-auto text-lg text-center text-gray-300 space-y-6 reveal">
                     <p>It all started with an electronics kit. My lifelong passion for understanding <strong class="text-white">how things work</strong> led me from an engineering degree straight into the world of product management.</p>
                     <p>Today, I channel that curiosity into building and scaling AI, IoT, and data products. I thrive on untangling complex problems and turning innovative ideas into solutions that create <strong class="text-white">real-world value</strong>.</p>
@@ -174,7 +181,7 @@
         </section>
 
         <!-- Skills Section -->
-        <section class="py-20 reveal">
+        <section class="py-24 md:py-32 reveal">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold tracking-tight">My Toolkit</h2>
@@ -219,7 +226,7 @@
         </section>
 
         <!-- Work / Case Studies Section -->
-        <section id="work" class="py-20 md:py-32">
+        <section id="work" class="py-24 md:py-40">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16 reveal">
                     <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Project Case Studies</h2>
@@ -270,7 +277,7 @@
         </section>
         
         <!-- Achievements Section -->
-        <section id="achievements" class="py-20 md:py-32 bg-brand-gray">
+        <section id="achievements" class="py-24 md:py-40 bg-brand-gray">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16 reveal">
                     <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Achievements & Initiatives</h2>
@@ -293,8 +300,30 @@
             </div>
         </section>
 
+        <!-- AI Project Simulator Section -->
+        <section id="ai-simulator" class="py-24 md:py-40">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight">AI Project Simulator</h2>
+                    <p class="text-lg text-gray-400 mt-4 max-w-2xl mx-auto">Have a business problem? Describe it below and my AI assistant will generate a high-level project plan, just like I would.</p>
+                </div>
+                <div class="max-w-2xl mx-auto reveal">
+                    <div class="bg-brand-gray p-8 rounded-xl">
+                        <textarea id="problem-input" class="w-full h-32 bg-brand-dark text-brand-light p-4 rounded-lg focus:ring-2 focus:ring-brand-primary focus:outline-none" placeholder="e.g., Reduce customer churn for a subscription-based SaaS product..."></textarea>
+                        <button id="simulate-button" class="mt-4 w-full px-8 py-3.5 text-base font-medium text-white gradient-bg rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center">
+                            ✨ Simulate Project Plan
+                        </button>
+                    </div>
+                    <div id="simulator-output" class="mt-8 bg-brand-gray p-8 rounded-xl hidden">
+                        <div id="loader" class="mx-auto loader hidden"></div>
+                        <div id="plan-content" class="text-left"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- CTA Section -->
-        <section id="contact" class="py-20 md:py-32">
+        <section id="contact" class="py-24 md:py-40 bg-brand-gray">
             <div class="container mx-auto px-6 text-center">
                 <div class="max-w-2xl mx-auto reveal">
                     <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-6">
@@ -338,6 +367,83 @@
     </footer>
 
     <script>
+        // --- Gemini API Integration ---
+        const simulateButton = document.getElementById('simulate-button');
+        const problemInput = document.getElementById('problem-input');
+        const simulatorOutput = document.getElementById('simulator-output');
+        const loader = document.getElementById('loader');
+        const planContent = document.getElementById('plan-content');
+
+        simulateButton.addEventListener('click', async () => {
+            const problem = problemInput.value;
+            if (!problem.trim()) {
+                alert('Please describe a business problem.');
+                return;
+            }
+
+            // Show loader and output container
+            simulatorOutput.classList.remove('hidden');
+            loader.classList.remove('hidden');
+            planContent.innerHTML = '';
+            simulateButton.disabled = true;
+
+            const prompt = `
+                As an expert Product Manager, create a high-level project plan for the following business problem: "${problem}".
+
+                Structure the response with the following sections:
+                - **Project Title:** A concise, descriptive title.
+                - **Key Objectives:** 3-4 bullet points outlining the main goals.
+                - **Success Metrics (KPIs):** 3-4 bullet points of measurable key performance indicators.
+                - **Potential Milestones:** A brief, 4-step timeline of major project phases (e.g., Discovery, MVP Development, etc.).
+
+                Keep the language professional, clear, and concise. Format the output cleanly using markdown-style headings and bullet points.
+            `;
+
+            try {
+                let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+                const payload = { contents: chatHistory };
+                const apiKey = ""; // API key will be injected by the environment
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API request failed with status ${response.status}`);
+                }
+
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    
+                    let text = result.candidates[0].content.parts[0].text;
+                    
+                    // Basic Markdown to HTML conversion
+                    text = text.replace(/\*\*(.*?)\*\*/g, '<h3 class="text-xl font-bold mt-4 mb-2 text-brand-light">$1</h3>');
+                    text = text.replace(/-\s(.*?)(?:\n|$)/g, '<li class="ml-5 list-disc text-gray-400">$1</li>');
+                    text = text.replace(/<\/li>\s*<li/g, '</li><li'); // Fix list spacing
+                    
+                    planContent.innerHTML = text;
+                } else {
+                    planContent.innerHTML = '<p class="text-red-400">Sorry, the AI could not generate a plan. Please try again.</p>';
+                }
+
+            } catch (error) {
+                console.error('Error calling Gemini API:', error);
+                planContent.innerHTML = '<p class="text-red-400">An error occurred. Please check the console for details.</p>';
+            } finally {
+                loader.classList.add('hidden');
+                simulateButton.disabled = false;
+            }
+        });
+
+
+        // --- Standard Website Interactivity ---
         // Mobile Menu Toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
