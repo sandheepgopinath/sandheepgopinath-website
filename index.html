@@ -40,19 +40,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-        /* Glassmorphism effect for skill pills */
-        .glass-pill {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px); /* For Safari */
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
-        }
-        .glass-pill:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
-        }
         /* Chatbot styles */
         .chat-bubble {
             max-width: 75%;
@@ -85,6 +72,28 @@
             0%, 80%, 100% { transform: scale(0); }
             40% { transform: scale(1.0); }
         }
+        /* Chat Popup Styles */
+        #chat-popup {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+        /* Awesome Skill Section Styles */
+        .skill-card {
+            background-color: #1a1a1a;
+            border: 1px solid #2a2a2a;
+        }
+        .skill-item {
+            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+        }
+        .skill-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(79, 70, 229, 0.5);
+        }
+        .skill-item svg {
+            transition: color 0.2s ease-out;
+        }
+        .skill-item:hover svg {
+            color: #c026d3;
+        }
     </style>
     <script>
         tailwind.config = {
@@ -112,7 +121,6 @@
                 <a href="#about" class="text-brand-light hover:text-brand-primary transition-colors">About</a>
                 <a href="#work" class="text-brand-light hover:text-brand-primary transition-colors">Work</a>
                 <a href="#achievements" class="text-brand-light hover:text-brand-primary transition-colors">Achievements</a>
-                <a href="#ai-chatbot" class="text-brand-light hover:text-brand-primary transition-colors">AI Chatbot</a>
                 <a href="#contact" class="text-brand-light hover:text-brand-primary transition-colors">Contact</a>
             </nav>
             <a href="#contact" class="hidden md:block px-5 py-2.5 text-sm font-medium text-white gradient-bg rounded-lg hover:opacity-90 transition-opacity">
@@ -127,7 +135,6 @@
             <a href="#about" class="block text-brand-light hover:text-brand-primary transition-colors py-2">About</a>
             <a href="#work" class="block text-brand-light hover:text-brand-primary transition-colors py-2">Work</a>
             <a href="#achievements" class="block text-brand-light hover:text-brand-primary transition-colors py-2">Achievements</a>
-            <a href="#ai-chatbot" class="block text-brand-light hover:text-brand-primary transition-colors py-2">AI Chatbot</a>
             <a href="#contact" class="block text-brand-light hover:text-brand-primary transition-colors py-2">Contact</a>
             <a href="#contact" class="block mt-2 px-5 py-2.5 text-sm font-medium text-white gradient-bg rounded-lg text-center">
                 Let's Talk
@@ -199,45 +206,96 @@
             </div>
         </section>
 
-        <!-- Skills Section -->
+        <!-- Skills Section - REDESIGNED -->
         <section class="py-24 md:py-32 reveal">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold tracking-tight">My Toolkit</h2>
                     <p class="text-lg text-gray-400 mt-4 max-w-2xl mx-auto">The skills and technologies I use to build successful products.</p>
                 </div>
-                <div class="max-w-4xl mx-auto">
-                    <!-- Technical Skills -->
-                    <div class="mb-12">
-                        <h3 class="text-xl font-semibold text-center mb-6 text-brand-light">Technical Skills</h3>
-                        <div class="flex flex-wrap justify-center gap-3">
-                            <a href="https://en.wikipedia.org/wiki/SQL" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">SQL</a>
-                            <a href="https://prestodb.io/" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Presto SQL</a>
-                            <a href="https://www.python.org/" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Python</a>
-                            <a href="https://en.wikipedia.org/wiki/Machine_learning" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Machine Learning</a>
-                            <a href="https://en.wikipedia.org/wiki/Artificial_intelligence" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Artificial Intelligence</a>
-                            <a href="https://en.wikipedia.org/wiki/Data_analysis" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Data Analysis</a>
-                            <a href="https://en.wikipedia.org/wiki/Computer_vision" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Computer Vision</a>
-                            <a href="https://en.wikipedia.org/wiki/Natural_language_processing" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">NLP</a>
-                            <a href="https://git-scm.com/" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Git</a>
-                            <a href="https://www.raspberrypi.org/" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Raspberry Pi</a>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- AI & Data Science Card -->
+                    <div class="skill-card rounded-xl p-6 reveal">
+                        <h3 class="text-xl font-bold mb-4 text-brand-light">AI & Data Science</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                                <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M12 6V3m0 18v-3m6-9h3m-18 0h3m12 5.333A8.958 8.958 0 0112 18c-4.95 0-8.958-4.008-8.958-8.958S7.05.083 12 .083s8.958 4.008 8.958 8.958z"></path></svg>
+                                <span class="text-sm">AI/ML</span>
+                            </a>
+                            <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                                <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10m16-10v10M8 7v10m4-10v10m4-10v10M6 7h12M6 17h12"></path></svg>
+                                <span class="text-sm">Data Analysis</span>
+                            </a>
+                            <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                                <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path></svg>
+                                <span class="text-sm">NLP</span>
+                            </a>
+                            <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                                <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                <span class="text-sm">Computer Vision</span>
+                            </a>
                         </div>
                     </div>
-                    <!-- Tools & Platforms -->
-                    <div>
-                        <h3 class="text-xl font-semibold text-center mb-6 text-brand-light">Tools & Platforms</h3>
-                        <div class="flex flex-wrap justify-center gap-3">
-                            <a href="https://www.pendo.io/" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Pendo</a>
-                            <a href="https://www.microstrategy.com/" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">MicroStrategy</a>
-                            <a href="https://analytics.google.com/" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Google Analytics</a>
-                            <a href="https://www.tableau.com/" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Tableau</a>
-                            <a href="https://powerbi.microsoft.com/" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Power BI</a>
-                            <a href="https://www.atlassian.com/software/jira" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Jira</a>
-                            <a href="https://www.atlassian.com/software/confluence" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Confluence</a>
-                            <a href="https://miro.com/" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Miro</a>
-                            <a href="https://balsamiq.com/" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">Balsamiq</a>
-                            <a href="https://docs.microsoft.com/en-us/sql/ssms/sql-server-management-studio-ssms" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">SSMS</a>
-                            <a href="https://github.com/" target="_blank" class="glass-pill px-4 py-2 rounded-full text-sm font-medium">GitHub</a>
+                     <!-- Languages & Databases Card -->
+                    <div class="skill-card rounded-xl p-6 reveal" style="transition-delay: 100ms;">
+                        <h3 class="text-xl font-bold mb-4 text-brand-light">Languages & DBs</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                             <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                                <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                <span class="text-sm">Python</span>
+                            </a>
+                            <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                                <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4M4 7v5c0 2.21 3.582 4 8 4s8-1.79 8-4V7"></path></svg>
+                                <span class="text-sm">SQL</span>
+                            </a>
+                             <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                                <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3.054 12.042a6.75 6.75 0 019.45-6.202 6.75 6.75 0 018.998 9.95l-1.493.497-1.493-.498a3.75 3.75 0 00-4.998-5.527 3.75 3.75 0 00-5.25 3.45V12a.75.75 0 01-1.5 0v-.002a5.25 5.25 0 01-2.707-4.752.75.75 0 011.5 0c0 .966.394 1.841 1.03 2.478V9.75a.75.75 0 011.5 0v.003a2.25 2.25 0 014.5 0v-.003a.75.75 0 011.5 0v.003a3.75 3.75 0 00-4.998 5.527l1.493.498-1.493.497a6.75 6.75 0 01-8.998-9.95z"></path></svg>
+                                <span class="text-sm">Presto SQL</span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Analytics & BI Card -->
+                    <div class="skill-card rounded-xl p-6 reveal" style="transition-delay: 200ms;">
+                        <h3 class="text-xl font-bold mb-4 text-brand-light">Analytics & BI</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                                <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"></path></svg>
+                                <span class="text-sm">Pendo</span>
+                            </a>
+                            <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                                <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                                <span class="text-sm">GA</span>
+                            </a>
+                            <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                                <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                                <span class="text-sm">Tableau</span>
+                            </a>
+                            <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                                <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                <span class="text-sm">Power BI</span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Product & Collaboration Card -->
+                    <div class="skill-card rounded-xl p-6 reveal" style="transition-delay: 300ms;">
+                        <h3 class="text-xl font-bold mb-4 text-brand-light">Product & Collab</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                                <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span class="text-sm">Jira</span>
+                            </a>
+                            <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                                <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                                <span class="text-sm">Confluence</span>
+                            </a>
+                            <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                                <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                                <span class="text-sm">Miro</span>
+                            </a>
+                             <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                                <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m12 0a2 2 0 100-4m0 4a2 2 0 110-4M6 6v12M18 6v12"></path></svg>
+                                <span class="text-sm">Git</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -319,41 +377,6 @@
             </div>
         </section>
 
-        <!-- AI Chatbot Section -->
-        <section id="ai-chatbot" class="py-24 md:py-40">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16 reveal">
-                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Chat with my AI Twin</h2>
-                    <p class="text-lg text-gray-400 mt-4 max-w-2xl mx-auto">Ask questions about my professional background, and my AI assistant will answer based on my resume.</p>
-                </div>
-                <div class="max-w-2xl mx-auto reveal">
-                    <div class="bg-brand-gray rounded-xl shadow-lg">
-                        <div id="chat-window" class="h-96 p-4 overflow-y-auto flex flex-col space-y-4">
-                            <!-- Initial AI message -->
-                            <div class="chat-bubble ai-bubble">
-                                <p>Hello! I'm Sandheep's AI Twin. Feel free to ask me anything about his skills, experience, or projects.</p>
-                            </div>
-                        </div>
-                        <div id="typing-indicator-container" class="p-4 hidden">
-                            <div class="chat-bubble ai-bubble inline-block">
-                                <div class="typing-indicator">
-                                    <span></span><span></span><span></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-4 border-t border-brand-dark">
-                            <div class="flex items-center space-x-2">
-                                <input type="text" id="chat-input" class="w-full bg-brand-dark text-brand-light p-3 rounded-lg focus:ring-2 focus:ring-brand-primary focus:outline-none" placeholder="e.g., What was his role at Danfoss?">
-                                <button id="send-button" class="px-5 py-3 text-white gradient-bg rounded-lg hover:opacity-90 transition-opacity">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" /></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- CTA Section -->
         <section id="contact" class="py-24 md:py-40 bg-brand-gray">
             <div class="container mx-auto px-6 text-center">
@@ -372,6 +395,44 @@
         </section>
 
     </main>
+
+    <!-- Floating Chat Button -->
+    <button id="open-chat-button" class="fixed bottom-8 right-8 gradient-bg text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform z-50">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+    </button>
+
+    <!-- Chat Popup -->
+    <div id="chat-popup" class="fixed bottom-28 right-8 w-full max-w-md mx-auto opacity-0 transform translate-y-4 pointer-events-none z-50">
+        <div class="bg-brand-gray rounded-xl shadow-lg">
+            <div class="p-4 border-b border-brand-dark flex justify-between items-center">
+                <h3 class="text-lg font-bold">Chat with my AI Twin</h3>
+                <button id="close-chat-button" class="text-gray-400 hover:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+            <div id="chat-window" class="h-96 p-4 overflow-y-auto flex flex-col space-y-4">
+                <!-- Initial AI message -->
+                <div class="chat-bubble ai-bubble">
+                    <p>Hello! I'm Sandheep's AI Twin. Feel free to ask me anything about his skills, experience, or projects.</p>
+                </div>
+            </div>
+            <div id="typing-indicator-container" class="p-4 hidden">
+                <div class="chat-bubble ai-bubble inline-block">
+                    <div class="typing-indicator">
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 border-t border-brand-dark">
+                <div class="flex items-center space-x-2">
+                    <input type="text" id="chat-input" class="w-full bg-brand-dark text-brand-light p-3 rounded-lg focus:ring-2 focus:ring-brand-primary focus:outline-none" placeholder="Ask a question...">
+                    <button id="send-button" class="px-5 py-3 text-white gradient-bg rounded-lg hover:opacity-90 transition-opacity">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-brand-dark">
@@ -399,11 +460,14 @@
     </footer>
 
     <script>
-        // --- Gemini API Chatbot Integration ---
+        // --- Gemini API Chatbot Integration (Client-Side) ---
         const sendButton = document.getElementById('send-button');
         const chatInput = document.getElementById('chat-input');
         const chatWindow = document.getElementById('chat-window');
         const typingIndicatorContainer = document.getElementById('typing-indicator-container');
+        const openChatButton = document.getElementById('open-chat-button');
+        const closeChatButton = document.getElementById('close-chat-button');
+        const chatPopup = document.getElementById('chat-popup');
 
         const resumeContext = `
             SANDHEEP GOPINATH - PRODUCT MANAGER
@@ -436,7 +500,6 @@
             const userMessage = chatInput.value.trim();
             if (!userMessage) return;
 
-            // Add user message to chat window
             const userBubble = document.createElement('div');
             userBubble.className = 'chat-bubble user-bubble';
             userBubble.textContent = userMessage;
@@ -444,52 +507,50 @@
             chatInput.value = '';
             chatWindow.scrollTop = chatWindow.scrollHeight;
 
-            // Show typing indicator
             typingIndicatorContainer.classList.remove('hidden');
-
-            const prompt = `You are Sandheep Gopinath's AI Twin, a helpful assistant integrated into his personal website. Your purpose is to answer questions about Sandheep's professional background based ONLY on the information provided below. Do not invent any information or answer questions outside of this context. If a question cannot be answered from the context, politely state that you don't have that specific information. Keep your answers conversational and concise. Here is Sandheep's resume context: \n\n${resumeContext}\n\nNow, answer the following question: "${userMessage}"`;
+            chatWindow.scrollTop = chatWindow.scrollHeight;
 
             try {
-                let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
-                const payload = { contents: chatHistory };
-                const apiKey = ""; // API key will be injected by the environment
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-                
-                const response = await fetch(apiUrl, {
+                // The API URL now points to our own serverless function
+                const response = await fetch('/api/chat', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify({ userMessage, resumeContext })
                 });
 
                 if (!response.ok) {
-                    throw new Error(`API request failed with status ${response.status}`);
+                    throw new Error(`Serverless function failed with status ${response.status}`);
                 }
 
                 const result = await response.json();
                 let aiResponse = "Sorry, I couldn't process that request. Please try again.";
 
-                if (result.candidates && result.candidates.length > 0 &&
-                    result.candidates[0].content && result.candidates[0].content.parts &&
-                    result.candidates[0].content.parts.length > 0) {
+                if (result.candidates && result.candidates[0]?.content?.parts[0]?.text) {
                     aiResponse = result.candidates[0].content.parts[0].text;
                 }
                 
-                // Hide typing indicator and add AI response
-                typingIndicatorContainer.classList.add('hidden');
                 const aiBubble = document.createElement('div');
                 aiBubble.className = 'chat-bubble ai-bubble';
                 aiBubble.textContent = aiResponse;
                 chatWindow.appendChild(aiBubble);
-                chatWindow.scrollTop = chatWindow.scrollHeight;
 
             } catch (error) {
-                console.error('Error calling Gemini API:', error);
-                typingIndicatorContainer.classList.add('hidden');
+                console.error('Error communicating with serverless function:', error);
                 const errorBubble = document.createElement('div');
                 errorBubble.className = 'chat-bubble ai-bubble';
                 errorBubble.textContent = 'An error occurred. Please try again later.';
                 chatWindow.appendChild(errorBubble);
+            } finally {
+                typingIndicatorContainer.classList.add('hidden');
                 chatWindow.scrollTop = chatWindow.scrollHeight;
+            }
+        };
+        
+        const toggleChatPopup = () => {
+            if (chatPopup.classList.contains('opacity-0')) {
+                chatPopup.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+            } else {
+                chatPopup.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
             }
         };
 
@@ -499,10 +560,11 @@
                 sendMessage();
             }
         });
-
-
+        
+        openChatButton.addEventListener('click', toggleChatPopup);
+        closeChatButton.addEventListener('click', toggleChatPopup);
+       
         // --- Standard Website Interactivity ---
-        // Mobile Menu Toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
 
@@ -510,14 +572,12 @@
             mobileMenu.classList.toggle('hidden');
         });
         
-        // Close mobile menu when a link is clicked
         document.querySelectorAll('#mobile-menu a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
             });
         });
 
-        // Header scroll effect
         const header = document.getElementById('header');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
@@ -527,7 +587,6 @@
             }
         });
 
-        // Scroll reveal animation
         const revealElements = document.querySelectorAll('.reveal');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
