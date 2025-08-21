@@ -179,6 +179,9 @@
                         <a href="Sandheep Gopinath Resume June 2025.pdf" download class="px-8 py-3.5 text-base font-medium text-brand-light bg-brand-gray rounded-lg hover:bg-gray-800 transition-colors">
                             Download Resume
                         </a>
+                        <button id="hero-chat-button" class="px-8 py-3.5 text-base font-medium text-brand-light bg-brand-gray rounded-lg hover:bg-gray-800 transition-colors">
+                            Chat with my AI Twin
+                        </button>
                     </div>
                 </div>
             </div>
@@ -314,7 +317,7 @@
                     <h2 class="text-3xl md:text-4xl font-bold tracking-tight">My Toolkit</h2>
                     <p class="text-lg text-gray-400 mt-4 max-w-2xl mx-auto">The skills and technologies I use to build successful products.</p>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     <!-- AI & Data Science Card -->
                     <div class="skill-card rounded-xl p-6 reveal">
                         <h3 class="text-xl font-bold mb-4 text-brand-light">AI & Data Science</h3>
@@ -450,15 +453,15 @@
     </button>
 
     <!-- Chat Popup -->
-    <div id="chat-popup" class="fixed bottom-28 right-8 w-full max-w-md mx-auto opacity-0 transform translate-y-4 pointer-events-none z-50">
-        <div class="bg-brand-gray rounded-xl shadow-lg">
+    <div id="chat-popup" class="fixed bottom-4 right-4 left-4 sm:left-auto sm:bottom-28 sm:right-8 sm:w-full sm:max-w-md mx-auto opacity-0 transform translate-y-4 pointer-events-none z-50">
+        <div class="bg-brand-gray rounded-xl shadow-lg flex flex-col h-[70vh] sm:h-auto">
             <div class="p-4 border-b border-brand-dark flex justify-between items-center">
                 <h3 class="text-lg font-bold">Chat with my AI Twin</h3>
                 <button id="close-chat-button" class="text-gray-400 hover:text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                 </button>
             </div>
-            <div id="chat-window" class="h-96 p-4 overflow-y-auto flex flex-col space-y-4">
+            <div id="chat-window" class="flex-grow p-4 overflow-y-auto flex flex-col space-y-4">
                 <!-- Initial AI message -->
                 <div class="chat-bubble ai-bubble">
                     <p>Hello! I'm Sandheep's AI Twin. Feel free to ask me anything about his skills, experience, or projects.</p>
@@ -516,6 +519,7 @@
         const openChatButton = document.getElementById('open-chat-button');
         const closeChatButton = document.getElementById('close-chat-button');
         const chatPopup = document.getElementById('chat-popup');
+        const heroChatButton = document.getElementById('hero-chat-button');
 
         const resumeContext = `
             SANDHEEP GOPINATH - PRODUCT MANAGER
@@ -612,6 +616,7 @@
         
         openChatButton.addEventListener('click', toggleChatPopup);
         closeChatButton.addEventListener('click', toggleChatPopup);
+        heroChatButton.addEventListener('click', toggleChatPopup);
        
         // --- Standard Website Interactivity ---
         const mobileMenuButton = document.getElementById('mobile-menu-button');
