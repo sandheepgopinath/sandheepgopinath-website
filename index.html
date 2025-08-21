@@ -94,6 +94,26 @@
         .skill-item:hover svg {
             color: #c026d3;
         }
+        /* Timeline Styles */
+        .timeline-wrapper {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .timeline-wrapper::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+        .timeline-dot {
+            transition: transform 0.2s ease-out;
+        }
+        .timeline-item:hover .timeline-dot {
+            transform: scale(1.2);
+        }
+        .timeline-card {
+             transition: transform 0.2s ease-out;
+        }
+        .timeline-item:hover .timeline-card {
+            transform: translateY(-5px);
+        }
     </style>
     <script>
         tailwind.config = {
@@ -118,7 +138,7 @@
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-2xl font-bold tracking-tighter">Sandheep Gopinath.</a>
             <nav class="hidden md:flex items-center space-x-8">
-                <a href="#about" class="text-brand-light hover:text-brand-primary transition-colors">About</a>
+                <a href="#journey" class="text-brand-light hover:text-brand-primary transition-colors">Journey</a>
                 <a href="#work" class="text-brand-light hover:text-brand-primary transition-colors">Work</a>
                 <a href="#achievements" class="text-brand-light hover:text-brand-primary transition-colors">Achievements</a>
                 <a href="#contact" class="text-brand-light hover:text-brand-primary transition-colors">Contact</a>
@@ -132,7 +152,7 @@
         </div>
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
-            <a href="#about" class="block text-brand-light hover:text-brand-primary transition-colors py-2">About</a>
+            <a href="#journey" class="block text-brand-light hover:text-brand-primary transition-colors py-2">Journey</a>
             <a href="#work" class="block text-brand-light hover:text-brand-primary transition-colors py-2">Work</a>
             <a href="#achievements" class="block text-brand-light hover:text-brand-primary transition-colors py-2">Achievements</a>
             <a href="#contact" class="block text-brand-light hover:text-brand-primary transition-colors py-2">Contact</a>
@@ -166,61 +186,124 @@
             </div>
         </section>
 
-        <!-- About Section -->
-        <section id="about" class="py-24 md:py-40 bg-brand-gray">
+        <!-- Journey/Timeline Section -->
+        <section id="journey" class="py-24 md:py-40 bg-brand-gray">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16 reveal">
-                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight">About Me</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight">My Professional Journey</h2>
+                    <p class="text-lg text-gray-400 mt-4 max-w-2xl mx-auto">A timeline of my experience and education.</p>
                 </div>
-                <div class="max-w-3xl mx-auto text-lg text-center text-gray-300 space-y-6 reveal">
-                    <p>It all started with an electronics kit. My lifelong passion for understanding <strong class="text-white">how things work</strong> led me from an engineering degree straight into the world of product management.</p>
-                    <p>Today, I channel that curiosity into building and scaling AI, IoT, and data products. I thrive on untangling complex problems and turning innovative ideas into solutions that create <strong class="text-white">real-world value</strong>.</p>
-                </div>
-
-                <div class="text-center my-16 reveal">
-                    <h3 class="text-2xl font-bold tracking-tight">Core Competencies</h3>
-                </div>
-                <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                    <div class="bg-brand-dark p-8 rounded-xl reveal" style="transition-delay: 100ms;">
-                        <h3 class="text-xl font-bold mb-3 text-center">Product Strategy</h3>
-                        <p class="text-gray-400 text-center">Defining the product vision, owning the strategic roadmap, and leading GTM strategy to achieve strong user adoption and enterprise business.</p>
+                <div class="timeline-wrapper overflow-x-auto py-10 reveal">
+                    <div class="relative mx-auto" style="width: 2400px; height: 200px;">
+                        <!-- The connecting line -->
+                        <div class="absolute top-8 left-0 h-0.5 w-full bg-gray-700"></div>
+                        <!-- Timeline items container -->
+                        <div class="relative flex justify-between w-full">
+                            <!-- Verint Systems -->
+                            <div class="timeline-item relative text-center w-64">
+                                <div class="absolute top-8 left-1/2 w-0.5 h-8 bg-gray-700 -translate-x-px"></div>
+                                <div class="timeline-dot absolute left-1/2 -translate-x-1/2 top-8 w-4 h-4 rounded-full bg-brand-primary border-4 border-brand-gray"></div>
+                                <div class="timeline-card mt-16 bg-brand-dark p-4 rounded-lg">
+                                    <p class="text-sm font-semibold gradient-text mb-1">2024 - Present</p>
+                                    <h3 class="text-md font-bold text-white">Product Manager</h3>
+                                    <p class="text-sm text-gray-300">Verint Systems</p>
+                                </div>
+                            </div>
+                            <!-- HRS Group -->
+                            <div class="timeline-item relative text-center w-64">
+                                <div class="absolute top-8 left-1/2 w-0.5 h-8 bg-gray-700 -translate-x-px"></div>
+                                <div class="timeline-dot absolute left-1/2 -translate-x-1/2 top-8 w-4 h-4 rounded-full bg-brand-primary border-4 border-brand-gray"></div>
+                                <div class="timeline-card mt-16 bg-brand-dark p-4 rounded-lg">
+                                    <p class="text-sm font-semibold gradient-text mb-1">2022 - 2024</p>
+                                    <h3 class="text-md font-bold text-white">Product Manager</h3>
+                                    <p class="text-sm text-gray-300">HRS Group</p>
+                                </div>
+                            </div>
+                             <!-- Plaksha University -->
+                            <div class="timeline-item relative text-center w-64">
+                                <div class="absolute top-8 left-1/2 w-0.5 h-8 bg-gray-700 -translate-x-px"></div>
+                                <div class="timeline-dot absolute left-1/2 -translate-x-1/2 top-8 w-4 h-4 rounded-full bg-brand-primary border-4 border-brand-gray"></div>
+                                <div class="timeline-card mt-16 bg-brand-dark p-4 rounded-lg">
+                                    <p class="text-sm font-semibold gradient-text mb-1">2021 - 2022</p>
+                                    <h3 class="text-md font-bold text-white">PG Diploma, AI/ML</h3>
+                                    <p class="text-sm text-gray-300">Plaksha University</p>
+                                </div>
+                            </div>
+                            <!-- University of Texas -->
+                            <div class="timeline-item relative text-center w-64">
+                                <div class="absolute top-8 left-1/2 w-0.5 h-8 bg-gray-700 -translate-x-px"></div>
+                                <div class="timeline-dot absolute left-1/2 -translate-x-1/2 top-8 w-4 h-4 rounded-full bg-brand-primary border-4 border-brand-gray"></div>
+                                <div class="timeline-card mt-16 bg-brand-dark p-4 rounded-lg">
+                                    <p class="text-sm font-semibold gradient-text mb-1">2020 - 2021</p>
+                                    <h3 class="text-md font-bold text-white">PG Program, AI</h3>
+                                    <p class="text-sm text-gray-300">University of Texas</p>
+                                </div>
+                            </div>
+                             <!-- Danfoss -->
+                            <div class="timeline-item relative text-center w-64">
+                                <div class="absolute top-8 left-1/2 w-0.5 h-8 bg-gray-700 -translate-x-px"></div>
+                                <div class="timeline-dot absolute left-1/2 -translate-x-1/2 top-8 w-4 h-4 rounded-full bg-brand-primary border-4 border-brand-gray"></div>
+                                <div class="timeline-card mt-16 bg-brand-dark p-4 rounded-lg">
+                                    <p class="text-sm font-semibold gradient-text mb-1">2017 - 2021</p>
+                                    <h3 class="text-md font-bold text-white">Product Manager</h3>
+                                    <p class="text-sm text-gray-300">Danfoss</p>
+                                </div>
+                            </div>
+                             <!-- Accel IT Academy -->
+                            <div class="timeline-item relative text-center w-64">
+                                <div class="absolute top-8 left-1/2 w-0.5 h-8 bg-gray-700 -translate-x-px"></div>
+                                <div class="timeline-dot absolute left-1/2 -translate-x-1/2 top-8 w-4 h-4 rounded-full bg-brand-primary border-4 border-brand-gray"></div>
+                                <div class="timeline-card mt-16 bg-brand-dark p-4 rounded-lg">
+                                    <p class="text-sm font-semibold gradient-text mb-1">2016 - 2017</p>
+                                    <h3 class="text-md font-bold text-white">PG Diploma, Embedded</h3>
+                                    <p class="text-sm text-gray-300">Accel IT Academy</p>
+                                </div>
+                            </div>
+                             <!-- Synapse Technologies -->
+                            <div class="timeline-item relative text-center w-64">
+                                <div class="absolute top-8 left-1/2 w-0.5 h-8 bg-gray-700 -translate-x-px"></div>
+                                <div class="timeline-dot absolute left-1/2 -translate-x-1/2 top-8 w-4 h-4 rounded-full bg-brand-primary border-4 border-brand-gray"></div>
+                                <div class="timeline-card mt-16 bg-brand-dark p-4 rounded-lg">
+                                    <p class="text-sm font-semibold gradient-text mb-1">2014 - 2017</p>
+                                    <h3 class="text-md font-bold text-white">Founding Member</h3>
+                                    <p class="text-sm text-gray-300">Synapse Technologies</p>
+                                </div>
+                            </div>
+                             <!-- SCT College -->
+                            <div class="timeline-item relative text-center w-64">
+                                <div class="absolute top-8 left-1/2 w-0.5 h-8 bg-gray-700 -translate-x-px"></div>
+                                <div class="timeline-dot absolute left-1/2 -translate-x-1/2 top-8 w-4 h-4 rounded-full bg-brand-primary border-4 border-brand-gray"></div>
+                                <div class="timeline-card mt-16 bg-brand-dark p-4 rounded-lg">
+                                    <p class="text-sm font-semibold gradient-text mb-1">2012 - 2016</p>
+                                    <h3 class="text-md font-bold text-white">B.Tech Electronics</h3>
+                                    <p class="text-sm text-gray-300">SCT College</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bg-brand-dark p-8 rounded-xl reveal" style="transition-delay: 200ms;">
-                        <h3 class="text-xl font-bold mb-3 text-center">Data-Driven Decisions</h3>
-                        <p class="text-gray-400 text-center">Launching analytics dashboards to track usage, diagnose adoption barriers, and enable data-driven prioritization for continuous improvement.</p>
-                    </div>
-                    <div class="bg-brand-dark p-8 rounded-xl reveal" style="transition-delay: 300ms;">
-                        <h3 class="text-xl font-bold mb-3 text-center">User-Centric Design</h3>
-                        <p class="text-gray-400 text-center">Engaging directly with end-users to identify core challenges, validate solutions, and ensure the final product is both impactful and intuitive.</p>
-                    </div>
-                </div>
-
-                <div class="text-center my-16 reveal">
-                    <h3 class="text-2xl font-bold tracking-tight">Education</h3>
-                </div>
-                <div class="max-w-3xl mx-auto space-y-4 text-center text-gray-300 reveal">
-                    <p><strong class="text-white">Post Graduate Diploma in Leadership & AI-ML</strong><br>Plaksha University (2021-22)</p>
-                    <p><strong class="text-white">Post Graduate Program in Artificial Intelligence</strong><br>McCombs School of Business, University of Texas (2020-21)</p>
-                    <p><strong class="text-white">B. Tech Electronics and Communication</strong><br>Sree Chitra Tirunal College of Engineering (2012-16)</p>
                 </div>
             </div>
         </section>
 
-        <!-- Skills Section - REDESIGNED -->
+        <!-- Skills Section - UPDATED -->
         <section class="py-24 md:py-32 reveal">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold tracking-tight">My Toolkit</h2>
                     <p class="text-lg text-gray-400 mt-4 max-w-2xl mx-auto">The skills and technologies I use to build successful products.</p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
                     <!-- AI & Data Science Card -->
                     <div class="skill-card rounded-xl p-6 reveal">
                         <h3 class="text-xl font-bold mb-4 text-brand-light">AI & Data Science</h3>
                         <div class="grid grid-cols-2 gap-4">
-                            <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                            <a href="https://en.wikipedia.org/wiki/Artificial_intelligence" target="_blank" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                                <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                <span class="text-sm">Artificial Intelligence</span>
+                            </a>
+                            <a href="https://en.wikipedia.org/wiki/Machine_learning" target="_blank" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
                                 <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M12 6V3m0 18v-3m6-9h3m-18 0h3m12 5.333A8.958 8.958 0 0112 18c-4.95 0-8.958-4.008-8.958-8.958S7.05.083 12 .083s8.958 4.008 8.958 8.958z"></path></svg>
-                                <span class="text-sm">AI/ML</span>
+                                <span class="text-sm">Machine Learning</span>
                             </a>
                             <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
                                 <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10m16-10v10M8 7v10m4-10v10m4-10v10M6 7h12M6 17h12"></path></svg>
@@ -230,25 +313,21 @@
                                 <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path></svg>
                                 <span class="text-sm">NLP</span>
                             </a>
-                            <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
-                                <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                                <span class="text-sm">Computer Vision</span>
-                            </a>
                         </div>
                     </div>
                      <!-- Languages & Databases Card -->
                     <div class="skill-card rounded-xl p-6 reveal" style="transition-delay: 100ms;">
                         <h3 class="text-xl font-bold mb-4 text-brand-light">Languages & DBs</h3>
                         <div class="grid grid-cols-2 gap-4">
-                             <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                             <a href="https://www.python.org/" target="_blank" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
                                 <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                 <span class="text-sm">Python</span>
                             </a>
-                            <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                            <a href="https://en.wikipedia.org/wiki/SQL" target="_blank" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
                                 <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4M4 7v5c0 2.21 3.582 4 8 4s8-1.79 8-4V7"></path></svg>
                                 <span class="text-sm">SQL</span>
                             </a>
-                             <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                             <a href="https://prestodb.io/" target="_blank" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
                                 <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3.054 12.042a6.75 6.75 0 019.45-6.202 6.75 6.75 0 018.998 9.95l-1.493.497-1.493-.498a3.75 3.75 0 00-4.998-5.527 3.75 3.75 0 00-5.25 3.45V12a.75.75 0 01-1.5 0v-.002a5.25 5.25 0 01-2.707-4.752.75.75 0 011.5 0c0 .966.394 1.841 1.03 2.478V9.75a.75.75 0 011.5 0v.003a2.25 2.25 0 014.5 0v-.003a.75.75 0 011.5 0v.003a3.75 3.75 0 00-4.998 5.527l1.493.498-1.493.497a6.75 6.75 0 01-8.998-9.95z"></path></svg>
                                 <span class="text-sm">Presto SQL</span>
                             </a>
@@ -258,19 +337,19 @@
                     <div class="skill-card rounded-xl p-6 reveal" style="transition-delay: 200ms;">
                         <h3 class="text-xl font-bold mb-4 text-brand-light">Analytics & BI</h3>
                         <div class="grid grid-cols-2 gap-4">
-                            <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                            <a href="https://www.pendo.io/" target="_blank" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
                                 <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"></path></svg>
                                 <span class="text-sm">Pendo</span>
                             </a>
-                            <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
-                                <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                                <span class="text-sm">GA</span>
+                            <a href="https://www.microstrategy.com/" target="_blank" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                                <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
+                                <span class="text-sm">MicroStrategy</span>
                             </a>
-                            <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                            <a href="https://www.tableau.com/" target="_blank" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
                                 <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
                                 <span class="text-sm">Tableau</span>
                             </a>
-                            <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                            <a href="https://powerbi.microsoft.com/" target="_blank" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
                                 <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                 <span class="text-sm">Power BI</span>
                             </a>
@@ -280,21 +359,43 @@
                     <div class="skill-card rounded-xl p-6 reveal" style="transition-delay: 300ms;">
                         <h3 class="text-xl font-bold mb-4 text-brand-light">Product & Collab</h3>
                         <div class="grid grid-cols-2 gap-4">
-                            <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                            <a href="https://www.aha.io/" target="_blank" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                                <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                                <span class="text-sm">Aha!</span>
+                            </a>
+                            <a href="https://www.atlassian.com/software/jira" target="_blank" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
                                 <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                 <span class="text-sm">Jira</span>
                             </a>
-                            <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                            <a href="https://www.atlassian.com/software/confluence" target="_blank" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
                                 <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
                                 <span class="text-sm">Confluence</span>
                             </a>
-                            <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                            <a href="https://miro.com/" target="_blank" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
                                 <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                                 <span class="text-sm">Miro</span>
                             </a>
-                             <a href="#" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
-                                <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m12 0a2 2 0 100-4m0 4a2 2 0 110-4M6 6v12M18 6v12"></path></svg>
-                                <span class="text-sm">Git</span>
+                        </div>
+                    </div>
+                    <!-- Prototyping & Dev Tools Card -->
+                    <div class="skill-card rounded-xl p-6 reveal" style="transition-delay: 400ms;">
+                        <h3 class="text-xl font-bold mb-4 text-brand-light">Prototyping & Dev</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                             <a href="https://www.figma.com/" target="_blank" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                                <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.4 16.6a9 9 0 11-14.8 0"></path></svg>
+                                <span class="text-sm">Figma</span>
+                            </a>
+                             <a href="https://replit.com/" target="_blank" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                                <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path></svg>
+                                <span class="text-sm">Replit</span>
+                            </a>
+                             <a href="https://claude.ai/" target="_blank" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                                <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
+                                <span class="text-sm">Claude</span>
+                            </a>
+                             <a href="https://www.make.com/" target="_blank" class="skill-item bg-brand-dark p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                                <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m-1 4h1m5-4h1m-1 4h1m-1-4h1m-1 4h1"></path></svg>
+                                <span class="text-sm">Make</span>
                             </a>
                         </div>
                     </div>
@@ -427,7 +528,7 @@
                 <div class="flex items-center space-x-2">
                     <input type="text" id="chat-input" class="w-full bg-brand-dark text-brand-light p-3 rounded-lg focus:ring-2 focus:ring-brand-primary focus:outline-none" placeholder="Ask a question...">
                     <button id="send-button" class="px-5 py-3 text-white gradient-bg rounded-lg hover:opacity-90 transition-opacity">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-l9-18-9 18 9-2zm0 0v-8" /></svg>
                     </button>
                 </div>
             </div>
@@ -519,7 +620,8 @@
                 });
 
                 if (!response.ok) {
-                    throw new Error(`Serverless function failed with status ${response.status}`);
+                    const errorData = await response.json().catch(() => ({ error: 'An unknown server error occurred.' }));
+                    throw new Error(errorData.error || `Request failed with status ${response.status}`);
                 }
 
                 const result = await response.json();
@@ -535,10 +637,10 @@
                 chatWindow.appendChild(aiBubble);
 
             } catch (error) {
-                console.error('Error communicating with serverless function:', error);
+                console.error('Error in sendMessage:', error);
                 const errorBubble = document.createElement('div');
                 errorBubble.className = 'chat-bubble ai-bubble';
-                errorBubble.textContent = 'An error occurred. Please try again later.';
+                errorBubble.textContent = `Sorry, an error occurred: ${error.message}`;
                 chatWindow.appendChild(errorBubble);
             } finally {
                 typingIndicatorContainer.classList.add('hidden');
