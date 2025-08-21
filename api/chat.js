@@ -1,8 +1,8 @@
 // This is the full code for the new file: /api/chat.js
 
 export default async function handler(request, response) {
-  // 1. Get the user's message from the request
-  const { userMessage, resumeContext } = await request.json();
+  // 1. Get the user's message from the request body (FIXED)
+  const { userMessage, resumeContext } = request.body;
 
   // 2. Get the secret API key from Vercel's environment variables
   const apiKey = process.env.GEMINI_API_KEY;
