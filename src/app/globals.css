@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+:root {
+  --paper: #eeeee9;
+  --cream: #f7f7f3;
+  --ink: #252a28;
+  --dark: #1d2523;
+  --muted: #707771;
+  --stroke: #d5d9d2;
+  --accent: #6c7e70;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  background: #cfdacb;
+}
+
+section {
+  scroll-margin-top: 60px;
+}
+
+.serif-font {
+  font-family: 'Libre Baskerville', Georgia, serif;
+}
+
+.wrap {
+  width: min(1180px, calc(100% - 96px));
+  margin-inline: auto;
+}
+
+@media (max-width: 850px) {
+  .wrap {
+    width: min(100% - 44px, 1180px);
+  }
+}
+
+/* Button styles matching v5 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: space-between;
+  border: 1px solid #bcc3b9;
+  border-radius: 3px;
+  min-height: 43px;
+  padding: 0 16px;
+  background: transparent;
+  color: #26302a;
+  font-size: 11px;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.btn:hover {
+  background: #dfe5de;
+  border-color: #98a79a;
+}
+
+.btn-dark {
+  background: #25322b;
+  border-color: #25322b;
+  color: #f5f6ef;
+}
+
+.btn-dark:hover {
+  background: #3b4a40;
+  color: white;
+}
+
+/* Fade in animation */
+.fade {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.75s, transform 0.75s;
+}
+
+/* Hero portrait matching v5 */
+.hero-portrait {
+  position: absolute;
+  right: -28px;
+  top: 30px;
+  bottom: 0;
+  width: 46%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero-portrait::before {
+  content: '';
+  position: absolute;
+  inset: 12% 0 0 0;
+  background: radial-gradient(circle at 55% 35%, #fafbf7 0%, #e7e8e0 40%, transparent 73%);
+  opacity: 0.85;
+}
+
+.hero-portrait img {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 86%;
+  object-fit: cover;
+  object-position: 50% 29%;
+  filter: grayscale(100%) contrast(1.08) brightness(0.98);
+  mix-blend-mode: multiply;
+  mask-image: linear-gradient(90deg, transparent 0%, #000 20%, #000 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 20%, #000 80%, transparent 100%);
+  opacity: 0.83;
+}
+
+.hero-portrait:after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--paper) 0%, transparent 35%), linear-gradient(0deg, var(--paper) 0%, transparent 30%);
+  pointer-events: none;
+}
+
+@media (max-width: 850px) {
+  .hero-portrait {
+    width: 72%;
+    right: -11%;
+    top: auto;
+    height: 360px;
+    bottom: 0;
+  }
+  .hero-portrait img {
+    height: 100%;
+    object-position: 50% 20%;
+  }
+  .hero-portrait:after {
+    background: linear-gradient(0deg, var(--paper), transparent 40%);
+  }
+}
+
+@media (max-width: 430px) {
+  .hero-portrait {
+    height: 330px;
+    width: 92%;
+    right: -20%;
+  }
+}
+
+/* Book covers matching v5 */
+.book-cover.real-cover {
+  padding: 0;
+  display: block;
+  background: #eeece6;
+  border: 1px solid #dddcd5;
+  box-shadow: 0 5px 12px #1e30231b;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.book-cover.real-cover:hover {
+  transform: translateY(-3px);
+}
+
+.book-cover.real-cover img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #f7f6f1;
+}
+
+.book-cover.cover-unavailable:after {
+  content: attr(data-cover-title);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: absolute;
+  inset: 8px;
+  color: #333c35;
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 16px;
+  line-height: 1.3;
+  padding: 10px;
+  border: 1px solid rgba(56, 63, 51, 0.2);
+  background: #e6eae2;
+}

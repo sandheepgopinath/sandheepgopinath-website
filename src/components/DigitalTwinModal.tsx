@@ -1,0 +1,218 @@
+"use client";
+
+import React, { useState, useRef, useEffect } from "react";
+import { FormattedChatMessage } from "./FormattedChatMessage";
+
+interface Message {
+  role: "user" | "assistant";
+  content: string;
+  source?: "aws-bedrock-claude" | "offline-knowledge-base";
+}
+
+interface DigitalTwinModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  initialQuestion?: string;
+}
+
+const SUGGESTED_CHIPS = [
+  "What has Sandheep built?",
+  "What is his AI experience?",
+  "What are his commercial results?",
+  "How does Sandheep approach product management?",
+  "What books shaped his thinking?",
+];
+
+export function DigitalTwinModal({ isOpen, onClose, initialQuestion }: DigitalTwinModalProps) {
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      role: "assistant",
+      content:
+        "Hello! I'm Sandheep's Digital Twin. Ask me anything about his product leadership, 0→1 products, commercial outcomes, philosophy on building, or his Thinking Shelf books.",
+      source: "aws-bedrock-claude",
+    },
+  ]);
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      setTimeout(() => {
+        inputRef.current?.focus();
+        scrollToBottom();
+      }, 100);
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, loading]);
+
+  useEffect(() => {
+    if (initialQuestion && isOpen) {
+      handleSend(initialQuestion);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialQuestion, isOpen]);
+
+  const handleSend = async (textToSend?: string) => {
+    const q = (textToSend || input).trim();
+    if (!q || loading) return;
+
+    const userMessage: Message = { role: "user", content: q };
+    const newHistory = [...messages, userMessage];
+    setMessages(newHistory);
+    setInput("");
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: newHistory.map((m) => ({ role: m.role, content: m.content })),
+        }),
+      });
+
+      const data = await res.json();
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content:
+            data.text ||
+            "I'm unable to retrieve that detail right now. Feel free to contact Sandheep directly at hello@sandheepgopinath.com",
+          source: data.source,
+        },
+      ]);
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content:
+            "I encountered a temporary connection issue reaching the AI backend. Please email hello@sandheepgopinath.com.",
+        },
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div
+      className="fixed right-[22px] bottom-[80px] z-50 w-[min(420px,calc(100vw-30px))] h-[min(590px,calc(100dvh-100px))] bg-[#f8f9f5] border border-[#cad2c9] shadow-[0_20px_50px_rgba(23,32,25,0.3)] rounded-[4px] flex flex-col overflow-hidden animate-fade-in font-sans"
+      onClick={(e) => e.stopPropagation()}
+    >
+      {/* Chat Head */}
+      <div className="px-[18px] py-[14px] border-b border-[#e0e5dd] bg-[#eeeee9] flex justify-between items-center text-[13px] text-[#25322b]">
+        <div>
+          <div className="font-bold flex items-center gap-1.5">
+            <span>Sandheep AI</span>
+            <span className="w-2 h-2 rounded-full bg-[#52855f] animate-pulse" />
+          </div>
+          <small className="text-[10px] text-[#78857b] block mt-0.5">
+            Interactive Digital Twin · Powered by Claude on AWS Bedrock
+          </small>
+        </div>
+        <button
+          onClick={onClose}
+          title="Close chat"
+          className="text-[#657367] hover:text-[#111] text-[20px] leading-none px-1 py-0.5"
+        >
+          ✕
+        </button>
+      </div>
+
+      {/* Messages */}
+      <div className="p-[15px] flex flex-col gap-[12px] flex-1 overflow-y-auto">
+        {messages.map((m, idx) => (
+          <div
+            key={idx}
+            className={`p-[11px_14px] text-[12px] leading-[1.75] rounded-[3px] max-w-[92%] ${
+              m.role === "user"
+                ? "bg-[#2c3a31] text-white self-end"
+                : "bg-[#ecf0e9] text-[#252a28] self-start border border-[#dce3da]"
+            }`}
+          >
+            {m.role === "user" ? (
+              <p className="whitespace-pre-wrap">{m.content}</p>
+            ) : (
+              <div>
+                <FormattedChatMessage content={m.content} />
+                {m.source && (
+                  <div className="mt-2 pt-1.5 border-t border-[#d8e0d6] flex items-center justify-between text-[10px] text-[#738276]">
+                    <span>
+                      {m.source === "aws-bedrock-claude" ? "Claude 3.5 Sonnet (AWS Bedrock)" : "Portfolio Knowledge"}
+                    </span>
+                    <a
+                      href="/Sandheep_Gopinath_Resume.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline hover:text-black"
+                    >
+                      CV PDF ↗
+                    </a>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        ))}
+
+        {loading && (
+          <div className="bg-[#ecf0e9] border border-[#dce3da] text-[#556358] self-start p-[10px_14px] text-[11px] rounded-[3px] flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#556358] animate-bounce [animation-delay:-0.3s]" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#556358] animate-bounce [animation-delay:-0.15s]" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#556358] animate-bounce" />
+            <span className="ml-1">Thinking...</span>
+          </div>
+        )}
+
+        <div ref={messagesEndRef} />
+      </div>
+
+      {/* Suggested Chips */}
+      <div className="px-[12px] py-[8px] bg-[#f2f4ef] border-t border-[#e2e7df] overflow-x-auto flex gap-1.5 scrollbar-none">
+        {SUGGESTED_CHIPS.map((chip, i) => (
+          <button
+            key={i}
+            onClick={() => handleSend(chip)}
+            disabled={loading}
+            className="whitespace-nowrap px-[10px] py-[5px] bg-white hover:bg-[#dfe6dc] text-[#4c5d50] hover:text-[#1d2720] border border-[#cbd6ca] rounded-[2px] text-[10.5px] transition-colors flex-shrink-0"
+          >
+            {chip}
+          </button>
+        ))}
+      </div>
+
+      {/* Chat Form */}
+      <form onSubmit={(e) => { e.preventDefault(); handleSend(); }} className="border-t border-[#dbe2d8] p-[10px] flex gap-[8px] bg-white">
+        <input
+          ref={inputRef}
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Ask anything about Sandheep's experience or thinking..."
+          disabled={loading}
+          className="border border-[#ccd5ca] bg-white flex-1 min-w-0 p-[9px_12px] text-[12px] text-[#252a28] focus:outline-none focus:border-[#6f8071] rounded-[2px]"
+        />
+        <button
+          type="submit"
+          disabled={!input.trim() || loading}
+          className="bg-[#29392e] hover:bg-[#3d5244] disabled:bg-[#869589] text-white border-0 px-[14px] py-[8px] text-[12px] font-medium rounded-[2px] transition-colors"
+        >
+          Send
+        </button>
+      </form>
+    </div>
+  );
+}

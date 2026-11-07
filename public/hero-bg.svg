@@ -1,0 +1,41 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="mesh1" cx="50%" cy="0%" r="70%">
+      <stop offset="0%" stop-color="#4f46e5" stop-opacity="0.35"/>
+      <stop offset="50%" stop-color="#312e81" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#09090b" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="mesh2" cx="15%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#2563eb" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#09090b" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="mesh3" cx="85%" cy="60%" r="50%">
+      <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#09090b" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="grid-grad" x1="0" y1="0" x2="0" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.08"/>
+      <stop offset="60%" stop-color="#ffffff" stop-opacity="0.02"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M 48 0 L 0 0 0 48" fill="none" stroke="url(#grid-grad)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="1920" height="1080" fill="#09090b"/>
+
+  <!-- Gradient Blobs -->
+  <rect width="1920" height="1080" fill="url(#mesh1)"/>
+  <rect width="1920" height="1080" fill="url(#mesh2)"/>
+  <rect width="1920" height="1080" fill="url(#mesh3)"/>
+
+  <!-- Subtle Grid Pattern -->
+  <rect width="1920" height="1080" fill="url(#grid)"/>
+
+  <!-- Soft Ambient Glow Orbs -->
+  <circle cx="960" cy="180" r="380" fill="#6366f1" fill-opacity="0.12" filter="blur(80px)"/>
+  <circle cx="300" cy="500" r="280" fill="#3b82f6" fill-opacity="0.1" filter="blur(90px)"/>
+  <circle cx="1600" cy="650" r="320" fill="#8b5cf6" fill-opacity="0.1" filter="blur(90px)"/>
+</svg>
