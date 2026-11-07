@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { portfolioV5Data } from "@/data/portfolioData";
 import { Navbar } from "@/components/Navbar";
@@ -11,6 +11,19 @@ export default function Home() {
   const [digitalTwinOpen, setDigitalTwinOpen] = useState(false);
   const [calendlyOpen, setCalendlyOpen] = useState(false);
   const [initialQuestion, setInitialQuestion] = useState<string | undefined>(undefined);
+  const [showAiBadge, setShowAiBadge] = useState(false);
+
+  useEffect(() => {
+    const hero = document.getElementById("landing-hero");
+    if (!hero) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      setShowAiBadge(!entry.isIntersecting);
+    });
+
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, []);
 
   const handleOpenDigitalTwin = (question?: string) => {
     setInitialQuestion(question);
@@ -39,67 +52,61 @@ export default function Home() {
       />
 
       <main>
-        {/* HERO SECTION */}
-        <section className="bg-[#eeeee9] relative min-h-[645px] max-md:min-h-[790px] overflow-hidden">
-          <div className="wrap relative min-h-[645px] max-md:min-h-[790px] flex items-center max-md:items-start">
-            <div className="relative z-10 w-[min(665px,66%)] max-md:w-full pt-[35px] max-md:pt-[65px] pb-[85px] max-md:pb-[290px]">
-              <div className="font-semibold text-[#78847a] text-[10px] tracking-[0.16em] uppercase">
-                {portfolioV5Data.kicker}
-              </div>
-
-              <h1 className="serif-font font-normal text-[clamp(42px,5vw,68px)] max-md:text-[46px] tracking-[-0.055em] leading-[1.12] my-[26px]">
-                Sandheep<br />
-                Gopinath<span className="text-[#88978a]">.</span>
+        {/* SECTION 1: HERO & TILES (FITS IN FIRST FOLD / VIEWPORT WITHOUT SCROLLING) */}
+        <section id="landing-hero" className="landing-hero relative flex flex-col justify-between overflow-hidden">
+          {/* Main Hero Content Area */}
+          <div className="hero-wrap relative flex flex-1 items-center">
+            <div className="hero-copy relative z-10">
+              <h1 className="serif-font hero-title">
+                Sandheep<br />Gopinath
               </h1>
-
-              <p className="text-[12px] text-[#576259] tracking-[0.04em] mb-[31px]">
-                {portfolioV5Data.roleline}
+              <h2 className="serif-font hero-headline">
+                Building products that create<br className="max-xl:hidden" /> lasting value for people, businesses,<br className="max-xl:hidden" /> and society.
+              </h2>
+              <div className="hero-rule" />
+              <p className="hero-summary">
+                A product leader and founder with 15+ years of experience across technology, business, and design — from early-stage ventures to global organizations.
               </p>
-
-              <p className="text-[17px] max-md:text-[15px] leading-[1.8] max-w-[580px] text-[#49524c] mb-[32px]">
-                {portfolioV5Data.summary}
-              </p>
-
-              <div className="flex gap-[10px] flex-wrap">
-                <a
-                  className="btn btn-dark"
-                  href={`mailto:${portfolioV5Data.email}`}
-                >
-                  Email me <span>↗</span>
-                </a>
-                <button
-                  className="btn"
-                  onClick={handleBookMeeting}
-                >
-                  Book a meeting <span>↗</span>
+              <div className="hero-actions flex flex-wrap items-center gap-[18px]">
+                <button className="btn btn-dark hero-button" onClick={handleBookMeeting}>
+                  Book a meeting <span aria-hidden="true">↗</span>
                 </button>
-                <button
-                  className="btn"
-                  onClick={() => handleOpenDigitalTwin()}
-                >
-                  Talk to my digital twin <span>✳</span>
+                <a className="btn hero-button" href={`mailto:${portfolioV5Data.email}`}>
+                  Email me <span aria-hidden="true">✉</span>
+                </a>
+                <button className="btn hero-button" onClick={() => handleOpenDigitalTwin()}>
+                  Talk to my digital twin <span aria-hidden="true">✧</span>
                 </button>
               </div>
             </div>
 
-            {/* Hero portrait with editorial multiply filter */}
-            <div aria-label="Portrait of Sandheep" className="hero-portrait">
-              {/* Fallback & Portrait representation */}
+            <div aria-label="Portrait of Sandheep Gopinath" className="hero-portrait">
               <Image
-                src="/portrait.jpg"
+                src="/sandheep-landing-portrait.webp"
                 alt="Sandheep Gopinath"
                 fill
                 priority
-                className="object-cover object-[50%_29%]"
+                sizes="(max-width: 760px) 100vw, 55vw"
+                className="object-cover object-top"
               />
             </div>
+          </div>
 
-            {/* Hero footer line */}
-            <div className="absolute z-10 bottom-[28px] max-md:bottom-[16px] left-0 right-0 flex justify-between text-[10px] text-[#7c857d] tracking-[0.10em] uppercase">
-              <span>{portfolioV5Data.location}</span>
-              <a href="#about" className="hover:text-[#252a28]">
-                Scroll to explore ↓
-              </a>
+          {/* 3 Tiles at the bottom of Section 1 */}
+          <div className="hero-highlights w-full relative z-10" aria-label="Experience highlights">
+            <div className="hero-highlights-wrap">
+              <div className="hero-highlight">
+                <svg viewBox="0 0 32 32" aria-hidden="true"><path d="m16 3 13 7-13 7L3 10l13-7Zm-13 13 13 7 13-7M3 22l13 7 13-7" /></svg>
+                <div><strong>15+ YEARS</strong><span>Product · Technology · Business</span></div>
+              </div>
+              <div className="hero-highlight">
+                <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="2"/><rect x="19" y="3" width="10" height="10" rx="2"/><rect x="3" y="19" width="10" height="10" rx="2"/><rect x="19" y="19" width="10" height="10" rx="2"/></svg>
+                <div><strong>ACROSS INDUSTRIES</strong><span>Manufacturing · Health Tech · Consumer · Retail · More</span></div>
+              </div>
+              <div className="hero-highlight">
+                <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 28h8a4 4 0 0 0 4-4v-3a4 4 0 0 1 4-4h2V4m0 0 7 3-7 3" /></svg>
+                <div><strong>THROUGH MULTIPLE STAGES</strong><span>Ideation · PMF · Launch · Growth · Scale</span></div>
+              </div>
             </div>
           </div>
         </section>
@@ -462,14 +469,16 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Floating Ask my AI sticky badge (v5 style) */}
-      <button
-        onClick={() => setDigitalTwinOpen(!digitalTwinOpen)}
-        className="fixed right-[23px] bottom-[21px] z-40 flex items-center gap-[9px] bg-[#25342b] hover:bg-[#32453a] text-[#f1f4ed] border border-[#6f8071] px-[17px] py-[12px] rounded-[3px] text-[11px] font-semibold shadow-[0_7px_25px_rgba(0,0,0,0.2)] transition-all"
-      >
-        <span>✳</span>
-        <span>Ask my AI</span>
-      </button>
+      {/* Show the floating AI shortcut after the landing hero scrolls away. */}
+      {showAiBadge && (
+        <button
+          onClick={() => handleOpenDigitalTwin()}
+          className="fixed right-[23px] bottom-[21px] z-40 flex items-center gap-[9px] bg-[#25342b] hover:bg-[#32453a] text-[#f1f4ed] border border-[#6f8071] px-[17px] py-[12px] rounded-[3px] text-[11px] font-semibold shadow-[0_7px_25px_rgba(0,0,0,0.2)] transition-all"
+        >
+          <span>✳</span>
+          <span>Ask my AI</span>
+        </button>
+      )}
 
       {/* Digital Twin Chat Widget */}
       <DigitalTwinModal

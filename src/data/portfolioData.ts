@@ -44,15 +44,17 @@ export const portfolioV5Data = {
   calendly: process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/sandheepgopinath",
   resumePdf: "/Sandheep_Gopinath_Resume.pdf",
   summary:
-    "I connect organizational purpose with customer needs to identify the problems worth solving. Working across customers, business leaders, and product teams, I shape the strategy and build solutions that create meaningful value for people and measurable outcomes for the business.",
+    "Connecting why an organization exists with what its customers genuinely need.",
   about: {
     number: "01 / ABOUT",
-    heading: "Purpose. People. Products.",
-    aside: "Connecting why an organization exists with what its customers genuinely need.",
+    heading: "What experience has taught me.",
+    aside: "Different industries. Different markets. The same question: did our work create value that matters?",
     paragraphs: [
-      "For me, product leadership begins with an organizational question: why do we exist, and which customer problems are we uniquely positioned to solve? The answer should inform product vision, investment choices, and what we deliberately choose not to build.",
-      "I work across customers, business leaders, design, engineering, and commercial teams to understand the problem, define a credible solution, and turn that shared understanding into a product. The responsibility goes beyond delivery: every choice should fit the organization’s mission, strategy, and long-term direction.",
-      "The relationship works both ways. Customer evidence should shape product strategy—and, when necessary, challenge the assumptions behind the organization’s strategy. I value continuous discovery, candid validation, and outcomes that matter to people and the business.",
+      "I've spent over a decade building products across industries, technologies, and businesses at very different stages of growth. One thing that experience has consistently reinforced is that the success of a product isn't determined by how sophisticated the technology is, but by the value it creates for the people and businesses it serves.",
+      "Working across hardware, software, AI, and data-driven products has shown me how differently the same problem can be approached. An idea that works in manufacturing might solve an entirely different problem in healthcare or hospitality. Often, the most valuable insights come from looking beyond the conventions of a particular industry.",
+      "My experience spans building businesses from the ground up, helping early-stage teams make their first critical product decisions, and working with established enterprises where even small improvements can create substantial value at scale. These experiences have taught me that impact looks different at every stage — sometimes it's finding the first paying customer, sometimes it's discovering that an idea isn't worth pursuing, and sometimes it's improving a product used by thousands of people.",
+      "Working on-site in India, China, Poland, and Denmark, and collaborating with teams across the world, has added another dimension to that understanding. I've seen how the same product, process, or decision can affect people differently depending on their environment, expectations, and ways of working. It has reinforced a simple belief: meaningful outcomes begin with understanding the people affected by our decisions.",
+      "Today, that perspective shapes how I approach product management. I look beyond features and delivery milestones to understand whether we're solving the right problem, whether it aligns with why the organization exists, and whether the outcome genuinely matters to the customer.",
     ],
     principles: [
       "Organizational purpose",
@@ -65,7 +67,7 @@ export const portfolioV5Data = {
     number: "02 / SELECTED OUTCOMES",
     heading: "Measured by outcomes.",
     intro:
-      "A few results from products and teams I've led. The work matters most when it changes what customers and businesses can achieve.",
+      "Selected results from products I have helped shape, launch, and scale.",
     metrics: [
       {
         value: "$10M",
@@ -193,7 +195,7 @@ export const portfolioV5Data = {
     intro:
       "A few books that have shaped how I think about building, communicating, learning, and understanding people. These are my short reflections—not quotations from the books.",
     footnote:
-      "Short takeaways from books that have shaped my thinking. These are curated personal reflections, not direct book quotations.",
+      "Selected reading · Cover images are loaded from external book retailers and may vary by edition. If a cover is unavailable, the title remains visible. Takeaways reflect my interpretation, not quotations.",
     books: [
       {
         title: "Inspired",
