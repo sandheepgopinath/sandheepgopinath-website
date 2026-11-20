@@ -156,6 +156,7 @@ export default function Home() {
 
   useEffect(() => {
     const mobileQuery = window.matchMedia("(max-width: 760px)");
+    let touchStartX = 0;
     let touchStartY = 0;
     let unlockTimer: ReturnType<typeof setTimeout> | undefined;
 
@@ -197,7 +198,11 @@ export default function Home() {
     };
 
     const handleWheel = (event: WheelEvent) => {
-      if (!mobileQuery.matches || event.deltaY === 0) return;
+      if (
+        !mobileQuery.matches ||
+        Math.abs(event.deltaY) < 18 ||
+        Math.abs(event.deltaY) <= Math.abs(event.deltaX) * 1.25
+      ) return;
       const target = getSnapTarget(event.deltaY > 0 ? "down" : "up");
       if (!target) return;
       event.preventDefault();
@@ -205,15 +210,18 @@ export default function Home() {
     };
 
     const handleTouchStart = (event: TouchEvent) => {
+      touchStartX = event.touches[0]?.clientX ?? 0;
       touchStartY = event.touches[0]?.clientY ?? 0;
     };
 
     const handleTouchMove = (event: TouchEvent) => {
       if (!mobileQuery.matches) return;
+      const currentX = event.touches[0]?.clientX ?? touchStartX;
       const currentY = event.touches[0]?.clientY ?? touchStartY;
-      const delta = touchStartY - currentY;
-      if (Math.abs(delta) < 4) return;
-      const target = getSnapTarget(delta > 0 ? "down" : "up");
+      const deltaX = touchStartX - currentX;
+      const deltaY = touchStartY - currentY;
+      if (Math.abs(deltaY) < 32 || Math.abs(deltaY) <= Math.abs(deltaX) * 1.25) return;
+      const target = getSnapTarget(deltaY > 0 ? "down" : "up");
       if (!target) return;
       event.preventDefault();
       snapToSection(target);
