@@ -92,7 +92,7 @@ export const portfolioV5Data = {
     ],
   },
   experience: {
-    number: "03 / PROFESSIONAL JOURNEY",
+    number: "04 / PROFESSIONAL JOURNEY",
     heading: "Experience.",
     intro:
       "From connected hardware and global manufacturing to AI platforms and enterprise SaaS.",
@@ -128,7 +128,7 @@ export const portfolioV5Data = {
     ],
   },
   work: {
-    number: "04 / SELECTED WORK",
+    number: "05 / SELECTED WORK",
     heading: "Products, problems, decisions.",
     intro:
       "A small selection of product problems I've worked on, spanning early product discovery, applied intelligence, and enterprise-scale execution.",
@@ -156,7 +156,7 @@ export const portfolioV5Data = {
       "Independent ventures and verified startup advisory engagements can be added here as distinct case studies, with your exact role and contributions clearly stated.",
   },
   philosophy: {
-    number: "05 / HOW I THINK",
+    number: "06 / HOW I THINK",
     heading: "Build with conviction.",
     subheading: "Validate with humility.",
     pullQuote:
@@ -190,7 +190,7 @@ export const portfolioV5Data = {
     ],
   },
   reading: {
-    number: "06 / THE THINKING SHELF",
+    number: "07 / THE THINKING SHELF",
     heading: "Ideas I keep coming back to.",
     intro:
       "A few books that have shaped how I think about building, communicating, learning, and understanding people. These are my short reflections—not quotations from the books.",
@@ -288,7 +288,7 @@ export const portfolioV5Data = {
     ],
   },
   education: {
-    number: "07 / EDUCATION",
+    number: "08 / EDUCATION",
     heading: "Continual learning.",
     items: [
       {
@@ -318,7 +318,7 @@ export const portfolioV5Data = {
     ],
   },
   contact: {
-    number: "08 / CONTACT",
+    number: "09 / CONTACT",
     heading: "Let's have a conversation.",
     subtitle:
       "Product challenges, new opportunities, or an interesting idea — I'd be glad to connect.",

@@ -54,7 +54,7 @@ export function CalendlyModal({ isOpen, onClose }: CalendlyModalProps) {
       >
         <button
           onClick={onClose}
-          className="absolute top-[15px] right-[20px] text-[#647266] hover:text-black text-[22px] border-0 bg-none"
+          className="liquid-glass-button liquid-glass-button--icon absolute top-[15px] right-[20px] text-[#647266] hover:text-black text-[22px]"
         >
           ✕
         </button>

@@ -1,17 +1,146 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { portfolioV5Data } from "@/data/portfolioData";
 import { Navbar } from "@/components/Navbar";
 import { DigitalTwinModal } from "@/components/DigitalTwinModal";
 import { CalendlyModal } from "@/components/CalendlyModal";
+import { ExpertiseSection } from "@/components/ExpertiseSection";
+import { AmbientMusic } from "@/components/AmbientMusic";
+import { ExperienceSection } from "@/components/ExperienceSection";
+
+const FULL_SUMMARY_TEXT =
+  "A product leader and founder with 11+ years of experience bridging product, technology, and business across diverse industries — from early-stage ventures to global organizations.";
+
+function TypingHeroSummary({ text }: { text: string }) {
+  const typedRef = useRef<HTMLSpanElement>(null);
+  const ghostRef = useRef<HTMLSpanElement>(null);
+  const cursorRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const typedEl = typedRef.current;
+    const ghostEl = ghostRef.current;
+    const cursorEl = cursorRef.current;
+    if (!typedEl || !ghostEl || !cursorEl) return;
+
+    // Respect reduced motion preference
+    if (typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      typedEl.textContent = text;
+      ghostEl.textContent = "";
+      cursorEl.style.display = "none";
+      return;
+    }
+
+    let rafId: number;
+    let startTime: number | null = null;
+    let charIndex = 0;
+    const startDelay = 450; // pause initially so headline is seen first
+    let nextCharTime = 0;
+
+    const tick = (now: number) => {
+      if (startTime === null) {
+        startTime = now;
+        nextCharTime = now + startDelay;
+      }
+
+      if (now >= nextCharTime) {
+        while (now >= nextCharTime && charIndex < text.length) {
+          charIndex++;
+          const char = text[charIndex - 1];
+          let delay = 18;
+          if (char === "," || char === "—") delay = 85;
+          else if (char === " ") delay = 28;
+          nextCharTime += delay;
+        }
+
+        typedEl.textContent = text.slice(0, charIndex);
+        ghostEl.textContent = text.slice(charIndex);
+
+        if (charIndex >= text.length) {
+          cursorEl.style.display = "none";
+          return;
+        }
+      }
+
+      rafId = requestAnimationFrame(tick);
+    };
+
+    rafId = requestAnimationFrame(tick);
+
+    // Guaranteed fallback: after 4.5s ensure full text is visible
+    const fallbackTimer = setTimeout(() => {
+      if (typedEl) typedEl.textContent = text;
+      if (ghostEl) ghostEl.textContent = "";
+      if (cursorEl) cursorEl.style.display = "none";
+      cancelAnimationFrame(rafId);
+    }, 4500);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      clearTimeout(fallbackTimer);
+    };
+  }, [text]);
+
+  return (
+    <p
+      className="text-[clamp(12.5px,0.98vw,15.5px)] text-[#636c64] leading-[1.6] max-w-[540px] max-md:max-w-[460px] max-md:text-center max-md:mx-auto md:text-left md:mx-0"
+      aria-label={text}
+    >
+      <span ref={typedRef} />
+      <span
+        ref={cursorRef}
+        aria-hidden="true"
+        className="inline-block w-[2px] h-[1.1em] bg-[#1c2921] align-middle -mt-0.5 mx-[1px] animate-pulse"
+      />
+      <span
+        ref={ghostRef}
+        aria-hidden="true"
+        className="opacity-0 select-none pointer-events-none"
+      >
+        {text}
+      </span>
+    </p>
+  );
+}
 
 export default function Home() {
   const [digitalTwinOpen, setDigitalTwinOpen] = useState(false);
   const [calendlyOpen, setCalendlyOpen] = useState(false);
   const [initialQuestion, setInitialQuestion] = useState<string | undefined>(undefined);
   const [showAiBadge, setShowAiBadge] = useState(false);
+  const [isHeroFootVisible, setIsHeroFootVisible] = useState(true);
+  const sectionSnapLockRef = useRef(false);
+
+  useEffect(() => {
+    const sentinel = document.getElementById("top-sentinel");
+    let observer: IntersectionObserver | null = null;
+
+    if (sentinel) {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          setIsHeroFootVisible(entry.isIntersecting);
+        },
+        { threshold: [0, 1] }
+      );
+      observer.observe(sentinel);
+    }
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      setIsHeroFootVisible(scrollY < 15);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    document.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      if (observer) observer.disconnect();
+      window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     const hero = document.getElementById("landing-hero");
@@ -25,26 +154,117 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const mobileQuery = window.matchMedia("(max-width: 760px)");
+    let touchStartY = 0;
+    let unlockTimer: ReturnType<typeof setTimeout> | undefined;
+
+    const getSnapTarget = (direction: "up" | "down") => {
+      const expertise = document.getElementById("expertise");
+      const experience = document.getElementById("experience");
+      if (!expertise || !experience) return null;
+
+      const scrollY = window.scrollY;
+      const expertiseTop = expertise.offsetTop;
+      const experienceTop = experience.offsetTop;
+
+      if (direction === "down") {
+        if (scrollY < expertiseTop - 2) return expertise;
+        if (scrollY < experienceTop - 2) return experience;
+        return null;
+      }
+
+      if (scrollY >= experienceTop - 6 && scrollY <= experienceTop + window.innerHeight * 0.12) {
+        return expertise;
+      }
+      if (scrollY >= expertiseTop - 6 && scrollY < experienceTop - 6) {
+        return "top" as const;
+      }
+      return null;
+    };
+
+    const snapToSection = (target: HTMLElement | "top") => {
+      if (sectionSnapLockRef.current) return;
+      sectionSnapLockRef.current = true;
+      if (target === "top") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      unlockTimer = setTimeout(() => {
+        sectionSnapLockRef.current = false;
+      }, 900);
+    };
+
+    const handleWheel = (event: WheelEvent) => {
+      if (!mobileQuery.matches || event.deltaY === 0) return;
+      const target = getSnapTarget(event.deltaY > 0 ? "down" : "up");
+      if (!target) return;
+      event.preventDefault();
+      snapToSection(target);
+    };
+
+    const handleTouchStart = (event: TouchEvent) => {
+      touchStartY = event.touches[0]?.clientY ?? 0;
+    };
+
+    const handleTouchMove = (event: TouchEvent) => {
+      if (!mobileQuery.matches) return;
+      const currentY = event.touches[0]?.clientY ?? touchStartY;
+      const delta = touchStartY - currentY;
+      if (Math.abs(delta) < 4) return;
+      const target = getSnapTarget(delta > 0 ? "down" : "up");
+      if (!target) return;
+      event.preventDefault();
+      snapToSection(target);
+    };
+
+    window.addEventListener("wheel", handleWheel, { passive: false });
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: false });
+
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+      if (unlockTimer) clearTimeout(unlockTimer);
+    };
+  }, []);
+
   const handleOpenDigitalTwin = (question?: string) => {
     setInitialQuestion(question);
     setDigitalTwinOpen(true);
   };
 
-  const handleBookMeeting = () => {
-    try {
-      const u = localStorage.getItem("sg_calendly_v2");
-      if (u) {
-        window.open(u, "_blank", "noopener,noreferrer");
-        return;
-      }
-    } catch {
-      // ignore
+  const handleScrollToExplore = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    setIsHeroFootVisible(false);
+    const expertiseSection = document.getElementById("expertise");
+    if (expertiseSection) {
+      expertiseSection.scrollIntoView({ behavior: "smooth" });
     }
-    setCalendlyOpen(true);
+  };
+
+  const handleBookMeeting = () => {
+    const width = 720;
+    const height = 750;
+    const left = typeof window !== "undefined" ? window.screen.width / 2 - width / 2 : 100;
+    const top = typeof window !== "undefined" ? window.screen.height / 2 - height / 2 : 100;
+    const popup = window.open(
+      "https://calendly.com/sandheepgopinath",
+      "calendlyPopup",
+      `width=${width},height=${height},top=${top},left=${left},resizable=yes,scrollbars=yes,status=no`
+    );
+    if (!popup || popup.closed || typeof popup.closed === "undefined") {
+      setCalendlyOpen(true);
+    }
   };
 
   return (
     <div className="relative min-h-screen text-[#252a28] bg-[#f7f7f3]">
+      {/* Sentinel for detecting if page is at the very top */}
+      <div id="top-sentinel" className="absolute top-0 left-0 w-full h-[20px] pointer-events-none -z-10" />
+
       {/* Navigation */}
       <Navbar
         onOpenDigitalTwin={() => handleOpenDigitalTwin()}
@@ -52,34 +272,71 @@ export default function Home() {
       />
 
       <main>
-        {/* SECTION 1: HERO & TILES (FITS IN FIRST FOLD / VIEWPORT WITHOUT SCROLLING) */}
+        {/* SECTION 1: HERO (UPDATED TO MATCH EDITORIAL DESIGN) */}
         <section id="landing-hero" className="landing-hero relative flex flex-col justify-between overflow-hidden">
           {/* Main Hero Content Area */}
           <div className="hero-wrap relative flex flex-1 items-center">
             <div className="hero-copy relative z-10">
-              <h1 className="serif-font hero-title">
-                Sandheep<br />Gopinath
-              </h1>
-              <h2 className="serif-font hero-headline">
-                Building products that create<br className="max-xl:hidden" /> lasting value for people, businesses,<br className="max-xl:hidden" /> and society.
-              </h2>
-              <div className="hero-rule" />
-              <p className="hero-summary">
-                A product leader and founder with 15+ years of experience across technology, business, and design — from early-stage ventures to global organizations.
-              </p>
-              <div className="hero-actions flex flex-wrap items-center gap-[18px]">
-                <button className="btn btn-dark hero-button" onClick={handleBookMeeting}>
-                  Book a meeting <span aria-hidden="true">↗</span>
-                </button>
-                <a className="btn hero-button" href={`mailto:${portfolioV5Data.email}`}>
-                  Email me <span aria-hidden="true">✉</span>
-                </a>
-                <button className="btn hero-button" onClick={() => handleOpenDigitalTwin()}>
-                  Talk to my digital twin <span aria-hidden="true">✧</span>
-                </button>
+              {/* Text Block */}
+              <div className="flex-none">
+                {/* Kicker */}
+                <div className="whitespace-nowrap text-[10px] min-[380px]:text-[11px] sm:text-[12px] font-semibold tracking-[0.13em] sm:tracking-[0.16em] text-[#6b776f] uppercase mb-2.5 sm:mb-6 text-center md:text-left">
+                  PRODUCT · BUSINESS · TECHNOLOGY
+                </div>
+
+                {/* Main Headline */}
+                <h1 className="serif-font text-[clamp(24px,3.5vw,50px)] font-normal text-[#171918] leading-[1.12] tracking-[-0.035em] mb-5 sm:mb-8 text-center md:text-left">
+                  Understanding Customers.<br />
+                  <span className="italic relative inline-block">
+                    Driving Growth.
+                    <svg
+                      className="absolute left-1 -bottom-1 sm:-bottom-1.5 w-[98%] h-[7px] sm:h-[10px] text-[#9ca79e] pointer-events-none"
+                      viewBox="0 0 240 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      preserveAspectRatio="none"
+                    >
+                      <path
+                        d="M2 11C60 3 175 3.5 238 10.5"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </span>
+                </h1>
+
+                {/* Experience Summary with Realistic Character-by-Character Typing */}
+                <TypingHeroSummary text={FULL_SUMMARY_TEXT} />
+              </div>
+
+              {/* Action Buttons: Centered dynamically in the available vertical space */}
+              <div className="flex-1 flex flex-col justify-center min-h-0 pt-4 sm:pt-6 md:pt-8 max-md:max-w-[165px]">
+                <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-2.5 sm:gap-3 w-full">
+                  <a
+                    href="/Sandheep%20Gopinath%20Resume%202026.pdf"
+                    download="Sandheep_Gopinath_Resume_2026.pdf"
+                    className="btn hero-liquid-glass hero-liquid-glass--primary text-[10px] sm:text-[11.5px] h-[31px] sm:h-[35px] px-3 justify-center w-full sm:w-auto"
+                  >
+                    Download Resume <span aria-hidden="true">↓</span>
+                  </a>
+                  <a
+                    href="mailto:hello@sandheepgopinath.com"
+                    className="btn hero-liquid-glass text-[10px] sm:text-[11.5px] h-[31px] sm:h-[35px] px-3 justify-center w-full sm:w-auto"
+                  >
+                    Email me <span aria-hidden="true">✉</span>
+                  </a>
+                  <button
+                    onClick={handleBookMeeting}
+                    className="btn hero-liquid-glass text-[10px] sm:text-[11.5px] h-[31px] sm:h-[35px] px-3 justify-center w-full sm:w-auto"
+                  >
+                    Set up a meeting <span aria-hidden="true">↗</span>
+                  </button>
+                </div>
               </div>
             </div>
 
+            {/* Existing portrait image - preserved unchanged */}
             <div aria-label="Portrait of Sandheep Gopinath" className="hero-portrait">
               <Image
                 src="/sandheep-landing-portrait.webp"
@@ -92,108 +349,35 @@ export default function Home() {
             </div>
           </div>
 
-          {/* 3 Tiles at the bottom of Section 1 */}
-          <div className="hero-highlights w-full relative z-10" aria-label="Experience highlights">
-            <div className="hero-highlights-wrap">
-              <div className="hero-highlight">
-                <svg viewBox="0 0 32 32" aria-hidden="true"><path d="m16 3 13 7-13 7L3 10l13-7Zm-13 13 13 7 13-7M3 22l13 7 13-7" /></svg>
-                <div><strong>15+ YEARS</strong><span>Product · Technology · Business</span></div>
-              </div>
-              <div className="hero-highlight">
-                <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="2"/><rect x="19" y="3" width="10" height="10" rx="2"/><rect x="3" y="19" width="10" height="10" rx="2"/><rect x="19" y="19" width="10" height="10" rx="2"/></svg>
-                <div><strong>ACROSS INDUSTRIES</strong><span>Manufacturing · Health Tech · Consumer · Retail · More</span></div>
-              </div>
-              <div className="hero-highlight">
-                <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 28h8a4 4 0 0 0 4-4v-3a4 4 0 0 1 4-4h2V4m0 0 7 3-7 3" /></svg>
-                <div><strong>THROUGH MULTIPLE STAGES</strong><span>Ideation · PMF · Launch · Growth · Scale</span></div>
-              </div>
-            </div>
-          </div>
+          {/* Bottom Bar Spacer: Preserves exact flex-centering of action buttons above */}
+          <div className="h-[46px] sm:h-[57px] flex-none w-full pointer-events-none" aria-hidden="true" />
         </section>
 
-        {/* 01 / ABOUT SECTION */}
-        <section className="py-[100px] max-md:py-[70px] bg-[#f8f8f5]" id="about">
-          <div className="wrap grid grid-cols-[35%_1fr] max-md:grid-cols-1 gap-[11%] max-md:gap-[14px] items-start">
-            <div>
-              <div className="text-[10px] text-[#7b897e] tracking-[0.11em] font-semibold">
-                {portfolioV5Data.about.number}
-              </div>
-              <h2 className="serif-font text-[clamp(26px,3vw,39px)] font-normal tracking-[-0.045em] leading-[1.3] my-[20px]">
-                {portfolioV5Data.about.heading}
-              </h2>
-              <div className="w-[42px] h-[1px] bg-[#89988d] my-[30px]" />
-              <p className="text-[12px] text-[#7b847d] leading-[1.9] max-w-[250px]">
-                {portfolioV5Data.about.aside}
-              </p>
-            </div>
-
-            <div className="text-[16px] max-md:text-[14px] text-[#3e4840] leading-[1.95] pt-[8px]">
-              {portfolioV5Data.about.paragraphs.map((para, i) => (
-                <p key={i} className="mb-[22px]">
-                  {para}
-                </p>
-              ))}
-
-              <div className="flex gap-[12px] flex-wrap mt-[26px]">
-                {portfolioV5Data.about.principles.map((p, i) => (
-                  <span
-                    key={i}
-                    className="border border-[#d5dcd3] rounded-[2px] text-[#626e64] px-[13px] py-[10px] text-[11px]"
-                  >
-                    {p}
-                  </span>
-                ))}
-              </div>
-            </div>
+        {/* Pinned viewport bottom bar */}
+        <div
+          className={`hero-foot fixed bottom-0 left-0 right-0 z-30 bg-[#f9f7f5] border-t border-[#e2ddd5] ${
+            !isHeroFootVisible ? "is-hidden" : ""
+          }`}
+          aria-label="Section navigation"
+        >
+          <div className="hero-wrap flex items-center justify-between py-3.5 sm:py-5 text-[11px] font-semibold tracking-[0.14em] text-[#6d7770] uppercase">
+            <span>02 / EXPERTISE &amp; IMPACT</span>
+            <a
+              href="#expertise"
+              onClick={handleScrollToExplore}
+              className="hover:text-[#191f1b] transition-colors flex items-center gap-1.5 cursor-pointer"
+            >
+              SCROLL TO EXPLORE <span aria-hidden="true">↓</span>
+            </a>
           </div>
-        </section>
+        </div>
 
-        {/* 02 / SELECTED OUTCOMES (IMPACT SECTION) */}
-        <section className="py-[100px] max-md:py-[70px] bg-[#202925] text-[#f0f1ec]" id="impact">
-          <div className="wrap">
-            <div className="flex justify-between max-md:block gap-[35px] items-end">
-              <div>
-                <div className="text-[10px] text-[#889c8b] tracking-[0.11em] font-semibold">
-                  {portfolioV5Data.impact.number}
-                </div>
-                <h2 className="serif-font text-[clamp(26px,3vw,39px)] font-normal tracking-[-0.045em] leading-[1.3] my-[20px] text-[#f0f1ec]">
-                  {portfolioV5Data.impact.heading}
-                </h2>
-              </div>
-              <p className="max-w-[590px] leading-[1.85] text-[#aebdb0] text-[14px] mb-2">
-                {portfolioV5Data.impact.intro}
-              </p>
-            </div>
+        <ExpertiseSection />
 
-            <div className="grid grid-cols-4 max-md:grid-cols-2 max-sm:grid-cols-1 mt-[56px] border-t border-[#4a5950]">
-              {portfolioV5Data.impact.metrics.map((m, idx) => (
-                <div
-                  key={idx}
-                  className={`pt-[29px] pb-[10px] pr-[18px] ${
-                    idx !== 0 ? "pl-[18px] max-sm:pl-0" : ""
-                  } ${
-                    idx !== 3 ? "border-r border-[#4a5950] max-md:border-r-0" : ""
-                  } ${
-                    idx >= 2 ? "max-md:border-t max-md:border-[#4a5950]" : ""
-                  }`}
-                >
-                  <strong className="block serif-font font-normal text-[clamp(24px,3vw,38px)] tracking-[-0.05em] text-[#dce6d9]">
-                    {m.value}
-                  </strong>
-                  <p className="text-[#d0d8ce] text-[12px] leading-[1.6] min-h-[44px] mb-[20px] mt-1">
-                    {m.description}
-                  </p>
-                  <small className="text-[10px] tracking-[0.09em] text-[#889c8b]">
-                    {m.company}
-                  </small>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <ExperienceSection />
 
-        {/* 03 / PROFESSIONAL JOURNEY (EXPERIENCE) */}
-        <section className="py-[100px] max-md:py-[70px] bg-[#f7f7f3]" id="experience">
+        {/* 04 / PROFESSIONAL JOURNEY (EXPERIENCE) */}
+        <section className="py-[100px] max-md:py-[70px] bg-[#f7f7f3]" id="journey">
           <div className="wrap">
             <div className="text-[10px] text-[#7b897e] tracking-[0.11em] font-semibold">
               {portfolioV5Data.experience.number}
@@ -229,7 +413,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 04 / SELECTED WORK */}
+        {/* 05 / SELECTED WORK */}
         <section className="py-[100px] max-md:py-[70px] bg-[#e9ece6]" id="work">
           <div className="wrap">
             <div className="text-[10px] text-[#7b897e] tracking-[0.11em] font-semibold">
@@ -269,7 +453,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 05 / HOW I THINK (PHILOSOPHY) */}
+        {/* 06 / HOW I THINK (PHILOSOPHY) */}
         <section className="py-[100px] max-md:py-[70px] bg-[#e6eae2]" id="philosophy">
           <div className="wrap">
             <div className="text-[10px] text-[#7b897e] tracking-[0.11em] font-semibold">
@@ -323,7 +507,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 06 / THE THINKING SHELF (READING) */}
+        {/* 07 / THE THINKING SHELF (READING) */}
         <section className="py-[100px] max-md:py-[70px] bg-[#f8f8f5]" id="reading">
           <div className="wrap">
             <div className="flex justify-between max-md:block gap-[70px] max-md:gap-[35px] items-end mb-[39px]">
@@ -390,7 +574,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 07 / EDUCATION */}
+        {/* 08 / EDUCATION */}
         <section className="py-[100px] max-md:py-[70px] bg-[#f7f7f3]" id="education">
           <div className="wrap">
             <div className="text-[10px] text-[#7b897e] tracking-[0.11em] font-semibold">
@@ -416,7 +600,7 @@ export default function Home() {
         </section>
       </main>
 
-      {/* 08 / CONTACT & FOOTER */}
+      {/* 09 / CONTACT & FOOTER */}
       <footer className="bg-[#1f2823] text-[#f2f4ed] pt-[82px] pb-[28px]" id="contact">
         <div className="wrap">
           <div className="text-[10px] text-[#8a9b8e] tracking-[0.11em] font-semibold">
@@ -473,7 +657,7 @@ export default function Home() {
       {showAiBadge && (
         <button
           onClick={() => handleOpenDigitalTwin()}
-          className="fixed right-[23px] bottom-[21px] z-40 flex items-center gap-[9px] bg-[#25342b] hover:bg-[#32453a] text-[#f1f4ed] border border-[#6f8071] px-[17px] py-[12px] rounded-[3px] text-[11px] font-semibold shadow-[0_7px_25px_rgba(0,0,0,0.2)] transition-all"
+          className="liquid-glass-button liquid-glass-button--primary fixed right-[23px] bottom-[21px] z-40 flex items-center gap-[9px] px-[17px] py-[12px] text-[11px] font-semibold"
         >
           <span>✳</span>
           <span>Ask my AI</span>
@@ -492,6 +676,8 @@ export default function Home() {
         isOpen={calendlyOpen}
         onClose={() => setCalendlyOpen(false)}
       />
+
+      <AmbientMusic />
     </div>
   );
 }

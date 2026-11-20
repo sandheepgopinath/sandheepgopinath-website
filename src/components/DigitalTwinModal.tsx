@@ -126,7 +126,7 @@ export function DigitalTwinModal({ isOpen, onClose, initialQuestion }: DigitalTw
         <button
           onClick={onClose}
           title="Close chat"
-          className="text-[#657367] hover:text-[#111] text-[20px] leading-none px-1 py-0.5"
+          className="liquid-glass-button liquid-glass-button--icon text-[#657367] hover:text-[#111] text-[20px] leading-none"
         >
           ✕
         </button>
@@ -187,7 +187,7 @@ export function DigitalTwinModal({ isOpen, onClose, initialQuestion }: DigitalTw
             key={i}
             onClick={() => handleSend(chip)}
             disabled={loading}
-            className="whitespace-nowrap px-[10px] py-[5px] bg-white hover:bg-[#dfe6dc] text-[#4c5d50] hover:text-[#1d2720] border border-[#cbd6ca] rounded-[2px] text-[10.5px] transition-colors flex-shrink-0"
+            className="liquid-glass-button whitespace-nowrap px-[10px] py-[5px] text-[#4c5d50] hover:text-[#1d2720] text-[10.5px] flex-shrink-0"
           >
             {chip}
           </button>
@@ -208,7 +208,7 @@ export function DigitalTwinModal({ isOpen, onClose, initialQuestion }: DigitalTw
         <button
           type="submit"
           disabled={!input.trim() || loading}
-          className="bg-[#29392e] hover:bg-[#3d5244] disabled:bg-[#869589] text-white border-0 px-[14px] py-[8px] text-[12px] font-medium rounded-[2px] transition-colors"
+          className="liquid-glass-button liquid-glass-button--primary text-white px-[14px] py-[8px] text-[12px] font-medium"
         >
           Send
         </button>
