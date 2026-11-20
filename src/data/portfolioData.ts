@@ -91,44 +91,8 @@ export const portfolioV5Data = {
       },
     ],
   },
-  experience: {
-    number: "04 / PROFESSIONAL JOURNEY",
-    heading: "Experience.",
-    intro:
-      "From connected hardware and global manufacturing to AI platforms and enterprise SaaS.",
-    items: [
-      {
-        dates: "2024 — 2026",
-        company: "Verint",
-        job: "Product Manager",
-        description:
-          "Owned strategy and roadmaps across enterprise workforce-management products, driving commercial enhancements and moving teams toward agile, customer-driven releases.",
-      },
-      {
-        dates: "2022 — 2024",
-        company: "HRS Group",
-        job: "Product Manager",
-        description:
-          "Led product strategy across core products, improved adoption through self-service workflows, and launched a machine-learning hotel-quality scoring platform.",
-      },
-      {
-        dates: "2017 — 2021",
-        company: "Danfoss",
-        job: "Product Lead · Digital Transformation",
-        description:
-          "Developed and scaled Industry 4.0 solutions across global factories, including computer vision quality inspection and predictive maintenance.",
-      },
-      {
-        dates: "2014 — 2017",
-        company: "Synapse Technologies",
-        job: "Founding Member · Products & Operations",
-        description:
-          "Helped build an industrial automation and IoT company, leading discovery, early product development, go-to-market, and enterprise customer acquisition.",
-      },
-    ],
-  },
   work: {
-    number: "05 / SELECTED WORK",
+    number: "04 / SELECTED WORK",
     heading: "Products, problems, decisions.",
     intro:
       "A small selection of product problems I've worked on, spanning early product discovery, applied intelligence, and enterprise-scale execution.",
@@ -156,18 +120,11 @@ export const portfolioV5Data = {
       "Independent ventures and verified startup advisory engagements can be added here as distinct case studies, with your exact role and contributions clearly stated.",
   },
   philosophy: {
-    number: "06 / HOW I THINK",
+    number: "05 / HOW I THINK",
     heading: "Build with conviction.",
     subheading: "Validate with humility.",
     pullQuote:
       "The hardest part of building a product isn't deciding what to build. It's being willing to find out you're wrong.",
-    paragraphs: [
-      "Product management is not only deciding what, why, when, and how to build. It starts by understanding why the organization exists, where it intends to go, and the needs, motivations, and circumstances of the people it serves. The right product decisions connect those realities.",
-      "That means working across customers, leadership, engineering, design, and commercial teams—not merely to coordinate delivery, but to establish a shared understanding of the problem, the opportunity, and how the solution supports the organization’s mission and strategy. Equally, evidence from customers should be allowed to change our strategic assumptions.",
-      "That demands being honest about our own blind spots. Sunk-cost bias makes it difficult to walk away from an investment. Confirmation bias encourages us to see what we hope is true. And experience can tempt us to believe we know our customers better than they know themselves.",
-      "In B2B, it gets even more complicated: the person who buys the product isn't always the person who uses it. A commercial win is not the same thing as meaningful user value. I want to understand both.",
-      "A product earns its place when someone chooses to spend their time, attention, or money on it—because it genuinely solves a problem that matters.",
-    ],
     principles: [
       {
         id: "01",
@@ -190,7 +147,7 @@ export const portfolioV5Data = {
     ],
   },
   reading: {
-    number: "07 / THE THINKING SHELF",
+    number: "06 / THE THINKING SHELF",
     heading: "Ideas I keep coming back to.",
     intro:
       "A few books that have shaped how I think about building, communicating, learning, and understanding people. These are my short reflections—not quotations from the books.",
@@ -288,7 +245,7 @@ export const portfolioV5Data = {
     ],
   },
   education: {
-    number: "08 / EDUCATION",
+    number: "07 / EDUCATION",
     heading: "Continual learning.",
     items: [
       {
@@ -318,7 +275,7 @@ export const portfolioV5Data = {
     ],
   },
   contact: {
-    number: "09 / CONTACT",
+    number: "08 / CONTACT",
     heading: "Let's have a conversation.",
     subtitle:
       "Product challenges, new opportunities, or an interesting idea — I'd be glad to connect.",

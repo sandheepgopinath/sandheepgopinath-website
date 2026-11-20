@@ -384,44 +384,7 @@ export default function Home() {
 
         <ExperienceSection />
 
-        {/* 04 / PROFESSIONAL JOURNEY (EXPERIENCE) */}
-        <section className="py-[100px] max-md:py-[70px] bg-[#f7f7f3]" id="journey">
-          <div className="wrap">
-            <div className="text-[10px] text-[#7b897e] tracking-[0.11em] font-semibold">
-              {portfolioV5Data.experience.number}
-            </div>
-            <h2 className="serif-font text-[clamp(26px,3vw,39px)] font-normal tracking-[-0.045em] leading-[1.3] my-[20px]">
-              {portfolioV5Data.experience.heading}
-            </h2>
-            <p className="max-w-[590px] leading-[1.85] text-[#647067] text-[14px] mb-[32px]">
-              {portfolioV5Data.experience.intro}
-            </p>
-
-            <div className="border-t border-[#d4d9d0]">
-              {portfolioV5Data.experience.items.map((item, idx) => (
-                <div
-                  key={idx}
-                  className="border-b border-[#d4d9d0] grid grid-cols-[145px_220px_1fr] max-md:grid-cols-[120px_1fr] max-sm:grid-cols-1 gap-[24px] max-md:gap-[10px] py-[28px]"
-                >
-                  <span className="text-[11px] text-[#838d83]">{item.dates}</span>
-                  <div>
-                    <h3 className="text-[15px] tracking-[-0.02em] font-semibold mb-[7px]">
-                      {item.company}
-                    </h3>
-                    <span className="text-[#68746a] text-[11px] leading-[1.7] block">
-                      {item.job}
-                    </span>
-                  </div>
-                  <p className="text-[#59655a] leading-[1.9] text-[13px] m-0 max-md:col-span-2 max-sm:col-span-1">
-                    {item.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* 05 / SELECTED WORK */}
+        {/* 04 / SELECTED WORK */}
         <section className="py-[100px] max-md:py-[70px] bg-[#e9ece6]" id="work">
           <div className="wrap">
             <div className="text-[10px] text-[#7b897e] tracking-[0.11em] font-semibold">
@@ -461,14 +424,14 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 06 / HOW I THINK (PHILOSOPHY) */}
+        {/* 05 / HOW I THINK (PHILOSOPHY) */}
         <section className="py-[100px] max-md:py-[70px] bg-[#e6eae2]" id="philosophy">
           <div className="wrap">
             <div className="text-[10px] text-[#7b897e] tracking-[0.11em] font-semibold">
               {portfolioV5Data.philosophy.number}
             </div>
 
-            <div className="grid grid-cols-[1fr_1.12fr] max-md:grid-cols-1 gap-[10%] max-md:gap-[30px] mt-[10px]">
+            <div className="mt-[10px]">
               <div>
                 <h2 className="serif-font text-[clamp(26px,3.1vw,39px)] leading-[1.45] my-[19px]">
                   {portfolioV5Data.philosophy.heading}
@@ -482,11 +445,6 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="text-[13px] leading-[2] text-[#536258] space-y-[17px]">
-                {portfolioV5Data.philosophy.paragraphs.map((p, i) => (
-                  <p key={i}>{p}</p>
-                ))}
-              </div>
             </div>
 
             {/* 3 Principles */}
@@ -515,7 +473,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 07 / THE THINKING SHELF (READING) */}
+        {/* 06 / THE THINKING SHELF (READING) */}
         <section className="py-[100px] max-md:py-[70px] bg-[#f8f8f5]" id="reading">
           <div className="wrap">
             <div className="flex justify-between max-md:block gap-[70px] max-md:gap-[35px] items-end mb-[39px]">
@@ -582,7 +540,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 08 / EDUCATION */}
+        {/* 07 / EDUCATION */}
         <section className="py-[100px] max-md:py-[70px] bg-[#f7f7f3]" id="education">
           <div className="wrap">
             <div className="text-[10px] text-[#7b897e] tracking-[0.11em] font-semibold">
@@ -608,7 +566,7 @@ export default function Home() {
         </section>
       </main>
 
-      {/* 09 / CONTACT & FOOTER */}
+      {/* 08 / CONTACT & FOOTER */}
       <footer className="bg-[#1f2823] text-[#f2f4ed] pt-[82px] pb-[28px]" id="contact">
         <div className="wrap">
           <div className="text-[10px] text-[#8a9b8e] tracking-[0.11em] font-semibold">

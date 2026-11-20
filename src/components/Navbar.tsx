@@ -37,9 +37,6 @@ export function Navbar({ onOpenDigitalTwin, onOpenCalendly }: NavbarProps) {
           <a href="#experience" className="text-[14px] text-[#252a28] hover:text-[#111] transition-colors">
             Experience
           </a>
-          <a href="#journey" className="text-[14px] text-[#252a28] hover:text-[#111] transition-colors">
-            Journey
-          </a>
           <a href="#work" className="text-[14px] text-[#252a28] hover:text-[#111] transition-colors">
             Work
           </a>
@@ -79,9 +76,6 @@ export function Navbar({ onOpenDigitalTwin, onOpenCalendly }: NavbarProps) {
           </a>
           <a href="#experience" onClick={() => setMobileMenuOpen(false)} className="hover:text-black">
             Experience
-          </a>
-          <a href="#journey" onClick={() => setMobileMenuOpen(false)} className="hover:text-black">
-            Journey
           </a>
           <a href="#work" onClick={() => setMobileMenuOpen(false)} className="hover:text-black">
             Work
