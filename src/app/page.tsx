@@ -340,7 +340,7 @@ export default function Home() {
               <div className="flex-1 flex flex-col justify-center min-h-0 pt-4 sm:pt-6 md:pt-8 max-md:max-w-[165px]">
                 <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-2.5 sm:gap-3 w-full">
                   <a
-                    href="/Sandheep%20Gopinath%20Resume%202026.pdf"
+                    href="/api/resume/download"
                     download="Sandheep_Gopinath_Resume_2026.pdf"
                     className="btn hero-liquid-glass hero-liquid-glass--primary text-[10px] sm:text-[11.5px] h-[31px] sm:h-[35px] px-3 justify-center w-full sm:w-auto"
                   >

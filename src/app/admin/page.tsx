@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { connection } from "next/server";
 import { LockKeyhole, ShieldCheck } from "lucide-react";
 import { ADMIN_EMAIL, auth, signIn, signOut } from "@/auth";
-import { AdminWorkspace } from "./AdminWorkspace";
+import { AdminTabs } from "./AdminTabs";
 import styles from "./admin.module.css";
 
 export const metadata: Metadata = {
@@ -59,7 +59,7 @@ async function AdminContent() {
           </form>
         </div>
       </header>
-      <AdminWorkspace />
+      <AdminTabs />
     </div>
   );
 }

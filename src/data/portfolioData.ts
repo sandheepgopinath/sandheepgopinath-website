@@ -43,7 +43,7 @@ export const portfolioV5Data = {
   location: "Based in Bengaluru, India",
   email: "hello@sandheepgopinath.com",
   calendly: process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/sandheepgopinath",
-  resumePdf: "/Sandheep%20Gopinath%20Resume%202026.pdf",
+  resumePdf: "/api/resume/download",
   summary:
     "Connecting why an organization exists with what its customers genuinely need.",
   about: {
