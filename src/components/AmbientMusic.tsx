@@ -105,15 +105,7 @@ export function AmbientMusic({ enabled, onToggle, onSelectChoice }: AmbientMusic
     return () => { document.body.style.overflow = previousOverflow; };
   }, [enabled]);
 
-  const handleSelectChoice = (choice: boolean, e?: React.SyntheticEvent | Event) => {
-    if (e) {
-      if ("preventDefault" in e && typeof e.preventDefault === "function") {
-        e.preventDefault();
-      }
-      if ("stopPropagation" in e && typeof e.stopPropagation === "function") {
-        e.stopPropagation();
-      }
-    }
+  const handleSelectChoice = (choice: boolean) => {
     if (hasTriggeredChoice.current) return;
     hasTriggeredChoice.current = true;
     if (choice) {
@@ -145,7 +137,7 @@ export function AmbientMusic({ enabled, onToggle, onSelectChoice }: AmbientMusic
         <div
           className="music-choice-backdrop"
           role="presentation"
-          onClick={(e) => { if (e.target === e.currentTarget) handleSelectChoice(false, e); }}
+          onClick={(e) => { if (e.target === e.currentTarget) handleSelectChoice(false); }}
         >
           <section
             className="music-choice-modal"
@@ -162,8 +154,7 @@ export function AmbientMusic({ enabled, onToggle, onSelectChoice }: AmbientMusic
                 ref={noMusicRef}
                 type="button"
                 className="music-choice-button liquid-glass-button"
-                onClick={(e) => handleSelectChoice(false, e)}
-                onPointerUp={(e) => handleSelectChoice(false, e)}
+                onClick={() => handleSelectChoice(false)}
               >
                 <span className="music-choice-icon"><VolumeX aria-hidden="true" /></span>
                 <strong>No Music</strong>
@@ -171,8 +162,7 @@ export function AmbientMusic({ enabled, onToggle, onSelectChoice }: AmbientMusic
               <button
                 type="button"
                 className="music-choice-button music-choice-button--play liquid-glass-button"
-                onClick={(e) => handleSelectChoice(true, e)}
-                onPointerUp={(e) => handleSelectChoice(true, e)}
+                onClick={() => handleSelectChoice(true)}
               >
                 <span className="music-choice-icon"><Music2 aria-hidden="true" /></span>
                 <strong>Play Soothing Music</strong>

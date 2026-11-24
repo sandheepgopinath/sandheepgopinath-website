@@ -445,7 +445,6 @@ export default function Home() {
 
         {/* 05 / HOW I THINK (PHILOSOPHY) */}
         <section className="how-section" id="philosophy" aria-labelledby="philosophy-title">
-          <span className="how-monogram" aria-hidden="true">N</span>
           <div className="how-landscape" aria-hidden="true"><i /><i /></div>
           <div className="wrap how-shell">
             <div className="how-kicker">

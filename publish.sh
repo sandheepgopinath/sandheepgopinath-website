@@ -44,7 +44,7 @@ sleep 3
 
 RETRY_COUNT=0
 MAX_RETRIES=25
-until firebase apphosting:rollouts:create studio --git-branch "$BRANCH_NAME" --force; do
+until firebase deploy --only hosting; do
     RETRY_COUNT=$((RETRY_COUNT + 1))
     if [ "$RETRY_COUNT" -ge "$MAX_RETRIES" ]; then
         echo "[-] Max retries reached. Rollout failed."
