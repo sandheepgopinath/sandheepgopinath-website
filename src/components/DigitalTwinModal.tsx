@@ -3,8 +3,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FormattedChatMessage } from "./FormattedChatMessage";
 import { trackDigitalTwin } from "@/lib/analytics";
-import { initAppCheck } from "@/lib/firebase";
-import { askDigitalTwinApi, DigitalTwinMessage } from "@/lib/digitalTwin";
+import { getAppCheckInstance } from "@/lib/firebase";
+import { askDigitalTwin, DigitalTwinMessage } from "@/lib/digitalTwin";
 
 interface DisplayMessage {
   role: "user" | "assistant";
@@ -48,7 +48,11 @@ export function DigitalTwinModal({ isOpen, onClose, initialQuestion }: DigitalTw
   useEffect(() => {
     if (isOpen) {
       trackDigitalTwin("open");
-      initAppCheck();
+      try {
+        getAppCheckInstance();
+      } catch {
+        // App Check browser init
+      }
       setTimeout(() => {
         inputRef.current?.focus();
         scrollToBottom();
@@ -85,47 +89,27 @@ export function DigitalTwinModal({ isOpen, onClose, initialQuestion }: DigitalTw
     }));
 
     try {
-      // 1. Call AWS Digital Twin API protected by Firebase App Check
-      const response = await askDigitalTwinApi(q, apiHistory);
-
-      if (response.status === "network_error") {
-        // Fallback to Next.js server route if client-side CORS / network is temporarily blocked
-        const fallbackRes = await fetch("/api/chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            messages: newHistory.map((m) => ({ role: m.role, content: m.content })),
-          }),
-        });
-        const fallbackData = await fallbackRes.json();
-        setMessages((prev) => [
-          ...prev,
-          {
-            role: "assistant",
-            content:
-              fallbackData.text ||
-              "I encountered a temporary issue. Feel free to contact Sandheep at hello@sandheepgopinath.com",
-          },
-        ]);
-        return;
-      }
-
+      const response = await askDigitalTwin(q, apiHistory);
       setMessages((prev) => [
         ...prev,
         {
           role: "assistant",
           content: response.answer,
           sources: response.sources,
-          requestId: response.request_id,
+          requestId: response.requestId,
         },
       ]);
-    } catch {
+    } catch (err: unknown) {
+      console.error("AWS Digital Twin API error:", err);
+      const errorMessage =
+        err instanceof Error
+          ? err.message
+          : "The assistant is temporarily unavailable.";
       setMessages((prev) => [
         ...prev,
         {
           role: "assistant",
-          content:
-            "I encountered a temporary connection issue. Please feel free to email Sandheep directly at hello@sandheepgopinath.com.",
+          content: errorMessage,
         },
       ]);
     } finally {
