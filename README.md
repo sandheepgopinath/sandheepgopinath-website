@@ -75,3 +75,23 @@ npm run start
 2. Import the repository in [Vercel](https://vercel.com).
 3. Add the environment variables (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`, `NEXT_PUBLIC_CALENDLY_URL`).
 4. Click **Deploy**.
+# Sandheep Gopinath portfolio
+
+## Career Admin setup
+
+The private `/admin` workspace uses Google OAuth through Auth.js and permits only `sandheepgopinath@gmail.com`.
+
+Add these server-only values to `.env.local` and to the Firebase App Hosting environment:
+
+```bash
+AUTH_SECRET="generate-a-long-random-value"
+AUTH_GOOGLE_ID="your-google-oauth-client-id"
+AUTH_GOOGLE_SECRET="your-google-oauth-client-secret"
+```
+
+Create a Google OAuth 2.0 Web application and register these authorized redirect URIs:
+
+- Local: `http://localhost:3000/api/auth/callback/google`
+- Production: `https://sandheepgopinath.com/api/auth/callback/google`
+
+Generate `AUTH_SECRET` with a cryptographically secure tool such as `openssl rand -hex 32`. Career and personal context belongs in `src/data/personal-details.md`; it is read only by the protected server API.

@@ -154,7 +154,8 @@ export function DigitalTwinModal({ isOpen, onClose, initialQuestion }: DigitalTw
                       {m.source === "aws-bedrock-claude" ? "Claude 3.5 Sonnet (AWS Bedrock)" : "Portfolio Knowledge"}
                     </span>
                     <a
-                      href="/Sandheep_Gopinath_Resume.pdf"
+                      href="/Sandheep%20Gopinath%20Resume%202026.pdf"
+                      download="Sandheep_Gopinath_Resume_2026.pdf"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="underline hover:text-black"

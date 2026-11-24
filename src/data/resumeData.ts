@@ -76,7 +76,7 @@ export const resumeData: ResumeData = {
     {
       company: "Verint",
       role: "Product Manager (Senior Product Manager Responsibilities)",
-      period: "Mar 2024 – Present",
+      period: "Mar 2024 – Sep 2026",
       location: "Bangalore",
       highlights: [
         "Drove $10M ARR retention and $5M in incremental revenue through paid product enhancements across 2 core enterprise workforce management products — leading strategy, vision, and roadmap.",
