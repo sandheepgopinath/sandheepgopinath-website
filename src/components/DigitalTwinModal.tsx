@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { FormattedChatMessage } from "./FormattedChatMessage";
+import { trackDigitalTwin } from "@/lib/analytics";
 
 interface Message {
   role: "user" | "assistant";
@@ -43,6 +44,7 @@ export function DigitalTwinModal({ isOpen, onClose, initialQuestion }: DigitalTw
 
   useEffect(() => {
     if (isOpen) {
+      trackDigitalTwin("open");
       setTimeout(() => {
         inputRef.current?.focus();
         scrollToBottom();
@@ -64,6 +66,8 @@ export function DigitalTwinModal({ isOpen, onClose, initialQuestion }: DigitalTw
   const handleSend = async (textToSend?: string) => {
     const q = (textToSend || input).trim();
     if (!q || loading) return;
+
+    trackDigitalTwin(textToSend ? "preset_clicked" : "message_sent", q);
 
     const userMessage: Message = { role: "user", content: q };
     const newHistory = [...messages, userMessage];

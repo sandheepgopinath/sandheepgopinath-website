@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Loader2, Music2, Volume2, VolumeX } from "lucide-react";
+import { trackMusic } from "@/lib/analytics";
 
 const VIDEO_ID = "pwVXI96HSs8";
 const AMBIENT_VOLUME = 20; // Reduced volume: soft, relaxing ambient background (20%)
@@ -108,6 +109,7 @@ export function AmbientMusic({ enabled, onToggle, onSelectChoice }: AmbientMusic
   const handleSelectChoice = (choice: boolean) => {
     if (hasTriggeredChoice.current) return;
     hasTriggeredChoice.current = true;
+    trackMusic(choice ? "choice_yes" : "choice_no");
     if (choice) {
       setIsConnecting(true);
       setTimeout(() => setIsConnecting(false), 3500);
@@ -177,7 +179,10 @@ export function AmbientMusic({ enabled, onToggle, onSelectChoice }: AmbientMusic
         <button
           type="button"
           className={`ambient-music-toggle liquid-glass-button ${enabled ? "is-playing" : ""} ${isScrolled ? "is-visible" : ""}`}
-          onClick={onToggle}
+          onClick={() => {
+            trackMusic(enabled ? "pause" : "play");
+            onToggle();
+          }}
           aria-pressed={enabled}
           aria-label={enabled ? "Turn off background music" : "Play background music"}
           title={enabled ? "Turn off background music" : "Play background music"}

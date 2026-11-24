@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AnalyticsProvider } from "@/components/AnalyticsProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -54,6 +55,7 @@ export default function RootLayout({
         />
       </head>
       <body id="top" className="antialiased selection:bg-[#cfdacb]">
+        <AnalyticsProvider />
         {children}
       </body>
     </html>
