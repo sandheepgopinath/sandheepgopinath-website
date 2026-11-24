@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-bedrock-runtime": "^3.1163.0",
+    "firebase": "^13.4.0",
     "lucide-react": "^1.70.0",
     "next": "16.4.5",
     "next-auth": "^5.0.0-beta.32",
