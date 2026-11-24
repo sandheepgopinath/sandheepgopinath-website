@@ -32,6 +32,7 @@ export interface EducationItem {
   degree: string;
   field: string;
   dates: string;
+  duration: string;
 }
 
 export const portfolioV5Data = {
@@ -92,32 +93,99 @@ export const portfolioV5Data = {
     ],
   },
   work: {
-    number: "04 / SELECTED WORK",
+    number: "06 / PRODUCTS, PROBLEMS, DECISIONS",
     heading: "Products, problems, decisions.",
     intro:
-      "A small selection of product problems I've worked on, spanning early product discovery, applied intelligence, and enterprise-scale execution.",
+      "Real product problems, consequential decisions, and what I learned from them across enterprise software, AI, manufacturing, and new ventures.",
     items: [
       {
-        tag: "ENTERPRISE SAAS / VERINT",
+        tag: "HRS GROUP / AI PRODUCT · EXECUTIVE INVESTMENT",
+        title: "Building an AI-led hotel quality intelligence platform",
+        description: "Business travellers were reporting serious hotel-quality issues. How could we justify a scalable response?",
+      },
+      {
+        tag: "HRS GROUP / DATA READINESS · AI PRODUCT EVALUATION",
+        title: "Building a trustworthy data foundation for hotel quality intelligence",
+        description: "Complaints, third-party ratings and historical quality flags offered different views of hotel risk. Were they sufficient to support a scoring product?",
+      },
+      {
+        tag: "HRS GROUP / AI ADOPTION · ORGANIZATIONAL CHANGE",
+        title: "Evolving a reporting team into an AI product capability",
+        description: "A team with data-science expertise was primarily delivering reports. How could its work move closer to real business problems?",
+      },
+      {
+        tag: "HRS GROUP / ADOPTION · ENTERPRISE PRODUCT DESIGN",
+        title: "Unlocking enterprise adoption through self-service design",
+        description: "The Recommendation Engine was valuable, yet only 6% of customers used it. More features were not the answer.",
+      },
+      {
+        tag: "HRS GROUP / GROWTH · SELF-SERVICE",
+        title: "Scaling automated rebooking without engineering bottlenecks",
+        description: "A revenue-generating product struggled to grow because customers needed months of technical support just to start.",
+      },
+      {
+        tag: "VERINT / 0→1 PRODUCT · RETENTION",
+        title: "Removing enterprise scheduling barriers at scale",
+        description: "Routine scheduling requests depended on privileged administrators, while enterprise customers were considering alternatives.",
+      },
+      {
+        tag: "VERINT / PLATFORM THINKING · ENTERPRISE EXTENSIBILITY",
+        title: "Extending enterprise products without compromising the ecosystem",
+        description: "New capabilities and paid customer enhancements had to fit into a mature, interconnected product landscape.",
+      },
+      {
+        tag: "VERINT / ROADMAP · TRADE-OFFS",
+        title: "Rebalancing customer demands and legacy product investment",
+        description: "Hundreds of requests competed with accessibility work, technical debt and finite engineering capacity.",
+      },
+      {
+        tag: "VERINT / EXECUTION · ORGANIZATIONAL CHANGE",
         title: "Modernizing enterprise product delivery",
-        description:
-          "Shifting a multi-year waterfall roadmap into faster, customer-led delivery with measurable commercial outcomes.",
+        description: "A 64-person cross-functional effort was falling behind a demanding release timeline.",
       },
       {
-        tag: "APPLIED AI / HRS GROUP",
-        title: "Improving hotel quality at scale",
-        description:
-          "An ML-powered scoring platform evaluating more than 1.5 million hotels to improve quality and reduce complaints.",
+        tag: "DANFOSS / GLOBAL DIGITALIZATION · FRONTLINE WORKFLOWS",
+        title: "Scaling human-centered digital transformation across factories",
+        description: "Manual production records limited visibility, but a technically correct solution would fail if it did not fit daily work.",
       },
       {
-        tag: "INDUSTRY 4.0 / DANFOSS",
-        title: "Connecting factories to better decisions",
-        description:
-          "Digital transformation through computer vision, predictive maintenance, and rapid prototype-led validation.",
+        tag: "DANFOSS / QUALITY · COMPUTER VISION",
+        title: "Reducing manufacturing defects through computer vision",
+        description: "Late defect detection increased scrap and lost production efficiency.",
+      },
+      {
+        tag: "DANFOSS / PREDICTIVE ANALYTICS · MAINTENANCE",
+        title: "Reducing factory downtime through predictive maintenance",
+        description: "Unexpected motor and pump problems created costly downtime across factories.",
+      },
+      {
+        tag: "SYNAPSE TECHNOLOGIES / BUSINESS MODEL · FOUNDER JUDGMENT",
+        title: "Repositioning a hardware venture for sustainable B2B growth",
+        description: "Selling consumer hardware one customer at a time was limiting growth.",
+      },
+      {
+        tag: "SYNAPSE TECHNOLOGIES / CUSTOMER DISCOVERY · PRODUCT DEFINITION",
+        title: "Turning customer requests into validated product opportunities",
+        description: "Customers often arrived with a specific device or feature in mind, not a fully understood problem.",
+      },
+      {
+        tag: "QURE.AI / HEALTHCARE AI · DISCOVERY",
+        title: "Defining clinical AI products through deep customer discovery",
+        description: "Medical AI opportunities could not be understood through technical feasibility alone.",
+      },
+      {
+        tag: "SKETCH THEORY / COMMERCE · PRODUCT-MARKET EXPLORATION",
+        title: "Reinventing an artist-led commerce business model",
+        description: "A do-it-yourself merchandise marketplace was creating friction for buyers and insufficient recognition for artists.",
+      },
+      {
+        tag: "SKETCH THEORY / GENERATIVE AI · OPERATIONS",
+        title: "Streamlining artist onboarding with controlled generative AI",
+        description: "Preparing consistent artist biographies and artwork descriptions required repetitive manual work.",
       },
     ],
     advisoryNote:
-      "Independent ventures and verified startup advisory engagements can be added here as distinct case studies, with your exact role and contributions clearly stated.",
+      "Stories adapted from the product-decision case library in the reference portfolio.",
   },
   philosophy: {
     number: "05 / HOW I THINK",
@@ -128,7 +196,7 @@ export const portfolioV5Data = {
     principles: [
       {
         id: "01",
-        title: "Understand before you build.",
+        title: "My thinking starts with understanding.",
         description:
           "Study the person, the context, and the underlying need—not just the feature request.",
       },
@@ -147,7 +215,7 @@ export const portfolioV5Data = {
     ],
   },
   reading: {
-    number: "06 / THE THINKING SHELF",
+    number: "07 / THE THINKING SHELF",
     heading: "Ideas I keep coming back to.",
     intro:
       "A few books that have shaped how I think about building, communicating, learning, and understanding people. These are my short reflections—not quotations from the books.",
@@ -160,7 +228,7 @@ export const portfolioV5Data = {
         category: "Product",
         reflection: "Fall in love with the customer problem, not the first solution that comes to mind.",
         href: "https://books.google.com/books?id=S8Q_DwAAQBAJ",
-        image: "https://atarim.io/wp-content/uploads/How-To-Create-Products-Customers-Love-by-Marty-Cagan.png",
+        image: "https://books.google.com/books/content?id=S8Q_DwAAQBAJ&printsec=frontcover&img=1&zoom=2&source=gbs_api",
       },
       {
         title: "The Art of Thinking Clearly",
@@ -211,14 +279,6 @@ export const portfolioV5Data = {
         image: "https://www.ilmibookhouse.com/cdn/shop/files/mastery.png?v=1723029877",
       },
       {
-        title: "The Complete Book of Yoga",
-        author: "Swami Vivekananda",
-        category: "Mind",
-        reflection: "The practice of attention and self-understanding can shape how we act, learn, and make decisions.",
-        href: "https://rupapublications.co.in/book/the-complete-book-of-yoga-karma-yoga-bhakti-yoga-raja-yoga-jnana-yoga",
-        image: "https://www.crossword.in/cdn/shop/products/the-complete-book-of-yoga-karma-yoga-bhakti-yoga-raja-yoga-jnana-yoga-paperback-swami-vivekananda-bk0457194-40569997459673.jpg?v=1746622380",
-      },
-      {
         title: "The Niche Code",
         author: "Rajeev Roy",
         category: "Positioning",
@@ -245,32 +305,41 @@ export const portfolioV5Data = {
     ],
   },
   education: {
-    number: "07 / EDUCATION",
-    heading: "Continual learning.",
+    number: "04 / EDUCATION",
+    heading: "Education & Learning",
+    intro: "From understanding how things work to discovering what technology can make possible.",
     items: [
       {
         institution: "Plaksha University",
         degree: "Post Graduate Diploma",
         field: "Leadership & AI–ML",
-        dates: "2021–22",
+        dates: "2021 — 2022",
+        duration: "1 year",
+        summary: "Selected for a 60-member cohort in Plaksha’s one-year Tech Leaders Program, co-designed with UC Berkeley to integrate AI/ML, real-world application, leadership, and mentorship. The program has since evolved into the M.Sc. in Artificial Intelligence.",
       },
       {
         institution: "McCombs School of Business, University of Texas",
         degree: "Post Graduate Program",
         field: "Artificial Intelligence",
-        dates: "2020–21",
+        dates: "2020 — 2021",
+        duration: "1 year",
+        summary: "Built a practical foundation in machine learning and AI, including NLP, computer vision, and reinforcement learning. Later returned as a course trainer, teaching these subjects while completing the Tech Leaders Program at Plaksha.",
       },
       {
         institution: "Accel IT Academy",
         degree: "Post Graduate Diploma",
         field: "Embedded Systems",
-        dates: "2016–17",
+        dates: "2016 — 2017",
+        duration: "1 year",
+        summary: "Developed a deeper understanding of embedded systems design and programming, including low-level, chip-level development and the core concepts behind connected hardware.",
       },
       {
         institution: "Sree Chitra Tirunal College of Engineering",
         degree: "B.Tech",
         field: "Electronics & Communication",
-        dates: "2012–16",
+        dates: "2012 — 2016",
+        duration: "4 years",
+        summary: "Built a foundation in electronics while teaching robotics and embedded systems to students and educators. Conducted workshops at colleges across India in collaboration with communities and brands including DIY Hacking and CEST (Council of Electronics Studies).",
       },
     ],
   },

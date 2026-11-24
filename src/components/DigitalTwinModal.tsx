@@ -109,7 +109,7 @@ export function DigitalTwinModal({ isOpen, onClose, initialQuestion }: DigitalTw
 
   return (
     <div
-      className="fixed right-[22px] bottom-[80px] z-50 w-[min(420px,calc(100vw-30px))] h-[min(590px,calc(100dvh-100px))] bg-[#f8f9f5] border border-[#cad2c9] shadow-[0_20px_50px_rgba(23,32,25,0.3)] rounded-[4px] flex flex-col overflow-hidden animate-fade-in font-sans"
+      className="fixed right-[22px] bottom-[80px] z-50 w-[min(420px,calc(100vw-30px))] h-[min(590px,calc(100svh-100px))] bg-[#f8f9f5] border border-[#cad2c9] shadow-[0_20px_50px_rgba(23,32,25,0.3)] rounded-[4px] flex flex-col overflow-hidden animate-fade-in font-sans"
       onClick={(e) => e.stopPropagation()}
     >
       {/* Chat Head */}

@@ -3,15 +3,30 @@
 import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { portfolioV5Data } from "@/data/portfolioData";
+import { decisionStories } from "@/data/decisionStories";
 import { Navbar } from "@/components/Navbar";
 import { DigitalTwinModal } from "@/components/DigitalTwinModal";
 import { CalendlyModal } from "@/components/CalendlyModal";
 import { ExpertiseSection } from "@/components/ExpertiseSection";
 import { AmbientMusic } from "@/components/AmbientMusic";
 import { ExperienceSection } from "@/components/ExperienceSection";
+import { BrainCircuit, GraduationCap, Microchip, UsersRound, X } from "lucide-react";
 
 const FULL_SUMMARY_TEXT =
   "A product leader and founder with 11+ years of experience bridging product, technology, and business across diverse industries — from early-stage ventures to global organizations.";
+
+const educationIcons = [UsersRound, BrainCircuit, Microchip, GraduationCap];
+const workDecisionStories = decisionStories.filter((story) => story.org !== "Sketch Theory");
+
+const pageSections = [
+  { id: "landing-hero", label: "01 / HOME", nextId: "experience", action: "NEXT SECTION", arrow: "↓" },
+  { id: "expertise", label: "02 / EXPERTISE & IMPACT", nextId: "experience", action: "NEXT SECTION", arrow: "↓" },
+  { id: "experience", label: "03 / EXPERIENCE", nextId: "education", action: "NEXT SECTION", arrow: "↓" },
+  { id: "education", label: "04 / EDUCATION", nextId: "philosophy", action: "NEXT SECTION", arrow: "↓" },
+  { id: "philosophy", label: "05 / HOW I THINK", nextId: "work", action: "NEXT SECTION", arrow: "↓" },
+  { id: "work", label: "06 / PRODUCTS, PROBLEMS, DECISIONS", nextId: "reading", action: "NEXT SECTION", arrow: "↓" },
+  { id: "reading", label: "07 / BOOKS", nextId: "landing-hero", action: "BACK TO TOP", arrow: "↑" },
+] as const;
 
 function TypingHeroSummary({ text }: { text: string }) {
   const typedRef = useRef<HTMLSpanElement>(null);
@@ -107,10 +122,40 @@ function TypingHeroSummary({ text }: { text: string }) {
 export default function Home() {
   const [digitalTwinOpen, setDigitalTwinOpen] = useState(false);
   const [calendlyOpen, setCalendlyOpen] = useState(false);
+  const [musicEnabled, setMusicEnabled] = useState<boolean | null>(null);
   const [initialQuestion, setInitialQuestion] = useState<string | undefined>(undefined);
-  const [showAiBadge, setShowAiBadge] = useState(false);
   const [isHeroFootVisible, setIsHeroFootVisible] = useState(true);
-  const sectionSnapLockRef = useRef(false);
+  const [activePageSection, setActivePageSection] = useState(0);
+  const [openBookTakeaway, setOpenBookTakeaway] = useState<number | null>(null);
+  const [workPreviewCount, setWorkPreviewCount] = useState(6);
+  const [showAllWork, setShowAllWork] = useState(false);
+  const [activeDecisionStory, setActiveDecisionStory] = useState<number | null>(null);
+  const selectedBook = openBookTakeaway === null ? null : portfolioV5Data.reading.books[openBookTakeaway];
+
+  useEffect(() => {
+    try {
+      const stored = sessionStorage.getItem("ambient_music_choice");
+      if (stored === "true") setMusicEnabled(true);
+      else if (stored === "false") setMusicEnabled(false);
+    } catch {}
+  }, []);
+
+  const handleToggleMusic = () => {
+    setMusicEnabled((prev) => {
+      const next = prev !== true;
+      try {
+        sessionStorage.setItem("ambient_music_choice", String(next));
+      } catch {}
+      return next;
+    });
+  };
+
+  const handleSelectMusicChoice = (enable: boolean) => {
+    setMusicEnabled(enable);
+    try {
+      sessionStorage.setItem("ambient_music_choice", String(enable));
+    } catch {}
+  };
 
   useEffect(() => {
     const sentinel = document.getElementById("top-sentinel");
@@ -143,99 +188,70 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    const hero = document.getElementById("landing-hero");
-    if (!hero) return;
+    if (!selectedBook) return;
+    const previousOverflow = document.body.style.overflow;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpenBookTakeaway(null);
+    };
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [selectedBook]);
 
-    const observer = new IntersectionObserver(([entry]) => {
-      setShowAiBadge(!entry.isIntersecting);
-    });
-
-    observer.observe(hero);
-    return () => observer.disconnect();
+  useEffect(() => {
+    const updateWorkPreviewCount = () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const reservedHeight = width <= 760 ? 310 : 300;
+      const rowHeight = width <= 760 ? 132 : 184;
+      const rowsThatFit = Math.max(1, Math.floor((height - reservedHeight) / rowHeight));
+      setWorkPreviewCount(Math.min(workDecisionStories.length, rowsThatFit * 2));
+    };
+    updateWorkPreviewCount();
+    window.addEventListener("resize", updateWorkPreviewCount);
+    return () => window.removeEventListener("resize", updateWorkPreviewCount);
   }, []);
 
   useEffect(() => {
-    const mobileQuery = window.matchMedia("(max-width: 760px)");
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let unlockTimer: ReturnType<typeof setTimeout> | undefined;
-
-    const getSnapTarget = (direction: "up" | "down") => {
-      const expertise = document.getElementById("expertise");
-      const experience = document.getElementById("experience");
-      if (!expertise || !experience) return null;
-
-      const scrollY = window.scrollY;
-      const expertiseTop = expertise.offsetTop;
-      const experienceTop = experience.offsetTop;
-
-      if (direction === "down") {
-        if (scrollY < expertiseTop - 2) return expertise;
-        if (scrollY < experienceTop - 2) return experience;
-        return null;
-      }
-
-      if (scrollY >= experienceTop - 6 && scrollY <= experienceTop + window.innerHeight * 0.12) {
-        return expertise;
-      }
-      if (scrollY >= expertiseTop - 6 && scrollY < experienceTop - 6) {
-        return "top" as const;
-      }
-      return null;
+    if (activeDecisionStory === null) return;
+    const previousOverflow = document.body.style.overflow;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setActiveDecisionStory(null);
     };
-
-    const snapToSection = (target: HTMLElement | "top") => {
-      if (sectionSnapLockRef.current) return;
-      sectionSnapLockRef.current = true;
-      if (target === "top") {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      } else {
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-      unlockTimer = setTimeout(() => {
-        sectionSnapLockRef.current = false;
-      }, 900);
-    };
-
-    const handleWheel = (event: WheelEvent) => {
-      if (
-        !mobileQuery.matches ||
-        Math.abs(event.deltaY) < 18 ||
-        Math.abs(event.deltaY) <= Math.abs(event.deltaX) * 1.25
-      ) return;
-      const target = getSnapTarget(event.deltaY > 0 ? "down" : "up");
-      if (!target) return;
-      event.preventDefault();
-      snapToSection(target);
-    };
-
-    const handleTouchStart = (event: TouchEvent) => {
-      touchStartX = event.touches[0]?.clientX ?? 0;
-      touchStartY = event.touches[0]?.clientY ?? 0;
-    };
-
-    const handleTouchMove = (event: TouchEvent) => {
-      if (!mobileQuery.matches) return;
-      const currentX = event.touches[0]?.clientX ?? touchStartX;
-      const currentY = event.touches[0]?.clientY ?? touchStartY;
-      const deltaX = touchStartX - currentX;
-      const deltaY = touchStartY - currentY;
-      if (Math.abs(deltaY) < 32 || Math.abs(deltaY) <= Math.abs(deltaX) * 1.25) return;
-      const target = getSnapTarget(deltaY > 0 ? "down" : "up");
-      if (!target) return;
-      event.preventDefault();
-      snapToSection(target);
-    };
-
-    window.addEventListener("wheel", handleWheel, { passive: false });
-    window.addEventListener("touchstart", handleTouchStart, { passive: true });
-    window.addEventListener("touchmove", handleTouchMove, { passive: false });
-
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", closeOnEscape);
     return () => {
-      window.removeEventListener("wheel", handleWheel);
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchmove", handleTouchMove);
-      if (unlockTimer) clearTimeout(unlockTimer);
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [activeDecisionStory]);
+
+  useEffect(() => {
+    let frame = 0;
+    const updateActiveSection = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const viewportMarker = window.innerHeight * 0.45;
+        const activeIndex = pageSections.findIndex(({ id }) => {
+          const section = document.getElementById(id);
+          if (!section) return false;
+          const rect = section.getBoundingClientRect();
+          return rect.top <= viewportMarker && rect.bottom > viewportMarker;
+        });
+        if (activeIndex >= 0) setActivePageSection(activeIndex);
+      });
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
     };
   }, []);
 
@@ -277,6 +293,8 @@ export default function Home() {
       <Navbar
         onOpenDigitalTwin={() => handleOpenDigitalTwin()}
         onOpenCalendly={() => setCalendlyOpen(true)}
+        isMusicPlaying={musicEnabled === true}
+        onToggleMusic={handleToggleMusic}
       />
 
       <main>
@@ -384,96 +402,144 @@ export default function Home() {
 
         <ExperienceSection />
 
-        {/* 04 / SELECTED WORK */}
-        <section className="py-[100px] max-md:py-[70px] bg-[#e9ece6]" id="work">
-          <div className="wrap">
-            <div className="text-[10px] text-[#7b897e] tracking-[0.11em] font-semibold">
-              {portfolioV5Data.work.number}
-            </div>
-            <h2 className="serif-font text-[clamp(26px,3vw,39px)] font-normal tracking-[-0.045em] leading-[1.3] my-[20px]">
-              {portfolioV5Data.work.heading}
-            </h2>
-            <p className="max-w-[590px] leading-[1.85] text-[#647067] text-[14px]">
-              {portfolioV5Data.work.intro}
-            </p>
-
-            <div className="grid grid-cols-3 max-md:grid-cols-1 gap-[14px] mt-[35px]">
-              {portfolioV5Data.work.items.map((card, idx) => (
-                <article
-                  key={idx}
-                  className="bg-[#f8f8f4] border border-[#d6dbd3] min-h-[235px] max-md:min-h-[180px] p-[27px] flex flex-col justify-between"
-                >
-                  <span className="text-[10px] tracking-[0.08em] text-[#7e8a7f] uppercase">
-                    {card.tag}
-                  </span>
-                  <div>
-                    <h3 className="serif-font text-[20px] leading-[1.4] tracking-[-0.035em] font-normal my-[10px]">
-                      {card.title}
-                    </h3>
-                    <p className="text-[#68736a] text-[12px] leading-[1.75]">
-                      {card.description}
-                    </p>
-                  </div>
-                </article>
-              ))}
+        {/* 04 / EDUCATION */}
+        <section className="education-section" id="education" aria-labelledby="education-title">
+          <div className="wrap education-layout">
+            <div className="education-intro">
+              <span>04 / EDUCATION</span>
+              <h2 id="education-title">{portfolioV5Data.education.heading}</h2>
+              <p>{portfolioV5Data.education.intro}</p>
+              <div className="education-summary">
+                <strong>10 years of learning</strong>
+                <span>Engineering → Embedded Systems → AI → Leadership</span>
+              </div>
             </div>
 
-            <p className="text-[11px] text-[#7b867c] leading-[1.75] mt-[18px]">
-              {portfolioV5Data.work.advisoryNote}
-            </p>
+            <div className="education-list">
+              {portfolioV5Data.education.items.map((edu, idx) => {
+                const Icon = educationIcons[idx];
+                return (
+                  <article key={edu.institution} className="education-entry">
+                    <div className="education-timeline-mark"><Icon aria-hidden="true" /></div>
+                    <div className="education-entry-content">
+                      <div className="education-entry-title">
+                        <h3>{edu.institution}</h3>
+                        <div className="education-entry-head">
+                          <time>{edu.dates}</time>
+                          <span>{edu.duration}</span>
+                        </div>
+                      </div>
+                      <div className="education-credentials">
+                        <span className="education-degree">{edu.degree}</span>
+                        <span aria-hidden="true">·</span>
+                        <span className="education-field">{edu.field}</span>
+                      </div>
+                      {"summary" in edu && <p className="education-note">{edu.summary}</p>}
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
           </div>
         </section>
 
         {/* 05 / HOW I THINK (PHILOSOPHY) */}
-        <section className="py-[100px] max-md:py-[70px] bg-[#e6eae2]" id="philosophy">
-          <div className="wrap">
-            <div className="text-[10px] text-[#7b897e] tracking-[0.11em] font-semibold">
-              {portfolioV5Data.philosophy.number}
+        <section className="how-section" id="philosophy" aria-labelledby="philosophy-title">
+          <span className="how-monogram" aria-hidden="true">N</span>
+          <div className="how-landscape" aria-hidden="true"><i /><i /></div>
+          <div className="wrap how-shell">
+            <div className="how-kicker">
+              <span>{portfolioV5Data.philosophy.number}</span>
+              <i aria-hidden="true" />
             </div>
 
-            <div className="mt-[10px]">
-              <div>
-                <h2 className="serif-font text-[clamp(26px,3.1vw,39px)] leading-[1.45] my-[19px]">
-                  {portfolioV5Data.philosophy.heading}
-                  <br />
-                  <em className="font-normal not-italic text-[#778b7a]">
-                    {portfolioV5Data.philosophy.subheading}
-                  </em>
-                </h2>
-                <div className="border-l-2 border-[#8ca08f] pl-[19px] serif-font text-[18px] max-md:text-[16px] leading-[1.8] text-[#35443b] max-w-[420px]">
-                  {portfolioV5Data.philosophy.pullQuote}
-                </div>
-              </div>
-
+            <div className="how-intro">
+              <h2 id="philosophy-title">
+                {portfolioV5Data.philosophy.heading}
+                <em>{portfolioV5Data.philosophy.subheading}</em>
+              </h2>
+              <p>{portfolioV5Data.philosophy.pullQuote}</p>
             </div>
 
-            {/* 3 Principles */}
-            <div className="grid grid-cols-3 max-md:grid-cols-1 gap-0 mt-[62px] max-md:mt-[35px] border-t border-[#bcc9bc]">
-              {portfolioV5Data.philosophy.principles.map((prin, i) => (
-                <div
-                  key={i}
-                  className={`pt-[25px] pb-0 pr-[30px] ${
-                    i !== 0 ? "pl-[30px] max-md:pl-0 border-l border-[#c7d1c6] max-md:border-l-0" : ""
-                  } ${
-                    i !== 2 ? "max-md:border-b max-md:border-[#c7d1c6] max-md:pb-[22px]" : ""
-                  }`}
+          </div>
+        </section>
+
+        {/* 06 / PRODUCTS, PROBLEMS, DECISIONS */}
+        <section className={`work-section ${showAllWork ? "is-expanded" : ""}`} id="work">
+          <div className="wrap work-shell">
+            <div className="work-section-label">
+              {portfolioV5Data.work.number}
+            </div>
+            <h2>
+              {portfolioV5Data.work.heading}
+            </h2>
+            <p className="work-intro">
+              {portfolioV5Data.work.intro}
+            </p>
+
+            <div className="work-grid">
+              {workDecisionStories.slice(0, showAllWork ? undefined : workPreviewCount).map((card, idx) => (
+                <button
+                  key={card.id}
+                  type="button"
+                  className="work-card"
+                  aria-haspopup="dialog"
+                  aria-label={`Open decision story: ${card.title}`}
+                  onClick={() => setActiveDecisionStory(idx)}
                 >
-                  <span className="block text-[#8a9a8d] text-[10px] tracking-[0.12em] mb-[21px] max-md:mb-[8px]">
-                    {prin.id}
-                  </span>
-                  <h3 className="text-[14px] tracking-[-0.015em] font-semibold leading-[1.5]">
-                    {prin.title}
-                  </h3>
-                  <p className="text-[12px] text-[#667469] leading-[1.85] max-w-[285px] mt-1">
-                    {prin.description}
-                  </p>
-                </div>
+                  <h3>{card.title}</h3>
+                </button>
               ))}
+            </div>
+
+            <div className="work-actions">
+              <span>{showAllWork ? `${workDecisionStories.length} stories shown` : `${Math.min(workPreviewCount, workDecisionStories.length)} of ${workDecisionStories.length} stories`}</span>
+              {(showAllWork || workPreviewCount < workDecisionStories.length) && (
+                <button
+                  type="button"
+                  className="liquid-glass-button"
+                  onClick={() => {
+                    setShowAllWork((current) => !current);
+                    if (showAllWork) requestAnimationFrame(() => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" }));
+                  }}
+                >
+                  {showAllWork ? "Show less" : `See more (${workDecisionStories.length - workPreviewCount})`}
+                </button>
+              )}
             </div>
           </div>
         </section>
 
-        {/* 06 / THE THINKING SHELF (READING) */}
+        {activeDecisionStory !== null && (() => {
+          const story = workDecisionStories[activeDecisionStory];
+          const sections = [
+            ["Context", `${story.problem} ${story.why}`],
+            ["Action", story.decision],
+            ["Results", story.outcome],
+            ["Learnings", story.insight],
+          ] as const;
+          return (
+            <div className="decision-dialog" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setActiveDecisionStory(null); }}>
+              <section className="decision-modal" role="dialog" aria-modal="true" aria-labelledby="decision-modal-title">
+                <header>
+                  <span>CONTEXT · ACTION · RESULTS · LEARNINGS</span>
+                  <button type="button" className="liquid-glass-button liquid-glass-button--icon" aria-label="Close decision story" onClick={() => setActiveDecisionStory(null)}><X aria-hidden="true" /></button>
+                </header>
+                <div className="decision-modal-body">
+                  <span className="decision-modal-org">{story.org} / {story.kind}</span>
+                  <h2 id="decision-modal-title">{story.title}</h2>
+                  <p className="decision-modal-teaser">{story.teaser}</p>
+                  <div className="decision-modal-tags">{story.competencies.map((item) => <span key={item}>{item}</span>)}</div>
+                  <div className="decision-narrative">
+                    {sections.map(([title, content]) => <section key={title}><h3>{title}</h3><p>{content}</p></section>)}
+                  </div>
+                </div>
+              </section>
+            </div>
+          );
+        })()}
+
+        {/* 07 / THE THINKING SHELF (READING) */}
         <section className="py-[100px] max-md:py-[70px] bg-[#f8f8f5]" id="reading">
           <div className="wrap">
             <div className="flex justify-between max-md:block gap-[70px] max-md:gap-[35px] items-end mb-[39px]">
@@ -490,18 +556,18 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="grid grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 gap-[0_29px] border-t border-[#d9ded5]">
+            <div className="book-tile-grid">
               {portfolioV5Data.reading.books.map((book, idx) => (
                 <article
                   key={idx}
-                  className="flex items-start gap-[17px] border-b border-[#d9ded5] py-[25px] max-md:py-[20px] min-w-0"
+                  className="book-tile"
                 >
                   <a
                     href={book.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`View ${book.title} book details`}
-                    className="book-cover real-cover flex-[0_0_89px] w-[89px] h-[127px] max-md:w-[82px] max-md:flex-[0_0_82px] max-md:h-[118px]"
+                    className="book-cover real-cover book-tile-cover"
                     data-cover-title={book.title}
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -516,19 +582,22 @@ export default function Home() {
                       }}
                     />
                   </a>
-                  <div className="min-w-0">
-                    <span className="block text-[9px] tracking-[0.1em] uppercase text-[#86938a] my-[2px]">
+                  <div className="book-tile-copy">
+                    <span className="book-tile-category">
                       {book.category}
                     </span>
-                    <h3 className="text-[13px] leading-[1.4] font-semibold tracking-[-0.02em] mb-[6px]">
-                      {book.title}
-                    </h3>
-                    <div className="text-[10px] text-[#838d82] mb-[9px]">
-                      {book.author}
-                    </div>
-                    <p className="text-[11px] leading-[1.8] text-[#657166] m-0">
-                      {book.reflection}
-                    </p>
+                    <a href={book.href} target="_blank" rel="noopener noreferrer">
+                      <h3>{book.title}</h3>
+                    </a>
+                    <span className="book-tile-author">{book.author}</span>
+                    <button
+                      type="button"
+                      className="book-takeaway-button"
+                      aria-expanded={openBookTakeaway === idx}
+                      onClick={() => setOpenBookTakeaway(idx)}
+                    >
+                      View my takeaway
+                    </button>
                   </div>
                 </article>
               ))}
@@ -540,95 +609,44 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 07 / EDUCATION */}
-        <section className="py-[100px] max-md:py-[70px] bg-[#f7f7f3]" id="education">
-          <div className="wrap">
-            <div className="text-[10px] text-[#7b897e] tracking-[0.11em] font-semibold">
-              {portfolioV5Data.education.number}
-            </div>
-            <h2 className="serif-font text-[clamp(26px,3vw,39px)] font-normal tracking-[-0.045em] leading-[1.3] my-[20px]">
-              {portfolioV5Data.education.heading}
-            </h2>
-
-            <div className="grid grid-cols-2 max-md:grid-cols-1 gap-[20px_60px] mt-[30px]">
-              {portfolioV5Data.education.items.map((edu, idx) => (
-                <div key={idx} className="border-t border-[#d6dad3] pt-[22px]">
-                  <strong className="text-[13px] font-semibold block mb-[8px]">
-                    {edu.institution}
-                  </strong>
-                  <p className="text-[12px] leading-[1.75] text-[#6a766b] m-0">
-                    {edu.degree} · {edu.field} · {edu.dates}
-                  </p>
+        {selectedBook && (
+          <div
+            className="book-takeaway-dialog"
+            role="presentation"
+            onMouseDown={(event) => {
+              if (event.target === event.currentTarget) setOpenBookTakeaway(null);
+            }}
+          >
+            <section className="book-takeaway-popup" role="dialog" aria-modal="true" aria-labelledby="book-takeaway-title">
+              <header>
+                <span>MY TAKEAWAY</span>
+                <button type="button" className="liquid-glass-button liquid-glass-button--icon" aria-label="Close takeaway" onClick={() => setOpenBookTakeaway(null)}>
+                  <X aria-hidden="true" />
+                </button>
+              </header>
+              <div className="book-takeaway-popup-body">
+                <span className="book-cover real-cover book-takeaway-popup-cover" data-cover-title={selectedBook.title}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={selectedBook.image} alt={`Cover of ${selectedBook.title}`} />
+                </span>
+                <div>
+                  <h2 id="book-takeaway-title">{selectedBook.title}</h2>
+                  <strong>{selectedBook.author}</strong>
+                  <p>{selectedBook.reflection}</p>
                 </div>
-              ))}
-            </div>
+              </div>
+            </section>
           </div>
-        </section>
+        )}
+
       </main>
 
-      {/* 08 / CONTACT & FOOTER */}
-      <footer className="bg-[#1f2823] text-[#f2f4ed] pt-[82px] pb-[28px]" id="contact">
-        <div className="wrap">
-          <div className="text-[10px] text-[#8a9b8e] tracking-[0.11em] font-semibold">
-            {portfolioV5Data.contact.number}
-          </div>
-          <h2 className="serif-font text-[clamp(26px,3vw,39px)] max-md:text-[30px] font-normal tracking-[-0.045em] leading-[1.3] mt-[20px] mb-[25px] text-[#f2f4ed]">
-            {portfolioV5Data.contact.heading}
-          </h2>
-          <p className="max-w-[590px] leading-[1.85] text-[#a9b7ac] text-[14px] mb-[35px]">
-            {portfolioV5Data.contact.subtitle}
-          </p>
-
-          <div className="flex gap-[10px] flex-wrap">
-            <a
-              className="btn btn-dark"
-              href={`mailto:${portfolioV5Data.email}`}
-            >
-              Email me <span>↗</span>
-            </a>
-            <button
-              className="btn"
-              onClick={handleBookMeeting}
-            >
-              Book a meeting <span>↗</span>
-            </button>
-            <button
-              className="btn"
-              onClick={() => handleOpenDigitalTwin()}
-            >
-              Talk to my digital twin <span>✳</span>
-            </button>
-          </div>
-
-          <div className="border-t border-[#4d5c50] mt-[90px] pt-[20px] flex max-md:flex-col justify-between gap-[20px] text-[#9fb0a2] text-[10px]">
-            <div>© 2026 SANDHEEP GOPINATH</div>
-            <div className="flex gap-[20px]">
-              <a
-                href={portfolioV5Data.resumePdf}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white"
-              >
-                Download CV ↓
-              </a>
-              <a href="#top" className="hover:text-white">
-                Back to top ↑
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-      {/* Show the floating AI shortcut after the landing hero scrolls away. */}
-      {showAiBadge && (
-        <button
-          onClick={() => handleOpenDigitalTwin()}
-          className="liquid-glass-button liquid-glass-button--primary fixed right-[23px] bottom-[21px] z-40 flex items-center gap-[9px] px-[17px] py-[12px] text-[11px] font-semibold"
-        >
-          <span>✳</span>
-          <span>Ask my AI</span>
-        </button>
-      )}
+      <div className={`section-page-footer ${pageSections[activePageSection].id === "philosophy" ? "section-page-footer--dark" : ""} ${pageSections[activePageSection].id === "reading" ? "section-page-footer--back" : ""}`} aria-label="Section navigation">
+        {pageSections[activePageSection].id !== "reading" && <span>{pageSections[(activePageSection + 1) % pageSections.length].label}</span>}
+        <a href={`#${pageSections[activePageSection].nextId}`}>
+          {pageSections[activePageSection].action} <span aria-hidden="true">{pageSections[activePageSection].arrow}</span>
+        </a>
+      </div>
 
       {/* Digital Twin Chat Widget */}
       <DigitalTwinModal
@@ -643,7 +661,11 @@ export default function Home() {
         onClose={() => setCalendlyOpen(false)}
       />
 
-      <AmbientMusic />
+      <AmbientMusic
+        enabled={musicEnabled}
+        onToggle={handleToggleMusic}
+        onSelectChoice={handleSelectMusicChoice}
+      />
     </div>
   );
 }

@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#f8f8f6" name="theme-color"/>
+<title>Sandheep Gopinath — Product Leadership</title>
+<meta content="A collection of product and business problems solved across industries. Explore real-world work by capability." name="description"/>
+<style>
+:root{--bg:#f8f8f6;--paper:#fff;--ink:#1d2224;--muted:#697075;--line:#dde0de;--accent:#345a78;--accent2:#c7d7e4;--radius:18px;--shadow:0 24px 80px rgba(24,35,45,.16)}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--bg);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}button,a{font:inherit}a{color:inherit;text-decoration:none}button{cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid #4a88b6;outline-offset:4px}.wrap{max-width:1320px;margin:auto;padding:0 clamp(22px,5.5vw,84px)}.nav{height:78px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}.brand{font-size:14px;font-weight:680;letter-spacing:-.035em}.navlinks{display:flex;align-items:center;gap:32px;font-size:12px;color:#4c555b}.navlinks a:hover{color:var(--accent)}.nav-cta{border:1px solid #b6bdc0;border-radius:999px;padding:11px 18px;color:var(--ink)}.hero{min-height:min(550px,75vh);display:flex;align-items:center;border-bottom:1px solid var(--line);position:relative}.hero-body{max-width:760px;padding:90px 0 105px}.eyebrow{font-size:10px;font-weight:700;letter-spacing:.17em;text-transform:uppercase;color:#81898d}.hero h1{font-size:clamp(33px,4.25vw,63px);line-height:1.12;font-weight:540;letter-spacing:-.065em;margin:21px 0 24px}.hero h1 span{color:#879196}.hero .intro{font-size:14px;line-height:1.85;color:#586267;max-width:660px}.hero-actions{display:flex;align-items:center;gap:25px;margin-top:29px}.link-arrow{display:inline-flex;align-items:center;gap:12px;font-size:12px;font-weight:650;border-bottom:1px solid #667681;padding:10px 0}.link-arrow:hover{color:var(--accent);border-color:var(--accent)}.hero-stamp{position:absolute;bottom:26px;right:0;font-size:10px;letter-spacing:.1em;color:#9ca4a6}.section{padding-top:clamp(70px,9vw,125px);padding-bottom:clamp(90px,10vw,150px)}.section-top{display:flex;justify-content:space-between;align-items:start;gap:25px;margin-bottom:43px}.section h2{font-size:clamp(26px,3vw,42px);font-weight:550;letter-spacing:-.055em;line-height:1.2;margin:15px 0 13px}.section-lede{max-width:510px;font-size:13px;line-height:1.75;color:var(--muted);margin:0}.section-aside{font-size:11px;color:#91999a;margin-top:6px;white-space:nowrap}.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.tile{appearance:none;text-align:left;position:relative;overflow:hidden;border:1px solid #e0e3e2;border-radius:var(--radius);background:#fff;min-height:225px;padding:25px 25px 22px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease,background-color .25s ease}.tile:hover{transform:translateY(-5px);box-shadow:0 22px 48px rgba(32,46,55,.09);border-color:#b4c2cb;background:#fefefe}.tile .tile-index{font-size:10px;color:#a1a9ad;letter-spacing:.1em;font-weight:700}.tile .tile-ghost{position:absolute;top:-23px;right:-3px;font-size:132px;font-weight:600;letter-spacing:-.12em;line-height:1;color:#f1f3f3;pointer-events:none;user-select:none;transition:transform .35s,color .35s}.tile:hover .tile-ghost{transform:translate(-5px,12px);color:#eaf0f3}.tile-main{position:relative;z-index:1}.tile-title{font-size:19px;font-weight:610;line-height:1.3;letter-spacing:-.045em;max-width:260px;margin:0 0 8px}.tile-copy{font-size:12px;line-height:1.65;color:#697377;max-width:275px;margin:0}.tile-bottom{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1;margin-top:22px}.tile-bottom span:first-child{font-size:10px;letter-spacing:.08em;color:#9aa2a4;text-transform:uppercase}.tile-arrow{height:33px;width:33px;display:grid;place-items:center;border:1px solid #d9dee1;border-radius:50%;font-size:17px;transition:background .2s,color .2s,transform .2s}.tile:hover .tile-arrow{background:#273f52;color:#fff;transform:rotate(45deg)}.section-end{display:flex;gap:25px;justify-content:space-between;align-items:center;margin-top:30px;color:#92999b;font-size:11px}.section-end a{font-weight:600;color:#3b505e}.footer{padding:38px 0 50px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;color:#858e91;font-size:11px}.footer a:hover{color:var(--ink)}
+/* Dialog */
+.dialog{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:clamp(14px,3vw,40px)}.dialog.is-open{display:flex}.scrim{position:absolute;inset:0;background:rgba(22,30,35,.53);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);animation:fade .22s ease}.modal{position:relative;display:flex;flex-direction:column;background:#fbfbfa;border:1px solid #fff;border-radius:22px;width:min(1020px,100%);max-height:min(790px,calc(100dvh - 45px));box-shadow:var(--shadow);overflow:hidden;animation:appear .28s cubic-bezier(.2,.8,.2,1)}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px 30px;border-bottom:1px solid var(--line)}.modal-kicker{font-size:10px;font-weight:700;letter-spacing:.13em;color:#78848a;text-transform:uppercase}.close{background:#fff;border:1px solid var(--line);width:36px;height:36px;border-radius:50%;font-size:21px;color:#657077;display:grid;place-items:center;line-height:1}.close:hover{background:#edf0f1;color:#1d2224}.modal-body{overflow:auto;overscroll-behavior:contain;padding:30px}.modal-title{font-size:clamp(26px,3vw,38px);line-height:1.18;font-weight:590;letter-spacing:-.058em;margin:0 0 11px}.modal-description{margin:0 0 28px;color:#737c80;font-size:13px;line-height:1.7;max-width:680px}.case-browser{display:grid;grid-template-columns:235px 1fr;gap:23px;align-items:start}.case-menu{display:flex;flex-direction:column;gap:6px;position:sticky;top:0}.case-choice{appearance:none;border:1px solid transparent;text-align:left;background:transparent;border-radius:11px;padding:13px 15px;display:flex;flex-direction:column;gap:5px;color:#5e696e}.case-choice:hover{background:#f0f1f0}.case-choice[aria-selected="true"]{background:#e9eef1;border-color:#d0dce3;color:#1f3747}.case-choice strong{font-size:12px;font-weight:650}.case-choice small{font-size:11px;color:#8a959a}.case-detail{background:#fff;border:1px solid var(--line);border-radius:15px;padding:clamp(20px,3vw,33px);min-height:370px}.case-meta{display:flex;justify-content:space-between;gap:12px;color:#839096;font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:650;margin-bottom:20px}.case-title{font-size:clamp(20px,2.3vw,27px);line-height:1.3;font-weight:610;letter-spacing:-.045em;margin:0 0 25px}.psi{display:grid;grid-template-columns:1fr;gap:19px}.psi-item{display:grid;grid-template-columns:88px 1fr;gap:20px;border-top:1px solid #e9ebeb;padding-top:16px}.psi-label{font-size:10px;font-weight:720;color:#55748a;letter-spacing:.11em;text-transform:uppercase;padding-top:4px}.psi-text{font-size:12px;line-height:1.8;color:#455055;margin:0}.impact-text{color:#1c2c35;font-weight:590}.modal-foot{padding:17px 30px;border-top:1px solid var(--line);display:flex;gap:12px;justify-content:space-between;align-items:center;background:#fbfbfa}.modal-foot .note{color:#879195;font-size:11px}.contact{background:#233b4d;border-radius:99px;color:#fff;border:1px solid #233b4d;padding:12px 20px;font-size:12px;font-weight:620}.contact:hover{background:#345a78}@keyframes fade{from{opacity:0}to{opacity:1}}@keyframes appear{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}body.modal-open{overflow:hidden}@media(max-width:950px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.case-browser{grid-template-columns:190px 1fr}.section-aside{display:none}}@media(max-width:650px){.nav{height:65px}.navlinks{gap:17px}.navlinks a:not(.nav-cta){display:none}.nav-cta{padding:9px 13px}.hero{min-height:440px}.hero-body{padding:65px 0 90px}.hero h1{font-size:clamp(32px,8vw,45px)}.hero .intro{font-size:12px}.section-top{margin-bottom:26px}.tiles{grid-template-columns:1fr;gap:11px}.tile{min-height:157px;padding:19px 20px}.tile-title{font-size:17px;margin-bottom:5px}.tile-copy{font-size:11px}.tile-ghost{font-size:110px;top:-22px}.tile-bottom{margin-top:11px}.section-end{align-items:start}.dialog{padding:0;align-items:stretch}.modal{height:100dvh;max-height:none;border-radius:0;width:100%;animation:mobileAppear .24s ease}.modal-head{padding:15px 19px}.modal-body{padding:22px 19px}.modal-description{margin-bottom:22px}.case-browser{grid-template-columns:1fr;gap:15px}.case-menu{position:static;display:flex;flex-direction:row;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -19px;padding:0 19px 8px;scrollbar-width:thin}.case-choice{min-width:165px;flex:0 0 165px;scroll-snap-align:start;border-color:#e5e7e6;background:#fff}.case-detail{min-height:0;padding:21px 18px}.psi-item{grid-template-columns:1fr;gap:5px;padding-top:14px}.psi{gap:16px}.modal-foot{padding:13px 19px}.modal-foot .note{max-width:185px;line-height:1.4}.footer{flex-direction:column}.hero-stamp{left:0;right:auto}@keyframes mobileAppear{from{transform:translateY(26px);opacity:.8}to{transform:translateY(0);opacity:1}}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.filterbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 23px}.filter{border:1px solid #dce0e2;border-radius:999px;background:#fff;padding:10px 16px;color:#58646b;font-size:11px;font-weight:580;transition:background .2s,color .2s,border-color .2s}.filter:hover{border-color:#8395a2}.filter.active{background:#263541;color:#fff;border-color:#263541}.tile{min-height:190px}.tile-title{font-size:16px;line-height:1.35;letter-spacing:-.03em;max-width:none}.tile-copy{font-size:12px}.tile-index{font-size:9px}.tile .tile-ghost{display:none}@media(max-width:760px){.filterbar{gap:7px}.filter{padding:9px 12px;font-size:10px}.tile{min-height:155px}.tile-title{font-size:15px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.tile,.tile-arrow,.filter{transition:none!important}.modal,.scrim{animation:none!important}}
+
+/* Journey — an editorial, low-noise company history */
+.journey-section{background:#f0f1ee;border-top:1px solid #e1e3df;padding-top:clamp(65px,8vw,106px);padding-bottom:clamp(70px,9vw,120px)}
+.journey-head{margin-bottom:34px;display:flex;justify-content:space-between;gap:22px;align-items:end}.journey-head .section-lede{max-width:520px}.journey-list{border-top:1px solid #ccd1ce}.journey-item{display:grid;grid-template-columns:minmax(145px,210px) minmax(0,1fr) 120px;gap:clamp(20px,4vw,58px);padding:32px 0 34px;border-bottom:1px solid #ccd1ce;align-items:start}.journey-brand{min-height:55px;display:flex;align-items:center}.journey-logo{display:block;max-width:155px;max-height:48px;width:auto;height:auto;object-fit:contain;object-position:left center}.journey-logo--danfoss{max-height:55px;max-width:125px}.journey-logo--qure{max-height:42px}.journey-logo-fallback{font-size:20px;font-weight:720;letter-spacing:-.055em;line-height:1.2;color:#30363a}.journey-logo-fallback.sketch{font-family:Georgia,serif;font-weight:600;letter-spacing:-.045em}.journey-kicker{font-size:10px;letter-spacing:.10em;text-transform:uppercase;color:#7a8582;margin-bottom:11px}.journey-statement{font-size:clamp(17px,1.55vw,21px);line-height:1.35;font-weight:590;letter-spacing:-.035em;margin:0 0 9px}.journey-copy{font-size:12px;line-height:1.85;color:#68716f;max-width:645px;margin:0}.journey-dates{font-size:11px;color:#737e7c;text-align:right;line-height:1.6;white-space:nowrap}.journey-note{font-size:10px;color:#8b9591;line-height:1.6;margin-top:20px}.journey-item:hover .journey-statement{color:#284961}@media(max-width:780px){.journey-item{grid-template-columns:125px minmax(0,1fr);gap:16px 26px;padding:26px 0}.journey-dates{grid-column:1;grid-row:2;text-align:left}.journey-content{grid-column:2;grid-row:1 / span 2}.journey-logo{max-width:120px;max-height:37px}.journey-logo--danfoss{max-height:49px;max-width:110px}.journey-logo-fallback{font-size:16px}}@media(max-width:520px){.journey-head{display:block}.journey-item{grid-template-columns:1fr;gap:9px;padding:23px 0}.journey-brand{min-height:39px}.journey-dates{grid-column:1;grid-row:2;text-align:left;font-size:10px}.journey-content{grid-column:1;grid-row:3;margin-top:8px}.journey-statement{font-size:18px}.journey-copy{font-size:12px}.journey-logo{max-height:37px}}
+
+/* Journey v2: company-first professional timeline */
+.journey-section{background:#f5f5f2}
+.journey-head{margin-bottom:33px}
+.journey-item--new{grid-template-columns:150px minmax(0,1fr);gap:clamp(26px,4vw,66px);padding:33px 0 36px;align-items:start}
+.journey-item--new .journey-brand{padding-top:7px;min-height:0}
+.journey-item--new .journey-logo{max-width:126px;max-height:42px}
+.journey-item--new .journey-logo--danfoss{max-width:110px}
+.journey-item--new .journey-logo--qure{max-height:36px}
+.journey-company-row{display:flex;align-items:baseline;justify-content:space-between;gap:18px}
+.journey-company{font-size:clamp(19px,2.15vw,27px);font-weight:650;letter-spacing:-.05em;line-height:1.2;margin:0}
+.journey-item--new .journey-dates{font-size:11px;text-align:right;flex:0 0 auto;white-space:nowrap}
+.journey-role{font-size:13px;color:#333d42;font-weight:600;margin:8px 0 10px}
+.journey-meta{display:flex;flex-wrap:wrap;gap:6px 15px;color:#78827e;font-size:11px;line-height:1.6}
+.journey-meta-location:before{content:'·';margin-right:12px;color:#a4aaa6}
+.journey-focus{font-size:12px;line-height:1.75;color:#515c5a;margin:17px 0 0;max-width:770px}
+.journey-focus strong{display:inline-block;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#8c9691;margin-right:10px}
+.journey-learning{font-size:12px;line-height:1.8;color:#4f5c59;max-width:790px;margin:13px 0 0;border-left:2px solid #b7c0bd;padding-left:15px}
+.journey-learning span{display:block;font-size:10px;letter-spacing:.085em;font-weight:700;text-transform:uppercase;color:#828d89;margin-bottom:3px}
+.journey-item--new:hover .journey-company{color:#284961}
+@media(max-width:780px){.journey-item--new{grid-template-columns:110px minmax(0,1fr);gap:18px}.journey-item--new .journey-content{grid-column:auto;grid-row:auto}.journey-item--new .journey-logo{max-width:105px;max-height:34px}.journey-company-row{flex-direction:column;gap:5px}.journey-item--new .journey-dates{text-align:left}.journey-meta-location:before{content:none;margin:0}}
+@media(max-width:520px){.journey-item--new{grid-template-columns:1fr;gap:10px;padding:26px 0 29px}.journey-item--new .journey-brand{padding:0}.journey-item--new .journey-content{grid-column:1;grid-row:auto;margin-top:3px}.journey-item--new .journey-company{font-size:21px}.journey-item--new .journey-logo{max-width:120px;max-height:36px}.journey-company-row{gap:6px}.journey-learning{font-size:12px}.journey-meta{display:block}.journey-meta-location{display:block;margin-top:3px}}
+
+/* Resume achievements: company-first, inline, progressively disclosed */
+.journey-resume{margin-top:19px;border-top:1px solid #e0e4e1;max-width:850px}
+.journey-resume summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 0 15px;font-size:12px;font-weight:650;color:#304759;cursor:pointer;transition:color .2s ease}
+.journey-resume summary::-webkit-details-marker{display:none}
+.journey-resume summary:hover{color:#1e6a98}
+.journey-resume summary:focus-visible{outline:3px solid #4a88b6;outline-offset:3px;border-radius:3px}
+.resume-count{font-weight:450;color:#869092}
+.resume-chevron{font-size:20px;font-weight:400;line-height:1;color:#77838a;transition:transform .2s ease}
+.journey-resume[open] .resume-chevron{transform:rotate(180deg)}
+.resume-content{padding:0 0 15px;animation:fade .23s ease}
+.resume-content ul{padding:0;margin:0;list-style:none;display:grid;gap:0}
+.resume-content li{position:relative;padding:13px 0 13px 19px;border-top:1px solid #eceded;color:#4c595d;font-size:12px;line-height:1.85}
+.resume-content li:before{content:'';position:absolute;left:1px;top:23px;width:5px;height:5px;border-radius:50%;background:#8095a2}
+.resume-source{font-size:10px;line-height:1.6;color:#8b9494;margin:12px 0 0}
+@media(max-width:520px){.journey-resume{margin-top:15px}.journey-resume summary{font-size:12px;min-height:48px}.resume-content li{font-size:12px;line-height:1.7}}
+
+/* Product decisions: company-led editorial story browser */
+.decisions-section{background:#f8f8f6}
+.decision-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.decision-tile{appearance:none;display:flex;flex-direction:column;justify-content:space-between;min-height:265px;padding:25px 27px;text-align:left;background:#fff;border:1px solid #dee2e0;border-radius:15px;color:var(--ink);transition:transform .2s,border-color .2s,box-shadow .2s}
+.decision-tile:hover{transform:translateY(-3px);border-color:#b8c6cc;box-shadow:0 15px 36px rgba(32,46,55,.065)}
+.decision-topline{display:flex;justify-content:space-between;color:#727d80;font-size:11px;font-weight:650;letter-spacing:.02em}
+.decision-topline span:last-child{font-variant-numeric:tabular-nums;color:#a4adb0}
+.decision-card-body{display:flex;flex-direction:column;align-items:flex-start;margin:26px 0 23px;gap:11px}
+.decision-kind{font-size:10px;color:#6f848b;text-transform:uppercase;letter-spacing:.10em;font-weight:650}
+.decision-card-title{font-size:clamp(19px,2.05vw,27px);font-weight:590;line-height:1.24;letter-spacing:-.045em;max-width:520px}
+.decision-teaser{font-size:12px;line-height:1.75;color:#687379;max-width:500px}
+.decision-card-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e6e9e7;padding-top:15px;font-size:11px;font-weight:600;color:#344f60}
+.decision-card-foot span{font-size:18px}
+.decision-modal{width:min(810px,100%)}
+.decision-modal-org{font-size:10px;letter-spacing:.10em;color:#668394;text-transform:uppercase;font-weight:700;margin-bottom:14px}
+.decision-modal .modal-title{max-width:700px;font-size:clamp(27px,3.15vw,41px)}
+.decision-modal .modal-description{font-size:14px;max-width:650px;margin-bottom:29px}
+.decision-narrative{max-width:690px}
+.decision-part{display:grid;grid-template-columns:170px 1fr;gap:24px;border-top:1px solid #e4e7e5;padding:22px 0}
+.decision-part h3{font-size:11px;line-height:1.6;letter-spacing:.025em;margin:0;font-weight:700;color:#3b5666}
+.decision-part p{font-size:13px;line-height:1.9;color:#4d5a5f;margin:0}
+.decision-part-reflection h3{color:#3b5666}
+.decision-part-reflection p{font-weight:580;color:#263941}
+.decision-controls{display:flex;gap:8px}
+.decision-controls button{font-size:11px;border-radius:99px;padding:10px 15px;border:1px solid #cdd5d7;background:white;color:#2c4552}
+.decision-controls button:disabled{opacity:.35;cursor:default}
+.decision-controls button:not(:disabled):hover{background:#e9eef0}
+@media(max-width:720px){.decision-grid{grid-template-columns:1fr}.decision-tile{min-height:230px;padding:21px}.decision-card-title{font-size:23px}.decision-part{grid-template-columns:1fr;gap:6px;padding:19px 0}.decision-part h3{font-size:11px}.decision-part p{font-size:12px}.decision-modal .modal-description{font-size:12px}.decision-modal .modal-title{font-size:29px}}
+@media(max-width:420px){.decision-controls button{padding:10px;font-size:10px}.decision-modal .modal-foot .note{font-size:10px}}
+
+/* CARL product decision cards */
+.decision-card-body{gap:12px;margin:22px 0 22px}
+.decision-chipset{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:6px}
+.decision-chip{display:inline-flex;align-items:center;max-width:100%;border:1px solid #e0e4e5;background:#f5f6f5;border-radius:5px;padding:6px 9px;font-size:10px;line-height:1.3;color:#56626a;font-weight:520}
+.decision-tile{min-height:285px}
+.decision-card-title{max-width:540px}
+.modal-competencies{margin:-8px 0 26px}
+.modal-competency-label{display:block;color:#80898b;font-size:10px;text-transform:uppercase;letter-spacing:.09em;font-weight:650;margin-bottom:8px}
+.modal-competencies .decision-chip{background:#eef1f2;border-color:#e3e8e9}
+.decision-part h3{font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+@media(max-width:720px){.decision-tile{min-height:240px}.decision-chip{font-size:10px}}
+
+/* Education — restrained editorial split layout */
+.education-section{padding:clamp(76px,9vw,128px) 0;background:#f8f8f6;border-top:1px solid #e6e6e1;border-bottom:1px solid #e6e6e1}
+.education-layout{display:grid;grid-template-columns:minmax(230px,.84fr) minmax(0,1.4fr);gap:clamp(50px,8vw,146px);align-items:start}
+.education-intro{position:sticky;top:42px;padding-top:3px}
+.education-intro h2{max-width:410px;margin:19px 0 18px;color:#242424;font-size:clamp(30px,3.6vw,48px);font-weight:540;letter-spacing:-.06em;line-height:1.15}
+.education-intro p{font-size:13px;color:#777773;line-height:1.85;max-width:310px;margin:0}
+.education-list{border-top:1px solid #d8d8d2}
+.education-entry{padding:26px 0 29px;border-bottom:1px solid #d8d8d2;position:relative}
+.education-entry-head{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:9px}
+.education-dates{font-size:11px;color:#84847e;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.education-ordinal{font-size:10px;color:#b0b0a9;letter-spacing:.09em}
+.education-topic{margin:0 0 8px;font-weight:570;font-size:clamp(18px,2vw,24px);line-height:1.25;letter-spacing:-.04em;color:#242424}
+.education-school{font-size:12px;line-height:1.6;color:#65655f;margin:0 0 10px}
+.education-note{font-size:12px;line-height:1.75;color:#85857e;margin:0;max-width:550px}
+@media(max-width:750px){.education-layout{grid-template-columns:1fr;gap:37px}.education-intro{position:static}.education-intro h2{max-width:none;font-size:clamp(30px,7vw,43px)}.education-intro p{max-width:520px}.education-entry{padding:22px 0 25px}}
+
+
+/* Experience — company-first disclosure, with product-level accountability */
+.exp-section{background:#f5f5f2;padding:clamp(66px,9vw,120px) 0;border-top:1px solid #e2e4df}
+.exp-heading{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:34px}
+.exp-heading .section-lede{max-width:650px}
+.exp-list{border-top:1px solid #d7dcd7}
+.exp-company{border-bottom:1px solid #d7dcd7}
+.exp-summary{list-style:none;display:grid;grid-template-columns:126px minmax(0,1fr) 155px;align-items:start;gap:clamp(16px,3.2vw,42px);padding:27px 0 28px;cursor:pointer;min-width:0}
+.exp-summary::-webkit-details-marker{display:none}
+.exp-summary:focus-visible{outline:2px solid #496879;outline-offset:5px}
+.exp-logo-wrap{min-height:58px;display:flex;align-items:center;padding-top:3px;min-width:0}
+.exp-logo{display:block;max-width:112px;max-height:47px;width:auto;height:auto;object-fit:contain;object-position:left center}
+.exp-logo-word{font-family:Georgia,serif;color:#38453e;font-size:18px;letter-spacing:-.05em;font-weight:600;line-height:1.15}
+.exp-summary-core{min-width:0;display:block}
+.exp-summary-name{display:block;font-family:Georgia,serif;font-size:clamp(23px,2.5vw,32px);line-height:1.2;letter-spacing:-.045em;color:#26332e}
+.exp-summary-role{display:block;font-size:12px;font-weight:630;color:#46514c;margin-top:7px}
+.exp-summary-intro{display:block;color:#727d75;font-size:12px;line-height:1.75;margin-top:12px;max-width:700px}
+.exp-summary-side{text-align:right;display:flex;align-items:flex-end;flex-direction:column;gap:6px;padding-top:5px}
+.exp-summary-years{font-size:10px;color:#5f6b65;letter-spacing:.04em;font-weight:650}
+.exp-summary-duration{font-size:11px;color:#929b95}
+.exp-expand{display:inline-flex;align-items:center;gap:9px;margin-top:18px;font-size:11px;color:#39544a;font-weight:700}
+.exp-expand-arrow{display:inline-block;transition:transform .2s;font-size:15px}
+.exp-company[open] .exp-expand-arrow{transform:rotate(90deg)}
+.exp-company[open] .exp-summary{padding-bottom:25px}
+.exp-panel{border-top:1px solid #e0e4de;margin-left:clamp(0px,14vw,168px);padding:23px 0 34px;animation:exp-reveal .23s ease}
+@keyframes exp-reveal{from{opacity:.25;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+.exp-mini-label{display:block;font-size:10px;letter-spacing:.1em;font-weight:750;color:#768579;margin-bottom:9px}
+.exp-location{font-size:12px;line-height:1.75;color:#53625a;margin-bottom:25px}
+.exp-panel-heading{border-top:1px solid #e3e7e1;padding-top:22px;margin-bottom:7px}
+.exp-panel-heading p{font-size:12px;color:#88938b;line-height:1.7;margin:0}
+.exp-product{display:grid;grid-template-columns:minmax(135px,190px) minmax(0,1fr);gap:22px;border-top:1px solid #e3e7e1;padding:25px 0}
+.exp-product:first-child{border-top:0}
+.exp-product-index{font-size:10px;letter-spacing:.065em;line-height:1.5;color:#85948a;font-weight:700;text-transform:uppercase}
+.exp-product-text h4{font-family:Georgia,serif;font-size:clamp(20px,2.05vw,25px);letter-spacing:-.04em;line-height:1.25;margin:0 0 7px;color:#2b3931;font-weight:500}
+.exp-product-phase{font-size:11px;color:#65786b;margin-bottom:13px;font-weight:650}
+.exp-product-text p{font-size:13px;line-height:1.83;color:#525e57;margin:0 0 11px;max-width:690px}
+.exp-product-text p:last-child{margin-bottom:0}
+.exp-reflection{padding:22px 25px;background:#ebeee9;border-radius:9px;margin-top:15px}
+.exp-reflection p{font-family:Georgia,serif;font-size:clamp(15px,1.5vw,18px);line-height:1.65;color:#37463b;max-width:750px;margin:0}
+.exp-note{font-size:10px;line-height:1.7;color:#8c968e;margin:22px 0 0}
+@media(max-width:800px){.exp-summary{grid-template-columns:90px minmax(0,1fr);gap:16px 20px}.exp-summary-side{grid-column:2;text-align:left;flex-direction:row;gap:9px 13px;align-items:center;padding:0}.exp-expand{margin:0 0 0 auto}.exp-logo{max-width:88px;max-height:39px}.exp-logo-word{font-size:15px}.exp-panel{margin-left:110px}.exp-product{grid-template-columns:1fr;gap:8px}.exp-product-index{font-size:10px}}
+@media(max-width:600px){.exp-heading{display:block;margin-bottom:26px}.exp-heading .section-aside{display:none}.exp-summary{grid-template-columns:1fr;gap:7px;padding:20px 0 22px}.exp-logo-wrap{min-height:0;grid-row:1;margin-bottom:5px}.exp-logo{max-width:104px;max-height:30px}.exp-logo-word{font-size:15px}.exp-summary-core{grid-row:2}.exp-summary-name{font-size:24px}.exp-summary-role{font-size:12px}.exp-summary-intro{font-size:12px;line-height:1.7;margin-top:9px}.exp-summary-side{grid-column:1;grid-row:3;flex-wrap:wrap;gap:5px 12px;margin-top:8px}.exp-summary-years{font-size:10px}.exp-summary-duration{font-size:10px}.exp-expand{font-size:10px}.exp-panel{margin:0;padding:18px 0 28px}.exp-location{margin-bottom:17px}.exp-product{padding:19px 0}.exp-product-text h4{font-size:22px}.exp-product-text p{font-size:12px;line-height:1.78}.exp-reflection{padding:17px;margin-top:8px}.exp-reflection p{font-size:16px}}
+@media(prefers-reduced-motion:reduce){.exp-panel{animation:none}.exp-expand-arrow{transition:none}}
+
+/* Experience: clean company overview + full-screen mobile / centered desktop detail dialog */
+.exp-company{display:block}
+.exp-open-button{width:100%;border:0;border-radius:0;background:transparent;color:inherit;text-align:left;font-family:inherit;transition:background-color .18s ease}
+.exp-open-button:hover{background:rgba(57,80,67,.045)}
+.exp-open-button:focus-visible{outline:2px solid #496879;outline-offset:-2px}
+.exp-open-button .exp-expand-arrow{transition:transform .18s ease}
+.exp-open-button:hover .exp-expand-arrow{transform:translate(2px,-2px)}
+.exp-dialog{z-index:1200}
+.exp-modal{width:min(980px,100%);background:#fbfbf9}
+.exp-modal-body{padding:30px clamp(22px,5vw,58px) 38px}
+.exp-modal-intro{padding:0 0 26px;border-bottom:1px solid #dfe3dd;margin-bottom:8px}
+.exp-modal-intro h2{font-family:Georgia,serif;font-size:clamp(30px,4.5vw,48px);font-weight:500;letter-spacing:-.06em;line-height:1.15;color:#25352c;margin:0 0 9px}
+.exp-modal-role{font-weight:650;color:#435449;font-size:13px;margin:0 0 7px}
+.exp-modal-meta{font-size:11px;color:#87928a;letter-spacing:.045em;margin:0 0 17px}
+.exp-modal-overview{font-size:14px;line-height:1.8;color:#536158;margin:0;max-width:770px}
+.exp-modal-content .exp-panel{margin:0;border-top:0;padding:18px 0 0;animation:none}
+.exp-modal-content .exp-panel-heading{margin-top:6px}
+.exp-modal-content .exp-product{grid-template-columns:165px minmax(0,1fr)}
+.exp-modal-content .exp-reflection{margin-top:24px}
+.exp-modal-footer{display:flex;align-items:center;justify-content:space-between;gap:15px;border-top:1px solid #e2e5df;padding:14px 28px;background:#fbfbf9}
+.exp-modal-footer #experience-position{font-size:11px;color:#8a968b}
+.exp-modal-nav{border:1px solid #d9dfd7;border-radius:99px;background:transparent;padding:9px 14px;font-size:11px;font-weight:650;color:#475b4d}
+.exp-modal-nav:hover:not(:disabled){background:#edf0e9}
+.exp-modal-nav:disabled{opacity:.3;cursor:default}
+@media(max-width:700px){
+.exp-open-button{padding:22px 0}
+.exp-modal{width:100%;height:100dvh;max-height:100dvh;border-radius:0}
+.exp-modal-body{padding:26px 20px 34px}
+.exp-modal-head{padding:15px 18px}
+.exp-modal-content .exp-product{grid-template-columns:1fr;gap:9px}
+.exp-modal-content .exp-product-text p{font-size:13px}
+.exp-modal-footer{padding:12px 17px}
+.exp-modal-intro h2{font-size:34px}
+.exp-modal-overview{font-size:13px}
+}
+@media(prefers-reduced-motion:reduce){.exp-open-button,.exp-open-button .exp-expand-arrow{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap"><header class="nav" id="top"><a class="brand" href="#top">Sandheep Gopinath<span style="color:#7891a1">.</span></a><nav aria-label="Main navigation" class="navlinks"><a href="#education">Learning</a><a href="#decisions">Decisions</a><a href="#journey">Journey</a><a class="nav-cta" href="mailto:me@sandheepgopinath.com">Get in touch ↗</a></nav></header>
+<section aria-labelledby="hero-title" class="hero"><div class="hero-body"><div class="eyebrow">Product leadership · Across industries</div><h1 id="hero-title">Connecting disciplines.<br/><span>Delivering results.</span></h1><p class="intro">A product leader and founder with 11+ years across technology and business—from defining what to build to improving adoption, revenue and execution.</p><div class="hero-actions"><a class="link-arrow" href="#decisions">Explore my work <span>↗</span></a><a class="link-arrow" href="mailto:me@sandheepgopinath.com">Email me <span>↗</span></a></div></div><span class="hero-stamp">SCROLL TO EXPLORE ↓</span></section>
+<main>
+<section aria-labelledby="education-title" class="education-section" id="education">
+<div class="wrap education-layout">
+<div class="education-intro">
+<div class="eyebrow">02 / EDUCATION</div>
+<h2 id="education-title">Curiosity led the way.</h2>
+<p>From understanding how things work to discovering what technology can make possible.</p>
+</div>
+<div class="education-list">
+<article class="education-entry">
+<div class="education-entry-head"><time class="education-dates">2021 — 2022</time><span class="education-ordinal">01</span></div>
+<h3 class="education-topic">Leadership &amp; AI/ML</h3>
+<p class="education-school">Post Graduate Diploma · Plaksha University · Technology Leaders Program</p>
+<p class="education-note">Human-centered design, leadership, and emerging technologies.</p>
+</article>
+<article class="education-entry">
+<div class="education-entry-head"><time class="education-dates">2020 — 2021</time><span class="education-ordinal">02</span></div>
+<h3 class="education-topic">Artificial Intelligence</h3>
+<p class="education-school">Post Graduate Program · McCombs School of Business, The University of Texas</p>
+<p class="education-note">Exploring predictive intelligence and its real-world applications.</p>
+</article>
+<article class="education-entry">
+<div class="education-entry-head"><time class="education-dates">2016 — 2017</time><span class="education-ordinal">03</span></div>
+<h3 class="education-topic">Embedded Systems</h3>
+<p class="education-school">Post Graduate Diploma · Accel IT Academy</p>
+<p class="education-note">Going deeper into connected systems and product development.</p>
+</article>
+<article class="education-entry">
+<div class="education-entry-head"><time class="education-dates">2012 — 2016</time><span class="education-ordinal">04</span></div>
+<h3 class="education-topic">Electronics &amp; Communication Engineering</h3>
+<p class="education-school">B.Tech · Sree Chitra Tirunal College of Engineering</p>
+<p class="education-note">Where my fascination with robotics and sensing began.</p>
+</article>
+</div>
+</div>
+</section>
+<section aria-labelledby="decisions-title" class="section decisions-section" id="decisions"><div class="section-top"><div><div class="eyebrow">03 / SELECTED PRODUCT DECISIONS</div><h2 id="decisions-title">Decisions that shaped products.</h2><p class="section-lede">Real product problems, consequential decisions and what I learned from them. Each story shows the capabilities involved—without treating a list of skills as the work itself.</p></div><span class="section-aside" id="story-count">17 STORIES · PRODUCT DECISIONS</span></div><div aria-label="Filter product decision stories" class="filterbar" id="filterbar" role="group"><button aria-pressed="true" class="filter active" data-filter="all" type="button">All stories</button><button aria-pressed="false" class="filter" data-filter="enterprise" type="button">Enterprise software</button><button aria-pressed="false" class="filter" data-filter="ai" type="button">AI &amp; data</button><button aria-pressed="false" class="filter" data-filter="industry" type="button">Manufacturing</button><button aria-pressed="false" class="filter" data-filter="venture" type="button">Ventures</button></div><div class="decision-grid" id="tiles"></div><div class="section-end"><span>Each story connects real decisions to the capabilities behind them.</span><a href="#journey">Explore my experience ↗</a></div></section>
+<section aria-labelledby="journey-title" class="exp-section" id="journey"><div class="wrap"><div class="exp-heading"><div><div class="eyebrow">04 / PROFESSIONAL JOURNEY</div><h2 id="journey-title">Experience.</h2><p class="section-lede">The products, teams and businesses I was entrusted to shape—beyond job titles and résumé highlights.</p></div><span class="section-aside">SELECT A COMPANY TO VIEW OWNERSHIP</span></div><div class="exp-list"><div class="exp-company"><button aria-controls="experience-dialog" aria-haspopup="dialog" class="exp-summary exp-open-button" data-experience="0" id="exp-trigger-0" type="button"><span class="exp-logo-wrap"><img alt="Verint logo" class="exp-logo" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false" src="https://commons.wikimedia.org/wiki/Special:FilePath/Verint-logo-may-2019.png"/><span class="exp-logo-word" hidden="">Verint</span></span><span class="exp-summary-core"><span class="exp-summary-name">Verint</span><span class="exp-summary-role">Product Manager</span><span class="exp-summary-intro">Two enterprise workforce-management products with different mandates: taking one from concept to scale, while evolving the other within a complex established platform.</span></span><span class="exp-summary-side"><span class="exp-summary-years">MAR 2024 — SEP 2026</span><span class="exp-summary-duration">2 yrs 7 mos</span><span class="exp-expand">View role &amp; products <span aria-hidden="true" class="exp-expand-arrow">↗</span></span></span></button><template id="exp-content-0"><div class="exp-panel"><div class="exp-location"><span class="exp-mini-label">LOCATION</span>Bengaluru, Karnataka, India</div><div class="exp-panel-heading"><span class="exp-mini-label">PRODUCT OWNERSHIP</span><p>The products, decisions and areas of accountability within this role.</p></div><div class="exp-products"><div class="exp-product"><div class="exp-product-index">01 / NEW PRODUCT</div><div class="exp-product-text"><h4>Request Anything</h4><div class="exp-product-phase">Concept → definition → launch → scale</div><p>Accountable for shaping an existing concept into a complete enterprise product: product vision and strategy, capabilities, requirements, roadmap, launch approach, early-customer identification and adoption. Product direction and delivery spanned a 64-person cross-functional group across engineering, UX and QA.</p><p>The challenge extended beyond releasing features: validating real scheduling problems with enterprise customers, shaping releases from feedback and ensuring new capabilities could operate within the wider workforce-management environment.</p></div></div><div class="exp-product"><div class="exp-product-index">02 / ESTABLISHED PRODUCT</div><div class="exp-product-text"><h4>Request Management</h4><div class="exp-product-phase">Product evolution → portfolio and platform decisions</div><p>Accountable for the direction of an established enterprise product and a 15-person cross-functional team. Scope encompassed roadmap investment, new feature development, paid customer enhancements, accessibility and technical-debt priorities.</p><p>A central strategic question was whether Request Management and Request Anything should remain distinct, integrate more closely or converge. New capabilities—including customer-specific requests—had to respect existing workflows, architectural dependencies, extensibility and the needs of the wider product ecosystem.</p></div></div></div><div class="exp-reflection"><span class="exp-mini-label">WHAT STAYED WITH ME</span><p>A new product demands clarity about what should exist. A legacy product demands equal judgment about what to preserve, change, integrate or decline.</p></div></div></template></div><div class="exp-company"><button aria-controls="experience-dialog" aria-haspopup="dialog" class="exp-summary exp-open-button" data-experience="1" id="exp-trigger-1" type="button"><span class="exp-logo-wrap"><img alt="HRS Group logo" class="exp-logo" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false" src="https://commons.wikimedia.org/wiki/Special:FilePath/HRS_logo_red.png"/><span class="exp-logo-word" hidden="">HRS Group</span></span><span class="exp-summary-core"><span class="exp-summary-name">HRS Group</span><span class="exp-summary-role">Product Manager · AI &amp; Data Products</span><span class="exp-summary-intro">Product direction across three core travel-technology products and three teams totaling 23 people, spanning AI innovation, enterprise adoption and customer experience.</span></span><span class="exp-summary-side"><span class="exp-summary-years">AUG 2022 — MAR 2024</span><span class="exp-summary-duration">1 yr 8 mos</span><span class="exp-expand">View role &amp; products <span aria-hidden="true" class="exp-expand-arrow">↗</span></span></span></button><template id="exp-content-1"><div class="exp-panel"><div class="exp-location"><span class="exp-mini-label">LOCATION</span>Remote</div><div class="exp-panel-heading"><span class="exp-mini-label">PRODUCT OWNERSHIP</span><p>The products, decisions and areas of accountability within this role.</p></div><div class="exp-products"><div class="exp-product"><div class="exp-product-index">01 / NEW AI CAPABILITY</div><div class="exp-product-text"><h4>Hotel Quality Scoring</h4><div class="exp-product-phase">Problem discovery → AI product definition → productization</div><p>Identified hotel-quality problems affecting business travellers and established a new product opportunity beyond the data team’s reporting mandate. Owned the product direction, MVP scope and business case, working with data scientists and leadership to take the scoring capability toward production.</p><p>The product needed to connect disparate hotel-quality evidence to a decision that mattered: helping the recommendation experience avoid unsuitable properties.</p></div></div><div class="exp-product"><div class="exp-product-index">02 / CORE ENTERPRISE PRODUCT</div><div class="exp-product-text"><h4>Recommendation Engine</h4><div class="exp-product-phase">Product strategy → onboarding → adoption</div><p>Owned the product’s direction and evolution, with particular focus on the gap between its potential value and its limited adoption. Scope included customer configuration strategy, self-service experience, roadmap priorities and improving enterprise onboarding.</p><p>Balanced simplicity for common customer needs with advanced configuration for enterprises that needed flexibility.</p></div></div><div class="exp-product"><div class="exp-product-index">03 / CORE ENTERPRISE PRODUCT</div><div class="exp-product-text"><h4>Rebooking</h4><div class="exp-product-phase">Product evolution → self-service growth</div><p>Responsible for product priorities and reducing the engineering dependence that made customer activation slow and difficult. Focused on giving customer-facing teams a more scalable path to configure and adopt the product.</p><p>Helped connect product changes to adoption and the commercial value of an existing capability.</p></div></div></div><div class="exp-reflection"><span class="exp-mini-label">WHAT STAYED WITH ME</span><p>A team commits to a product when it understands the reason behind the work and feels ownership of the decisions—not merely the roadmap.</p></div></div></template></div><div class="exp-company"><button aria-controls="experience-dialog" aria-haspopup="dialog" class="exp-summary exp-open-button" data-experience="2" id="exp-trigger-2" type="button"><span class="exp-logo-wrap"><img alt="Danfoss logo" class="exp-logo" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false" src="https://commons.wikimedia.org/wiki/Special:FilePath/Danfoss-Logo.svg"/><span class="exp-logo-word" hidden="">Danfoss</span></span><span class="exp-summary-core"><span class="exp-summary-name">Danfoss</span><span class="exp-summary-role">Product Lead · Digital Transformation</span><span class="exp-summary-intro">Industry 4.0 product opportunities across international manufacturing sites, from frontline discovery and connected operations to predictive analytics and computer vision.</span></span><span class="exp-summary-side"><span class="exp-summary-years">SEP 2017 — AUG 2021</span><span class="exp-summary-duration">4 years</span><span class="exp-expand">View role &amp; products <span aria-hidden="true" class="exp-expand-arrow">↗</span></span></span></button><template id="exp-content-2"><div class="exp-panel"><div class="exp-location"><span class="exp-mini-label">LOCATION</span>Chennai, India · Kolding &amp; Nordborg, Denmark · Grodzisk, Poland · Wuqing, China</div><div class="exp-panel-heading"><span class="exp-mini-label">PRODUCT OWNERSHIP</span><p>The products, decisions and areas of accountability within this role.</p></div><div class="exp-products"><div class="exp-product"><div class="exp-product-index">01 / OPERATIONS</div><div class="exp-product-text"><h4>Connected manufacturing &amp; traceability</h4><div class="exp-product-phase">Factory-floor discovery → digitization → cross-site scale</div><p>Identified manufacturing and supply-chain problems by working with operators and plant leaders. Shaped opportunities involving connected equipment, data visibility, traceability and production workflows, balancing local needs with solutions that could be adapted across factories.</p><p>Product decisions required understanding actual working conditions before introducing connected technology.</p></div></div><div class="exp-product"><div class="exp-product-index">02 / INTELLIGENT OPERATIONS</div><div class="exp-product-text"><h4>Predictive maintenance</h4><div class="exp-product-phase">Operational risk → AI/ML opportunity</div><p>Shaped product direction around anticipating equipment issues from motor and pump signals, connecting analytical feasibility with operational decisions that maintenance teams could act upon.</p><p>Emphasized preventing disruption rather than merely collecting more equipment data.</p></div></div><div class="exp-product"><div class="exp-product-index">03 / QUALITY</div><div class="exp-product-text"><h4>Computer vision inspection</h4><div class="exp-product-phase">Quality problem → feasibility → adoption</div><p>Identified opportunities to use machine vision for defect detection and process visibility, guiding the scope and product path from initial validation toward manufacturing use.</p><p>The solution had to fit production workflows and support decisions on the shop floor—not simply demonstrate technical accuracy.</p></div></div></div><div class="exp-reflection"><span class="exp-mini-label">WHAT STAYED WITH ME</span><p>Real adoption depends on how people experience a product. Trust and genuine relationships with frontline teams reveal needs observation alone cannot.</p></div></div></template></div><div class="exp-company"><button aria-controls="experience-dialog" aria-haspopup="dialog" class="exp-summary exp-open-button" data-experience="3" id="exp-trigger-3" type="button"><span class="exp-logo-wrap"><span class="exp-logo-word">Synapse Technologies</span></span><span class="exp-summary-core"><span class="exp-summary-name">Synapse Technologies</span><span class="exp-summary-role">Co-founder · Products &amp; Operations</span><span class="exp-summary-intro">Founder-level ownership across products, people and the business: opportunity discovery, R&amp;D, portfolio direction, commercial strategy, partnerships and operations.</span></span><span class="exp-summary-side"><span class="exp-summary-years">AUG 2014 — SEP 2017</span><span class="exp-summary-duration">3 yrs 2 mos</span><span class="exp-expand">View role &amp; products <span aria-hidden="true" class="exp-expand-arrow">↗</span></span></span></button><template id="exp-content-3"><div class="exp-panel"><div class="exp-location"><span class="exp-mini-label">LOCATION</span>Cochin, Kerala, India</div><div class="exp-panel-heading"><span class="exp-mini-label">PRODUCT OWNERSHIP</span><p>The products, decisions and areas of accountability within this role.</p></div><div class="exp-products"><div class="exp-product"><div class="exp-product-index">01 / PRODUCT PORTFOLIO</div><div class="exp-product-text"><h4>Connected and industrial products</h4><div class="exp-product-phase">Customer problem → scope → commercialization</div><p>Owned product direction across connected devices, industrial automation and specialized customer solutions, including laboratory and safety applications. Customer discovery, feasibility, product definition and delivery decisions were connected to pricing and the practical realities of an early-stage business.</p><p>Deepened embedded-systems expertise to extend the company’s product-development and R&amp;D capabilities.</p></div></div><div class="exp-product"><div class="exp-product-index">02 / BUSINESS DIRECTION</div><div class="exp-product-text"><h4>From consumer sales to B2B</h4><div class="exp-product-phase">Business-model decision → commercial focus</div><p>Co-owned the choice to shift emphasis from fragmented consumer sales toward larger institutional and enterprise opportunities. This shaped product investment, sales channels, customer acquisition, negotiations, vendor decisions, hiring and operating priorities.</p><p>The responsibility was for a viable business, not just an impressive technical product.</p></div></div></div><div class="exp-reflection"><span class="exp-mini-label">WHAT STAYED WITH ME</span><p>Listen without bias and seek real commitment, not polite agreement. A product matters when the right people value the problem it solves.</p></div></div></template></div><div class="exp-company"><button aria-controls="experience-dialog" aria-haspopup="dialog" class="exp-summary exp-open-button" data-experience="4" id="exp-trigger-4" type="button"><span class="exp-logo-wrap"><img alt="Qure.ai logo" class="exp-logo" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false" src="https://images.yourstory.com/cs/images/companies/qurewhitelogo-1583508590145.png?ar=1%3A1&amp;fill=solid&amp;fill-color=fff&amp;fm=auto&amp;format=auto&amp;mode=fill&amp;q=75&amp;w=1920"/><span class="exp-logo-word" hidden="">Qure.ai</span></span><span class="exp-summary-core"><span class="exp-summary-name">Qure.ai</span><span class="exp-summary-role">Product Discovery &amp; Strategy · Short-term engagement</span><span class="exp-summary-intro">A focused clinical AI product-definition engagement, taking an unfamiliar medical domain from discovery and feasibility assessment to a structured product direction.</span></span><span class="exp-summary-side"><span class="exp-summary-years">THREE-MONTH ENGAGEMENT</span><span class="exp-summary-duration">3 months</span><span class="exp-expand">View role &amp; products <span aria-hidden="true" class="exp-expand-arrow">↗</span></span></span></button><template id="exp-content-4"><div class="exp-panel"><div class="exp-location"><span class="exp-mini-label">LOCATION</span>Location not confirmed</div><div class="exp-panel-heading"><span class="exp-mini-label">PRODUCT OWNERSHIP</span><p>The products, decisions and areas of accountability within this role.</p></div><div class="exp-products"><div class="exp-product"><div class="exp-product-index">01 / CLINICAL DISCOVERY</div><div class="exp-product-text"><h4>Understanding radiology workflows</h4><div class="exp-product-phase">Research → unmet needs → opportunity definition</div><p>Worked with clinicians, radiologists, data scientists and leadership to understand imaging workflows and identify problems worth addressing with AI. The mandate included market research, user needs and the feasibility of available clinical data.</p><p>The work required learning specialist language and building rapport before expecting meaningful answers.</p></div></div><div class="exp-product"><div class="exp-product-index">02 / PRODUCT DEFINITION</div><div class="exp-product-text"><h4>Defining what should be built</h4><div class="exp-product-phase">Vision → prioritized scope → PRD and roadmap</div><p>Developed the product recommendation, requirements and prioritized roadmap for leadership and subsequent development consideration. The engagement covered product definition rather than claiming a later commercial launch.</p><p>An evidence-led scope was the deliverable—not an unverified adoption or revenue outcome.</p></div></div></div><div class="exp-reflection"><span class="exp-mini-label">WHAT STAYED WITH ME</span><p>Become fluent in the customer’s world. Genuine conversations with clinicians reveal problems that formal interviews and documents alone may miss.</p></div></div></template></div><div class="exp-company"><button aria-controls="experience-dialog" aria-haspopup="dialog" class="exp-summary exp-open-button" data-experience="5" id="exp-trigger-5" type="button"><span class="exp-logo-wrap"><span class="exp-logo-word">Sketch Theory · Edition36</span></span><span class="exp-summary-core"><span class="exp-summary-name">Sketch Theory · Edition36</span><span class="exp-summary-role">Co-founder · Product &amp; Business</span><span class="exp-summary-intro">Co-owning an artist-led commerce venture, including product proposition, marketplace experience, artist relationships, commercialization and operations.</span></span><span class="exp-summary-side"><span class="exp-summary-years">2026 — PRESENT</span><span class="exp-summary-duration">Ongoing venture</span><span class="exp-expand">View role &amp; products <span aria-hidden="true" class="exp-expand-arrow">↗</span></span></span></button><template id="exp-content-5"><div class="exp-panel"><div class="exp-location"><span class="exp-mini-label">LOCATION</span>India</div><div class="exp-panel-heading"><span class="exp-mini-label">PRODUCT OWNERSHIP</span><p>The products, decisions and areas of accountability within this role.</p></div><div class="exp-products"><div class="exp-product"><div class="exp-product-index">01 / PRODUCT &amp; BUSINESS MODEL</div><div class="exp-product-text"><h4>Curated artist-led commerce</h4><div class="exp-product-phase">Customer discovery → business model → launch</div><p>Reframed an open print-on-demand concept around curated original artwork and artist-approved personalization, shaping product positioning, customer experience and the path from artist onboarding to commerce.</p><p>The model needed to serve both artists seeking recognition and buyers seeking a meaningful, differentiated product.</p></div></div><div class="exp-product"><div class="exp-product-index">02 / PLATFORM &amp; OPERATIONS</div><div class="exp-product-text"><h4>Artist experience and commerce workflows</h4><div class="exp-product-phase">Creator onboarding → traceability → personalization</div><p>Product scope spans artist storefronts, edition uniqueness, personalization, product publishing, order experiences and artist payment/conversion visibility, with AI-assisted support for content workflows.</p><p>Coordinating product, creative direction, supply chain and commercialization as one venture rather than separate workstreams.</p></div></div></div><div class="exp-reflection"><span class="exp-mini-label">WHAT STAYED WITH ME</span><p>An early product idea is a hypothesis. Artists and customers can show when the business model—not just a feature—needs to change.</p></div></div></template></div></div><p class="exp-note">Team sizes describe cross-functional product groups, not direct reports. Qure.ai engagement dates and work location are not confirmed.</p></div></section>
+</main>
+<footer class="wrap footer"><span>© 2026 Sandheep Gopinath</span><span>Built with focus. No unnecessary noise.</span><a href="#top">Back to top ↑</a></footer></div>
+<div aria-hidden="true" class="dialog exp-dialog" id="experience-dialog" role="presentation"><div class="scrim" data-experience-dismiss=""></div><section aria-labelledby="experience-modal-title" aria-modal="true" class="modal exp-modal" role="dialog" tabindex="-1"><div class="modal-head"><span class="modal-kicker">PROFESSIONAL JOURNEY / PRODUCT OWNERSHIP</span><button aria-label="Close experience details" class="close" id="experience-close" type="button">×</button></div><div class="modal-body exp-modal-body" id="experience-modal-body"><header class="exp-modal-intro"><h2 id="experience-modal-title"></h2><p class="exp-modal-role" id="experience-modal-role"></p><p class="exp-modal-meta" id="experience-modal-meta"></p><p class="exp-modal-overview" id="experience-modal-overview"></p></header><div class="exp-modal-content" id="experience-modal-content"></div></div><div class="exp-modal-footer"><button class="exp-modal-nav" id="experience-prev" type="button">← Previous</button><span id="experience-position"></span><button class="exp-modal-nav" id="experience-next" type="button">Next →</button></div></section></div><div aria-hidden="true" class="dialog" id="dialog" role="presentation"><div class="scrim" data-dismiss=""></div><section aria-labelledby="modal-title" aria-modal="true" class="modal decision-modal" role="dialog" tabindex="-1"><div class="modal-head"><span class="modal-kicker">Context · Action · Results · Learnings</span><button aria-label="Close story" class="close" id="closeDialog" type="button">×</button></div><div class="modal-body" id="modal-body"><div class="decision-modal-org" id="modal-org"></div><h2 class="modal-title" id="modal-title"></h2><p class="modal-description" id="modal-description"></p><div aria-label="Applicable competencies" class="modal-competencies" id="modal-competencies"></div><div class="decision-narrative" id="case-detail"></div></div><div class="modal-foot"><span class="note" id="modal-progress">A product decision, in context.</span><div class="decision-controls"><button class="decision-prev" id="previousStory" type="button">← Previous</button><button class="decision-next" id="nextStory" type="button">Next story →</button></div></div></section></div>
+<script>
+const stories=
+[
+  {
+    "id": "hotel",
+    "org": "HRS Group",
+    "category": "ai",
+    "kind": "AI product · Executive investment",
+    "title": "Building an AI-led hotel quality intelligence platform",
+    "competencies": [
+      "Executive Communication",
+      "AI/ML Product Development",
+      "MVP Definition & Go-to-Market"
+    ],
+    "teaser": "Business travellers were reporting serious hotel-quality issues. How could we justify a scalable response?",
+    "problem": "HRS had sourced hotels over several years, but changes in safety, cleanliness and maintenance were not always reassessed. Complaints from business travellers were becoming a material customer-experience concern, and manual review across a large hotel network was difficult to scale.",
+    "why": "The issue affected more than hotel operations: travellers’ confidence, corporate client trust and complaint-handling effort were at stake. Addressing it required investment in new capabilities and a decision to expand the data team beyond reporting.",
+    "decision": "I established the business importance through complaint trends and quality signals, and led an MVP with data scientists using historical complaints, flagged properties, external ratings, and GeoSure information. I presented the opportunity, feasibility, and expected value to my director; together we secured CPO support for investment.",
+    "outcome": "Leadership backed the initiative. Hotel Quality Scoring reached production in approximately six months and evaluated more than 1.5 million hotels.",
+    "insight": "A promising technology only earns investment when the underlying business risk, value and feasibility are clear."
+  },
+  {
+    "id": "data",
+    "org": "HRS Group",
+    "category": "ai",
+    "kind": "Data readiness · AI product evaluation",
+    "title": "Building a trustworthy data foundation for hotel quality intelligence",
+    "competencies": [
+      "AI Data Readiness & Evaluation",
+      "AI/ML Product Strategy"
+    ],
+    "teaser": "Complaints, third-party ratings and historical quality flags offered different views of hotel risk. Were they sufficient to support a scoring product?",
+    "problem": "HRS needed to identify hotels likely to deliver poor business-travel experiences, but evidence of hotel quality was fragmented. Complaints, previously flagged properties, external hotel ratings and safety indicators had different origins and limitations.",
+    "why": "Before committing to predictive scoring, the team had to determine whether available data meaningfully represented the quality problems it wanted to detect. A model built on weak or mismatched signals could generate misleading rankings and undermine customer trust.",
+    "decision": "I worked with data scientists to examine the available signals and identify historical examples of poor-quality hotels that could inform a supervised approach. We brought together complaint histories, manually flagged properties, external ratings and GeoSure data to test feasibility and shape the initial logistic-regression scoring model. I kept the intended product decision—identifying potentially problematic hotels—central to the data work.",
+    "outcome": "The available evidence supported an MVP and the subsequent Hotel Quality Scoring product, which evaluated more than 1.5 million hotels. Specific validation thresholds and model performance measures have not yet been documented.",
+    "insight": "Model readiness starts by asking whether the data actually represents the customer problem—not by choosing an algorithm first."
+  },
+  {
+    "id": "ai-transition",
+    "org": "HRS Group",
+    "category": "ai",
+    "kind": "AI adoption · Organizational change",
+    "title": "Evolving a reporting team into an AI product capability",
+    "competencies": [
+      "AI Adoption & Change Management",
+      "Organizational Change & Delivery Leadership",
+      "Strategic Alignment & Decision-Making"
+    ],
+    "teaser": "A team with data-science expertise was primarily delivering reports. How could its work move closer to real business problems?",
+    "problem": "The HRS data team largely produced MicroStrategy reports and dossiers. The organization had data science expertise, but its day-to-day remit did not consistently involve defining and developing AI products around business problems.",
+    "why": "New AI tools alone would not change the team’s contribution. The team needed a meaningful product direction, leadership support and a concrete problem that demonstrated why its capabilities should be used differently.",
+    "decision": "I proposed shifting attention from reporting requests toward identifying high-value problems suitable for AI-driven products. The hotel-quality challenge offered a tangible starting point. I worked with data scientists to shape an MVP, connected the work to customer outcomes and business priorities, and engaged leadership to support the direction.",
+    "outcome": "The team advanced beyond reporting into AI-driven product development, including Hotel Quality Scoring, which reached production. The change in team operating model has not been separately quantified.",
+    "insight": "Adopting AI across a team is as much about shared purpose, ownership and organizational support as it is about technology."
+  },
+  {
+    "id": "recommend",
+    "org": "HRS Group",
+    "category": "enterprise",
+    "kind": "Adoption · Enterprise product design",
+    "title": "Unlocking enterprise adoption through self-service design",
+    "competencies": [
+      "Enterprise Product Design",
+      "Solution Prioritization",
+      "Business Acumen"
+    ],
+    "teaser": "The Recommendation Engine was valuable, yet only 6% of customers used it. More features were not the answer.",
+    "problem": "Customers could not easily configure Recommendation Engine for their needs. Onboarding depended heavily on engineering and could take months, discouraging adoption even where the product could deliver value.",
+    "why": "Continuing to add functionality would do little if customers could not activate the existing product. The real decision was whether to increase sophistication or remove the barriers preventing use.",
+    "decision": "Working with Customer Success, I investigated the configuration journey and prioritized a one-step experience with four predefined options. Advanced settings remained available for complex customers, while self-service setup reduced engineering dependency.",
+    "outcome": "Adoption rose from 6% to 60%, and onboarding fell from months to under an hour.",
+    "insight": "Sometimes the highest-value product decision is to make what already exists substantially easier to use."
+  },
+  {
+    "id": "rebook",
+    "org": "HRS Group",
+    "category": "enterprise",
+    "kind": "Growth · Self-service",
+    "title": "Scaling automated rebooking without engineering bottlenecks",
+    "competencies": [
+      "Enterprise Product Design",
+      "Business Acumen",
+      "Solution Prioritization"
+    ],
+    "teaser": "A revenue-generating product struggled to grow because customers needed months of technical support just to start.",
+    "problem": "Rebooking could identify lower hotel rates and automatically rebook reservations, but activation required a lengthy engineering-led configuration process. Adoption remained around 3%.",
+    "why": "Customer value was locked behind implementation effort. Scaling adoption through repeated custom onboarding would continue to strain technical teams and delay customer benefits.",
+    "decision": "I prioritized self-service configuration so customer-facing teams could activate the capability with far less engineering intervention, reducing the cost of bringing new accounts onto the product.",
+    "outcome": "Rebooking adoption rose from 3% to 25%. Alongside Recommendation Engine improvements, the two products contributed to a reported 12% revenue increase.",
+    "insight": "A product cannot scale commercially if every new customer requires a bespoke technical project."
+  },
+  {
+    "id": "request",
+    "org": "Verint",
+    "category": "enterprise",
+    "kind": "0→1 product · Retention",
+    "title": "Removing enterprise scheduling barriers at scale",
+    "competencies": [
+      "Product Strategy",
+      "Stakeholder Management",
+      "MVP Definition & GTM",
+      "Business Acumen"
+    ],
+    "teaser": "Routine scheduling requests depended on privileged administrators, while enterprise customers were considering alternatives.",
+    "problem": "Frontline staff needed help from administrators for schedule-related changes. The resulting friction affected employee experience and became a significant concern for several enterprise customers, including four at risk of leaving.",
+    "why": "A narrow feature fix would not necessarily resolve the recurring workflow problem. The product had to support employee requests within enterprise controls while demonstrating enough customer value to protect important relationships.",
+    "decision": "Starting from an existing product concept, I defined the requirements and roadmap, worked with domain experts and Customer Success to identify early customers, and used controlled releases and direct demonstrations to learn which capabilities mattered most.",
+    "outcome": "Request Anything reached more than 10,000 weekly active users and 100,000 weekly requests, and directly supported approximately $10 million in retained annual recurring revenue.",
+    "insight": "Enterprise product growth begins by removing an important workflow constraint, not by accumulating features."
+  },
+  {
+    "id": "ecosystem",
+    "org": "Verint",
+    "category": "enterprise",
+    "kind": "Platform thinking · Enterprise extensibility",
+    "title": "Extending enterprise products without compromising the ecosystem",
+    "competencies": [
+      "Platform Thinking & Reusability",
+      "Enterprise Product Design & Scalability",
+      "Trade-off Decisions & Product Prioritization"
+    ],
+    "teaser": "New capabilities such as Net Staffing and paid customer enhancements had to fit into a mature, interconnected product landscape.",
+    "problem": "Request Anything needed new capabilities, including Net Staffing, while enterprise customers also requested paid enhancements. Each change had to coexist with established products, permission models, workflows and existing customer configurations.",
+    "why": "A feature that solves one customer’s immediate need can disrupt shared behaviour, create inconsistent experiences, or increase long-term product complexity. Enterprise extensibility depends on treating each addition as part of an interconnected system.",
+    "decision": "I evaluated proposed capabilities and customer-specific enhancements against existing workflows, product boundaries, dependencies and likely effects on other customers. I challenged isolated customizations where necessary and worked to make new functionality fit the broader product experience rather than solving requests in isolation.",
+    "outcome": "This approach guided the definition and prioritization of new capabilities and paid enhancements within the enterprise product portfolio. A separate metric for reduced regressions or technical reuse has not been established.",
+    "insight": "Every enterprise feature becomes part of a system. Good product decisions account for everyone affected, not just the customer requesting the change."
+  },
+  {
+    "id": "roadmap",
+    "org": "Verint",
+    "category": "enterprise",
+    "kind": "Roadmap · Trade-offs",
+    "title": "Rebalancing customer demands and legacy product investment",
+    "competencies": [
+      "Product Prioritization",
+      "Strategic Decision-Making",
+      "Stakeholder Management"
+    ],
+    "teaser": "Hundreds of requests competed with accessibility work, technical debt and finite engineering capacity.",
+    "problem": "Request Management carried years of feature requests from customers while also needing accessibility improvements and maintenance of older capabilities. Several demands were urgent to individual accounts, but the team could not do everything.",
+    "why": "Accepting the loudest request could add complexity without improving the product for most customers. Ignoring account concerns could create commercial risk. Prioritization demanded choices across immediate value and long-term sustainability.",
+    "decision": "I evaluated requests against the underlying problem, customer importance, commercial context, product fit and capacity. I worked with UX on accessibility requirements and challenged requests when an alternative solution made more sense, escalating commercially sensitive decisions with clear recommendations.",
+    "outcome": "The roadmap balanced customer enhancements, accessibility and product sustainability. An isolated numerical outcome for this prioritization practice has not been established.",
+    "insight": "Preserve the lessons of a legacy product without letting its history determine every future decision."
+  },
+  {
+    "id": "delivery",
+    "org": "Verint",
+    "category": "enterprise",
+    "kind": "Execution · Organizational change",
+    "title": "Modernizing enterprise product delivery",
+    "competencies": [
+      "Organizational Change",
+      "Cross-functional Leadership",
+      "Strategic Alignment"
+    ],
+    "teaser": "A 64-person cross-functional effort was falling behind a demanding release timeline.",
+    "problem": "Request Anything had an aggressive schedule and slow initial progress. Coordination across engineering, QA, UX, product and customer-facing stakeholders was limiting execution.",
+    "why": "More pressure alone would not resolve unclear commitments, dependencies or shifting scope. Improving the way the organization worked was a product leadership decision in its own right.",
+    "decision": "I proposed a more structured operating approach to management, aligned release scope and GTM commitments, and introduced monthly PI plans, sprint-level goals, velocity review and capacity visibility. Teams understood not only their deliverables but the purpose and constraints behind them.",
+    "outcome": "Delivery velocity increased by 25%, and time-to-market improved by 4× compared with earlier release cycles.",
+    "insight": "A shared plan only works when teams understand the why, contribute to commitments and trust the people coordinating them."
+  },
+  {
+    "id": "factory",
+    "org": "Danfoss",
+    "category": "industry",
+    "kind": "Global digitalization · Frontline workflows",
+    "title": "Scaling human-centered digital transformation across factories",
+    "competencies": [
+      "Stakeholder Management",
+      "Digital Adoption",
+      "Product Discovery"
+    ],
+    "teaser": "Manual production records limited visibility, but a technically correct solution would fail if it did not fit daily work.",
+    "problem": "Shop-floor information was often collected manually, making traceability and operational visibility harder. Factory teams across countries had different routines and constraints.",
+    "why": "A digital system could look successful in a prototype yet fail in practice if operators did not trust it or if its workflow added friction. Scaling required learning what people actually experienced during their work.",
+    "decision": "I spent time with operators and plant leaders, developed relationships beyond formal observation, and shaped digital workflows around real production needs. We adapted validated approaches across sites in India, Denmark, Poland and China rather than assuming a single factory’s implementation would fit every location.",
+    "outcome": "The wider Industry 4.0 initiatives contributed to a reported 2.4% annual productivity improvement.",
+    "insight": "To earn adoption, become someone users trust enough to tell you what really frustrates them."
+  },
+  {
+    "id": "vision",
+    "org": "Danfoss",
+    "category": "industry",
+    "kind": "Quality · Computer vision",
+    "title": "Reducing manufacturing defects through computer vision",
+    "competencies": [
+      "AI/ML Product Development",
+      "Solution Prioritization",
+      "Product Strategy"
+    ],
+    "teaser": "Late defect detection increased scrap and lost production efficiency.",
+    "problem": "Manufacturing defects were not always identified early enough to avoid wasted material and disrupted workflows. Manual inspection could limit the consistency and speed of detection.",
+    "why": "The goal was not to introduce computer vision for its own sake. Any solution needed to improve quality decisions within the realities of the production line.",
+    "decision": "I identified the quality-inspection opportunity, evaluated computer vision as a feasible approach, validated it through early prototypes and helped guide the solution toward production use with relevant teams.",
+    "outcome": "The vision inspection initiative detected 90% of manufacturing defects, improved production efficiency by 17%, and received the CII Kaizen Gold Award.",
+    "insight": "Technology choices should follow the operational decision they need to improve."
+  },
+  {
+    "id": "predict",
+    "org": "Danfoss",
+    "category": "ai",
+    "kind": "Predictive analytics · Maintenance",
+    "title": "Reducing factory downtime through predictive maintenance",
+    "competencies": [
+      "AI/ML Product Strategy",
+      "Technical Fluency",
+      "Solution Prioritization"
+    ],
+    "teaser": "Unexpected motor and pump problems created costly downtime across factories.",
+    "problem": "Machine failures could interrupt manufacturing and generate avoidable maintenance costs. Conventional maintenance practices did not always provide advance warning.",
+    "why": "Predictive models were only useful if they could identify actionable anomalies from available machine signals and support practical maintenance decisions.",
+    "decision": "I worked with factory teams to understand failure consequences and shape a predictive-maintenance product using equipment signals and anomaly detection. The approach connected operational priorities, data feasibility and how maintenance teams would act on alerts.",
+    "outcome": "The initiative delivered approximately $80,000 in annual savings across six factories.",
+    "insight": "AI creates value when its predictions connect to a timely real-world decision."
+  },
+  {
+    "id": "pivot",
+    "org": "Synapse Technologies",
+    "category": "venture",
+    "kind": "Business model · Founder judgment",
+    "title": "Repositioning a hardware venture for sustainable B2B growth",
+    "competencies": [
+      "Strategic Decision-Making",
+      "Business Acumen",
+      "Go-to-Market"
+    ],
+    "teaser": "Selling consumer hardware one customer at a time was limiting growth.",
+    "problem": "Synapse’s original consumer-focused approach produced limited growth, while larger opportunities were appearing with builders, institutions and industrial customers.",
+    "why": "Continuing with small individual orders required repeated acquisition effort. A B2B model promised larger contracts and recurring relationships, but required changing what the company sold and how it operated.",
+    "decision": "I helped redirect the business toward B2B opportunities, adapting the product offering, pricing, customer acquisition, partnerships and operations to serve institutional and enterprise needs.",
+    "outcome": "B2B became the primary business. Synapse reached profitability and developed 12 recurring B2B customer relationships.",
+    "insight": "A founder must be willing to change the commercial model, not just improve the product."
+  },
+  {
+    "id": "discovery",
+    "org": "Synapse Technologies",
+    "category": "venture",
+    "kind": "Customer discovery · Product definition",
+    "title": "Turning customer requests into validated product opportunities",
+    "competencies": [
+      "Product Discovery",
+      "Solution Prioritization",
+      "Business Acumen"
+    ],
+    "teaser": "Customers often arrived with a specific device or feature in mind, not a fully understood problem.",
+    "problem": "Industrial and laboratory customers approached Synapse with equipment ideas ranging from automation to safety monitoring. Their first request did not always describe the real workflow need or the most useful solution.",
+    "why": "Simply building what someone initially requested risked delivering capable technology that solved the wrong problem. Positive feedback was also not sufficient proof of demand.",
+    "decision": "I worked closely with customers, listened to how they operated, challenged assumptions, and shaped product requirements around their actual constraints. I learned to distinguish polite agreement from stronger evidence such as willingness to commit to a purchase or deployment.",
+    "outcome": "This customer-led approach supported a broader B2B product portfolio and recurring customer relationships. Individual product outcomes have not been quantified.",
+    "insight": "Customer commitment is a stronger signal of value than customer compliments."
+  },
+  {
+    "id": "qure",
+    "org": "Qure.ai",
+    "category": "ai",
+    "kind": "Healthcare AI · Discovery",
+    "title": "Defining clinical AI products through deep customer discovery",
+    "competencies": [
+      "Product Discovery",
+      "AI/ML Product Strategy",
+      "MVP Definition"
+    ],
+    "teaser": "Medical AI opportunities could not be understood through technical feasibility alone.",
+    "problem": "Finding meaningful AI applications in radiology required understanding clinical routines, diagnostic decisions, specialist terminology and constraints that would not emerge from a generic market analysis.",
+    "why": "A technically promising AI product could still miss an important clinical need. Understanding specialists as people, not simply research subjects, was essential to identifying an opportunity worth pursuing.",
+    "decision": "I invested in learning radiologists’ and doctors’ working language, building relationships and engaging with their real concerns. Combining this discovery with market research and data-feasibility discussions, I defined the product direction, priorities, PRD and roadmap.",
+    "outcome": "Within the three-month engagement, I delivered a development-ready product definition. Qure.ai began development afterward; a launch or commercial result has not been confirmed.",
+    "insight": "To understand a specialist customer’s pain, learn their world and earn the trust needed for honest conversations."
+  },
+  {
+    "id": "sketch",
+    "org": "Sketch Theory",
+    "category": "venture",
+    "kind": "Commerce · Product-market exploration",
+    "title": "Reinventing an artist-led commerce business model",
+    "competencies": [
+      "Product Strategy",
+      "Customer Discovery",
+      "Business Model Innovation"
+    ],
+    "teaser": "A do-it-yourself merchandise marketplace was creating friction for buyers and insufficient recognition for artists.",
+    "problem": "An open print-on-demand approach expected shoppers to create designs themselves, while artists wanted their original work and identity to remain central. The model did not adequately serve either group.",
+    "why": "Polishing the customization interface would not solve the misalignment. The underlying value proposition needed to change.",
+    "decision": "Based on conversations with artists and customers, I helped shift Sketch Theory toward curated original artwork, premium made-to-order apparel, artist storytelling and limited artist-approved personalization.",
+    "outcome": "The first artist-led collection launched and received nine paid orders in its first three days—an early demand signal, not established product-market fit.",
+    "insight": "When research challenges the core proposition, change the proposition rather than defending the original solution."
+  },
+  {
+    "id": "artistai",
+    "org": "Sketch Theory",
+    "category": "ai",
+    "kind": "Generative AI · Operations",
+    "title": "Streamlining artist onboarding with controlled generative AI",
+    "competencies": [
+      "Generative AI Product Development",
+      "AI/ML Technical Fluency",
+      "Product Definition"
+    ],
+    "teaser": "Preparing consistent artist biographies and artwork descriptions required repetitive manual work.",
+    "problem": "Artist profiles needed credible bios, style descriptors and artwork descriptions, but incoming artist information varied in detail and format.",
+    "why": "Generative AI could save preparatory effort, but unconstrained output risked inconsistent content or unsupported claims about an artist.",
+    "decision": "I defined a controlled workflow using Amazon Bedrock and AWS Lambda, with bounded inputs, an artwork image, structured output fields, length constraints and administrative access controls. The system supplies draft content for review rather than acting as an autonomous agent.",
+    "outcome": "The internal artist-analysis generator was integrated and tested. Production-scale time savings have not yet been quantified.",
+    "insight": "Generative AI works best when the workflow, safeguards, and human review are clearly defined. This is a GenAI product, not an autonomous agent."
+  }
+];
+const tiles=document.getElementById('tiles');
+const dialog=document.getElementById('dialog');
+const modal=document.querySelector('.modal');
+let activeFilter='all',activeStory=0,origin=null,visibleStories=stories.map((_,i)=>i);
+const escapeHTML=s=>String(s).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+function renderTiles(){
+  visibleStories=stories.map((s,i)=>({s,i})).filter(({s})=>activeFilter==='all'||s.category===activeFilter).map(({i})=>i);
+  tiles.innerHTML='';
+  visibleStories.forEach((index,pos)=>{
+    const s=stories[index], b=document.createElement('button');
+    b.type='button';b.className='decision-tile';b.setAttribute('aria-haspopup','dialog');
+    b.setAttribute('aria-label','Read decision story: '+s.title);
+    b.innerHTML=`<span class="decision-topline"><span>${escapeHTML(s.org)}</span><span>${String(pos+1).padStart(2,'0')}</span></span><span class="decision-card-body"><strong class="decision-card-title">${escapeHTML(s.title)}</strong><span class="decision-teaser">${escapeHTML(s.teaser)}</span><span class="decision-chipset" aria-label="Applicable competencies">${s.competencies.map(x=>`<span class="decision-chip">${escapeHTML(x)}</span>`).join('')}</span></span><span class="decision-card-foot">Read decision story <span aria-hidden="true">↗</span></span>`;
+    b.addEventListener('click',()=>openStory(index,b));tiles.appendChild(b);
+  });
+  document.getElementById('story-count').textContent=visibleStories.length+' STORIES · PRODUCT DECISIONS';
+}
+document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',()=>{
+  activeFilter=btn.dataset.filter;
+  document.querySelectorAll('.filter').forEach(b=>{let selected=b===btn;b.classList.toggle('active',selected);b.setAttribute('aria-pressed',String(selected))});
+  renderTiles();
+}));
+function openStory(index,element){origin=element;activeStory=index;dialog.classList.add('is-open');dialog.setAttribute('aria-hidden','false');document.body.classList.add('modal-open');renderModal();document.getElementById('closeDialog').focus()}
+function renderModal(){
+  const s=stories[activeStory], position=visibleStories.indexOf(activeStory);
+  document.getElementById('modal-org').textContent=s.org+'  /  '+s.kind;
+  document.getElementById('modal-title').textContent=s.title;
+  document.getElementById('modal-description').textContent=s.teaser;
+  document.getElementById('modal-competencies').innerHTML='<span class="modal-competency-label">Capabilities demonstrated</span><div class="decision-chipset">'+s.competencies.map(x=>'<span class="decision-chip">'+escapeHTML(x)+'</span>').join('')+'</div>';
+  const sections=[['Context',s.problem+' '+s.why],['Action',s.decision],['Results',s.outcome],['Learnings',s.insight]];
+  document.getElementById('case-detail').innerHTML=sections.map(([title,body],i)=>`<section class="decision-part ${i===3?'decision-part-reflection':''}"><h3>${escapeHTML(title)}</h3><p>${escapeHTML(body)}</p></section>`).join('');
+  document.getElementById('modal-progress').textContent='Story '+(position+1)+' of '+visibleStories.length;
+  document.getElementById('previousStory').disabled=position<=0;
+  document.getElementById('nextStory').disabled=position>=visibleStories.length-1;
+  document.getElementById('modal-body').scrollTop=0;
+}
+function shiftStory(step){const position=visibleStories.indexOf(activeStory),next=visibleStories[position+step];if(next!==undefined){activeStory=next;renderModal()}}
+document.getElementById('previousStory').addEventListener('click',()=>shiftStory(-1));
+document.getElementById('nextStory').addEventListener('click',()=>shiftStory(1));
+function closeModal(){dialog.classList.remove('is-open');dialog.setAttribute('aria-hidden','true');document.body.classList.remove('modal-open');if(origin)origin.focus()}
+document.getElementById('closeDialog').addEventListener('click',closeModal);
+document.querySelector('[data-dismiss]').addEventListener('click',closeModal);
+document.addEventListener('keydown',e=>{
+  if(!dialog.classList.contains('is-open'))return;
+  if(e.key==='Escape'){closeModal();return}
+  if(e.key==='Tab'){
+    const focusable=[...modal.querySelectorAll('button:not([disabled]),a[href],[tabindex="0"]')].filter(el=>el.getClientRects().length);
+    const first=focusable[0],last=focusable[focusable.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+  }
+});
+renderTiles();
+</script>
+<script>
+(function(){
+const buttons=[...document.querySelectorAll('.exp-open-button')];
+const expDialog=document.getElementById('experience-dialog');
+const expModal=expDialog.querySelector('.exp-modal');
+const expContent=document.getElementById('experience-modal-content');
+const expBody=document.getElementById('experience-modal-body');
+const closeBtn=document.getElementById('experience-close');
+let active=-1,returnFocus=null;
+function show(index,trigger){
+ if(index<0||index>=buttons.length)return;
+ if(!expDialog.classList.contains('is-open'))returnFocus=trigger||document.activeElement;
+ active=index;
+ const button=buttons[index];
+ document.getElementById('experience-modal-title').textContent=button.querySelector('.exp-summary-name').textContent;
+ document.getElementById('experience-modal-role').textContent=button.querySelector('.exp-summary-role').textContent;
+ document.getElementById('experience-modal-meta').textContent=[button.querySelector('.exp-summary-years').textContent,button.querySelector('.exp-summary-duration').textContent].join(' · ');
+ document.getElementById('experience-modal-overview').textContent=button.querySelector('.exp-summary-intro').textContent;
+ const template=document.getElementById('exp-content-'+index);
+ expContent.replaceChildren(template.content.cloneNode(true));
+ document.getElementById('experience-position').textContent=(index+1)+' / '+buttons.length;
+ document.getElementById('experience-prev').disabled=index===0;
+ document.getElementById('experience-next').disabled=index===buttons.length-1;
+ expDialog.classList.add('is-open');expDialog.setAttribute('aria-hidden','false');
+ document.body.classList.add('modal-open');expBody.scrollTop=0;closeBtn.focus();
+}
+function hide(){expDialog.classList.remove('is-open');expDialog.setAttribute('aria-hidden','true');
+ if(!document.getElementById('dialog').classList.contains('is-open'))document.body.classList.remove('modal-open');
+ if(returnFocus&&returnFocus.isConnected)returnFocus.focus();}
+buttons.forEach((btn,i)=>btn.addEventListener('click',()=>show(i,btn)));
+closeBtn.addEventListener('click',hide);
+expDialog.querySelector('[data-experience-dismiss]').addEventListener('click',hide);
+document.getElementById('experience-prev').addEventListener('click',()=>show(active-1));
+document.getElementById('experience-next').addEventListener('click',()=>show(active+1));
+document.addEventListener('keydown',event=>{
+ if(!expDialog.classList.contains('is-open'))return;
+ if(event.key==='Escape'){event.preventDefault();hide();return;}
+ if(event.key==='Tab'){
+  const focusables=[...expModal.querySelectorAll('button:not([disabled]),a[href],[tabindex="0"]')].filter(el=>el.getClientRects().length);
+  const first=focusables[0],last=focusables[focusables.length-1];
+  if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
+  else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
+ }
+});
+})();
+</script></body></html>

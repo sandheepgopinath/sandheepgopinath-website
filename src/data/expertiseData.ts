@@ -44,22 +44,30 @@ export const expertiseStories: Record<string, ExpertiseStory> = {
 };
 
 export const expertiseAreas: ExpertiseArea[] = [
-  { num: "01", title: "Executive Communication", description: "Building alignment around business needs, decisions, and trade-offs.", group: "leadership", storyIds: ["hotel", "delivery", "reqmgmt"] },
-  { num: "02", title: "Stakeholder Management & Influence", description: "Balancing customer needs, executive priorities and difficult trade-offs.", group: "leadership", storyIds: ["stakeholders", "reqmgmt", "execalignment"] },
-  { num: "03", title: "Team Management & Cross-functional Leadership", description: "Aligning teams, ownership and decisions without relying on reporting lines.", group: "leadership", storyIds: ["teamexecution", "team", "delivery"] },
-  { num: "04", title: "Organizational Change & Delivery Leadership", description: "Improving the ways teams plan, decide and deliver.", group: "leadership", storyIds: ["delivery", "industrial", "recommend"] },
-  { num: "05", title: "Strategic Alignment & Decision-Making", description: "Turning business evidence into clear recommendations and shared direction.", group: "leadership", storyIds: ["execalignment", "stakeholders", "qure"] },
-  { num: "06", title: "Product Mentorship", description: "Mentoring new PMs, contributing to PM communities, and advising startups pro bono.", group: "leadership", storyIds: ["mentor", "community", "startupmentor"] },
-  { num: "07", title: "Trade-off Decisions and Product Prioritization", description: "Deciding what matters now, what waits, and why.", group: "foundation", storyIds: ["reqmgmt", "request", "synapse"] },
-  { num: "08", title: "Enterprise Product Design and Scalability", description: "Making products work for complex customers and broader adoption.", group: "foundation", storyIds: ["request", "recommend", "rebook"] },
-  { num: "09", title: "Business Acumen and Value Management", description: "Linking product decisions to retention, revenue, and savings.", group: "foundation", storyIds: ["commercial", "request", "synapse", "predict"] },
-  { num: "10", title: "MVP Definition and Go-to-Market (GTM)", description: "Validating early, launching deliberately, and earning adoption.", group: "foundation", storyIds: ["hotel", "request", "sketch"] },
-  { num: "11", title: "Platform Thinking and Reusability", description: "Reducing repeat effort with configurable and reusable capabilities.", group: "foundation", storyIds: ["recommend", "rebook", "industrial"] },
-  { num: "12", title: "Solution Prioritization", description: "Comparing alternative approaches before committing to one.", group: "foundation", storyIds: ["recommend", "synproduct", "reqmgmt"] },
-  { num: "13", title: "AI/ML and Generative AI Product Development", description: "Turning meaningful problems into useful AI-enabled products.", group: "ai", storyIds: ["hotel", "predict", "sketchai"] },
-  { num: "14", title: "AI/ML Product Strategy and Technical Fluency", description: "Choosing useful AI applications and testing whether they are viable.", group: "ai", storyIds: ["hotel", "qure", "vision", "predict"] },
-  { num: "15", title: "AI Data Readiness and Evaluation", description: "Understanding which data can support a trustworthy product decision.", group: "ai", storyIds: ["hotel", "qure"] },
-  { num: "16", title: "AI Adoption and Change Management", description: "Helping people use new intelligence in real workflows.", group: "ai", storyIds: ["hotel", "industrial", "recommend"] },
-  { num: "17", title: "Build, Buy, or Fine-Tune Decisions", description: "Choosing a practical route to a capability, not technology for its own sake.", group: "ai", storyIds: ["vendor", "hotel", "qure"] },
-  { num: "18", title: "Generative AI and Agentic Systems", description: "Applying generative AI where it makes a workflow more useful.", group: "ai", storyIds: ["sketchai"] },
+  // Product & Business
+  { num: "01", title: "Customer Discovery", description: "Uncovering unmet user needs, workflow friction, and operational bottlenecks to shape what to build.", group: "foundation", storyIds: ["qure", "synproduct", "industrial"] },
+  { num: "02", title: "MVP Definition and Go-to-Market (GTM)", description: "Validating early, launching deliberately, and earning adoption.", group: "foundation", storyIds: ["hotel", "request", "sketch"] },
+  { num: "03", title: "Trade-off Decisions and Product Prioritization", description: "Deciding what matters now, what waits, and why.", group: "foundation", storyIds: ["reqmgmt", "request", "synapse"] },
+  { num: "04", title: "UX Judgment", description: "Designing intuitive, self-service experiences that remove friction and accelerate product adoption.", group: "foundation", storyIds: ["recommend", "rebook", "industrial"] },
+  { num: "05", title: "Product Analysis and Tracking", description: "Measuring adoption, behavioral metrics, and data signals to evaluate performance and guide roadmap decisions.", group: "foundation", storyIds: ["recommend", "hotel"] },
+  { num: "06", title: "Enterprise Product Design and Scalability", description: "Making products work for complex customers and broader adoption.", group: "foundation", storyIds: ["request", "recommend", "rebook"] },
+  { num: "07", title: "Competitive and Market Strategy", description: "Analyzing market dynamics, customer segments, and business models to identify and capture sustainable value.", group: "foundation", storyIds: ["synapse", "sketch"] },
+  { num: "08", title: "Platform Thinking and Reusability", description: "Reducing repeat effort with configurable and reusable capabilities.", group: "foundation", storyIds: ["recommend", "rebook", "industrial"] },
+
+  // Leadership
+  { num: "09", title: "Business Acumen and Value Management", description: "Linking product decisions to retention, revenue, and savings.", group: "leadership", storyIds: ["commercial", "request", "synapse", "predict"] },
+  { num: "10", title: "Executive Communication", description: "Building alignment around business needs, decisions, and trade-offs.", group: "leadership", storyIds: ["hotel", "delivery", "reqmgmt"] },
+  { num: "11", title: "Stakeholder Management & Influence", description: "Balancing customer needs, executive priorities and difficult trade-offs.", group: "leadership", storyIds: ["stakeholders", "reqmgmt", "execalignment"] },
+  { num: "12", title: "Team Management & Cross-functional Leadership", description: "Aligning teams, ownership and decisions without relying on reporting lines.", group: "leadership", storyIds: ["teamexecution", "team", "delivery"] },
+  { num: "13", title: "Organizational Change & Delivery Leadership", description: "Improving the ways teams plan, decide and deliver.", group: "leadership", storyIds: ["delivery", "industrial", "recommend"] },
+  { num: "14", title: "Strategic Alignment & Decision-Making", description: "Turning business evidence into clear recommendations and shared direction.", group: "leadership", storyIds: ["execalignment", "stakeholders", "qure"] },
+  { num: "15", title: "Product Mentorship", description: "Mentoring new PMs, contributing to PM communities, and advising startups pro bono.", group: "leadership", storyIds: ["mentor", "community", "startupmentor"] },
+
+  // AI & Technology
+  { num: "16", title: "AI/ML and Generative AI Product Development", description: "Turning meaningful problems into useful AI-enabled products.", group: "ai", storyIds: ["hotel", "predict", "sketchai"] },
+  { num: "17", title: "AI/ML Product Strategy and Technical Fluency", description: "Choosing useful AI applications and testing whether they are viable.", group: "ai", storyIds: ["hotel", "qure", "vision", "predict"] },
+  { num: "18", title: "AI Data Readiness and Evaluation", description: "Understanding which data can support a trustworthy product decision.", group: "ai", storyIds: ["hotel", "qure"] },
+  { num: "19", title: "AI Adoption and Change Management", description: "Helping people use new intelligence in real workflows.", group: "ai", storyIds: ["hotel", "industrial", "recommend"] },
+  { num: "20", title: "Build, Buy, or Fine-Tune Decisions", description: "Choosing a practical route to a capability, not technology for its own sake.", group: "ai", storyIds: ["vendor", "hotel", "qure"] },
+  { num: "21", title: "Generative AI and Agentic Systems", description: "Applying generative AI where it makes a workflow more useful.", group: "ai", storyIds: ["sketchai"] },
 ];
