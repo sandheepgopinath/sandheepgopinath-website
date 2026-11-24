@@ -28,12 +28,25 @@ export function getFirebaseApp(): FirebaseApp {
   return app;
 }
 
+/**
+ * Initializes Firebase App Check with reCAPTCHA Enterprise.
+ * Strictly runs on the browser side (never SSR).
+ */
 export function initAppCheck(): AppCheck | undefined {
   if (typeof window === "undefined") return undefined;
   if (appCheck) return appCheck;
 
   try {
     const firebaseApp = getFirebaseApp();
+
+    // Enable App Check debug token in local development if specified
+    if (process.env.NODE_ENV !== "production" && typeof window !== "undefined") {
+      const debugToken = process.env.NEXT_PUBLIC_FIREBASE_APPCHECK_DEBUG_TOKEN;
+      if (debugToken) {
+        (window as unknown as { FIREBASE_APPCHECK_DEBUG_TOKEN?: boolean | string }).FIREBASE_APPCHECK_DEBUG_TOKEN = debugToken;
+      }
+    }
+
     appCheck = initializeAppCheck(firebaseApp, {
       provider: new ReCaptchaEnterpriseProvider(RECAPTCHA_SITE_KEY),
       isTokenAutoRefreshEnabled: true,
@@ -45,12 +58,16 @@ export function initAppCheck(): AppCheck | undefined {
   }
 }
 
-export async function getAppCheckToken(): Promise<string | null> {
+/**
+ * Retrieves a valid Firebase App Check token.
+ * Pass forceRefresh = true to force generation of a new token (e.g. after a 403).
+ */
+export async function getAppCheckToken(forceRefresh = false): Promise<string | null> {
   if (typeof window === "undefined") return null;
   try {
     const ac = appCheck || initAppCheck();
     if (!ac) return null;
-    const result = await getToken(ac, false);
+    const result = await getToken(ac, forceRefresh);
     return result.token;
   } catch (err) {
     console.warn("Error getting Firebase App Check token:", err);

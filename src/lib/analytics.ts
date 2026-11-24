@@ -72,7 +72,7 @@ export function trackEmailClick(source: string) {
 }
 
 export function trackDigitalTwin(
-  action: "open" | "close" | "message_sent" | "preset_clicked",
+  action: "open" | "close" | "message_sent" | "preset_clicked" | "new_conversation",
   prompt?: string
 ) {
   trackEvent("digital_twin_interaction", {
