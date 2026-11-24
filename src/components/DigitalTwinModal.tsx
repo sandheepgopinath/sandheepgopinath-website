@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { FormattedChatMessage } from "./FormattedChatMessage";
 import { trackDigitalTwin } from "@/lib/analytics";
+import { getRecaptchaToken } from "@/lib/recaptchaClient";
 
 interface Message {
   role: "user" | "assistant";
@@ -35,6 +36,11 @@ export function DigitalTwinModal({ isOpen, onClose, initialQuestion }: DigitalTw
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [sessionToken, setSessionToken] = useState<string | null>(null);
+  const [isVerified, setIsVerified] = useState(false);
+  const [captchaResolved, setCaptchaResolved] = useState(false);
+
+  const resolvedTokenRef = useRef<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -42,26 +48,80 @@ export function DigitalTwinModal({ isOpen, onClose, initialQuestion }: DigitalTw
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const renderRecaptchaWidget = useCallback(() => {
+    if (typeof window === "undefined") return;
+    try {
+      const container = document.getElementById("recaptcha-chat-widget");
+      if (container && !container.hasChildNodes()) {
+        const enterprise = (
+          window as unknown as {
+            grecaptcha?: {
+              enterprise?: {
+                render?: (
+                  id: string,
+                  opts: {
+                    sitekey: string;
+                    action?: string;
+                    callback?: (token: string) => void;
+                    "expired-callback"?: () => void;
+                    "error-callback"?: () => void;
+                  }
+                ) => void;
+              };
+            };
+          }
+        )?.grecaptcha?.enterprise;
+
+        enterprise?.render?.("recaptcha-chat-widget", {
+          sitekey: "6LeuPTAuAAAAAIQhXZiUnVHpfHYcW_n80J5i4Uoj",
+          action: "CHAT",
+          callback: (token: string) => {
+            // Once resolved, immediately store token and remove the widget
+            resolvedTokenRef.current = token;
+            setCaptchaResolved(true);
+          },
+          "expired-callback": () => {
+            resolvedTokenRef.current = null;
+            setCaptchaResolved(false);
+          },
+          "error-callback": () => {
+            resolvedTokenRef.current = null;
+            setCaptchaResolved(false);
+          },
+        });
+      }
+    } catch (e) {
+      console.warn("reCAPTCHA render error:", e);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedToken = sessionStorage.getItem("chat_session_token");
+      if (savedToken) {
+        setSessionToken(savedToken);
+        setIsVerified(true);
+        setCaptchaResolved(true);
+      }
+    }
+  }, []);
+
   useEffect(() => {
     if (isOpen) {
       trackDigitalTwin("open");
       setTimeout(() => {
         inputRef.current?.focus();
         scrollToBottom();
-      }, 100);
+        if (!isVerified && !captchaResolved) {
+          renderRecaptchaWidget();
+        }
+      }, 250);
     }
-  }, [isOpen]);
+  }, [isOpen, isVerified, captchaResolved, renderRecaptchaWidget]);
 
   useEffect(() => {
     scrollToBottom();
   }, [messages, loading]);
-
-  useEffect(() => {
-    if (initialQuestion && isOpen) {
-      handleSend(initialQuestion);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialQuestion, isOpen]);
 
   const handleSend = async (textToSend?: string) => {
     const q = (textToSend || input).trim();
@@ -76,15 +136,60 @@ export function DigitalTwinModal({ isOpen, onClose, initialQuestion }: DigitalTw
     setLoading(true);
 
     try {
+      let recaptchaToken: string | null = resolvedTokenRef.current;
+      // If we don't have a resolved token and aren't verified yet, try client fetch
+      if (!isVerified && !recaptchaToken) {
+        recaptchaToken = await getRecaptchaToken("CHAT");
+      }
+
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           messages: newHistory.map((m) => ({ role: m.role, content: m.content })),
+          recaptchaToken,
+          sessionToken,
         }),
       });
 
       const data = await res.json();
+
+      if (res.status === 403 || data.requireVerification) {
+        setIsVerified(false);
+        setCaptchaResolved(false);
+        setSessionToken(null);
+        resolvedTokenRef.current = null;
+        if (typeof window !== "undefined") {
+          sessionStorage.removeItem("chat_session_token");
+        }
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: "assistant",
+            content:
+              data.text ||
+              "Please complete the fraud defense verification below to verify you are human, then send your message again.",
+            source: data.source,
+          },
+        ]);
+        // Re-render captcha widget
+        setTimeout(() => {
+          renderRecaptchaWidget();
+        }, 100);
+        return;
+      }
+
+      // Successful verification & response
+      if (data.sessionToken) {
+        setSessionToken(data.sessionToken);
+        setIsVerified(true);
+        setCaptchaResolved(true);
+        resolvedTokenRef.current = null; // Token consumed, session now active
+        if (typeof window !== "undefined") {
+          sessionStorage.setItem("chat_session_token", data.sessionToken);
+        }
+      }
+
       setMessages((prev) => [
         ...prev,
         {
@@ -109,7 +214,16 @@ export function DigitalTwinModal({ isOpen, onClose, initialQuestion }: DigitalTw
     }
   };
 
+  useEffect(() => {
+    if (initialQuestion && isOpen) {
+      handleSend(initialQuestion);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialQuestion, isOpen]);
+
   if (!isOpen) return null;
+
+  const showCaptcha = !isVerified && !captchaResolved;
 
   return (
     <div
@@ -199,7 +313,17 @@ export function DigitalTwinModal({ isOpen, onClose, initialQuestion }: DigitalTw
         ))}
       </div>
 
-      {/* Chat Form */}
+      {/* Checkbox Widget (Removed automatically once resolved or session verified) */}
+      {showCaptcha && (
+        <div
+          id="recaptcha-chat-widget"
+          className="border-t border-[#e2e7df] bg-[#f8faf7] flex justify-center py-2 transition-all duration-300"
+          data-sitekey="6LeuPTAuAAAAAIQhXZiUnVHpfHYcW_n80J5i4Uoj"
+          data-action="CHAT"
+        />
+      )}
+
+      {/* Input Form */}
       <form onSubmit={(e) => { e.preventDefault(); handleSend(); }} className="border-t border-[#dbe2d8] p-[10px] flex gap-[8px] bg-white">
         <input
           ref={inputRef}

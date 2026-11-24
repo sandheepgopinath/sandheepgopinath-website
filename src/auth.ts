@@ -4,6 +4,7 @@ import Google from "next-auth/providers/google";
 export const ADMIN_EMAIL = "sandheepgopinath@gmail.com";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  trustHost: true,
   providers: [Google],
   pages: {
     signIn: "/admin",

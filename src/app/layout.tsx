@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { AnalyticsProvider } from "@/components/AnalyticsProvider";
 import "./globals.css";
 
@@ -55,6 +56,24 @@ export default function RootLayout({
         />
       </head>
       <body id="top" className="antialiased selection:bg-[#cfdacb]">
+        {/* Google Analytics 4 Scripts via Next.js Script component */}
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-T0TCPRECHN"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-T0TCPRECHN', { send_page_view: true });
+          `}
+        </Script>
+        {/* Google reCAPTCHA Enterprise Fraud Defense */}
+        <Script
+          strategy="afterInteractive"
+          src="https://www.google.com/recaptcha/enterprise.js"
+        />
         <AnalyticsProvider />
         {children}
       </body>
