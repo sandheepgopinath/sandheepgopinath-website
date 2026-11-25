@@ -16,7 +16,7 @@ const firebaseConfig = {
 };
 
 export const RECAPTCHA_SITE_KEY =
-  process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "6LeuPTAuAAAAAIQhXZiUnVHpfHYcW_n80J5i4Uoj";
+  process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "6Le_djEuAAAAAKweHn84I3PvLpnrLSnBQJqDuaU0";
 
 const app: FirebaseApp = getApps().length ? getApp() : initializeApp(firebaseConfig);
 
