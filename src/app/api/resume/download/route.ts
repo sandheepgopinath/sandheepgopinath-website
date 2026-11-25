@@ -1,7 +1,9 @@
-import { NextResponse } from "next/server";
+import { connection, NextResponse } from "next/server";
 import { getResumeFile } from "@/lib/storage";
 
 export async function GET() {
+  await connection();
+
   try {
     const fileData = await getResumeFile();
 
@@ -17,7 +19,7 @@ export async function GET() {
         "Content-Type": "application/pdf",
         "Content-Disposition": `attachment; filename="${fileData.filename.replace(/"/g, "")}"; filename*=UTF-8''${encodedFilename}`,
         "Content-Length": fileData.size.toString(),
-        "Cache-Control": "public, max-age=60, s-maxage=300, stale-while-revalidate=86400",
+        "Cache-Control": "no-store",
       },
     });
   } catch (error) {

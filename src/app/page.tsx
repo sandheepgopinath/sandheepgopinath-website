@@ -344,7 +344,6 @@ export default function Home() {
                 <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-2.5 sm:gap-3 w-full">
                   <a
                     href="/api/resume/download"
-                    download="Sandheep_Gopinath_Resume_2026.pdf"
                     className="btn hero-liquid-glass hero-liquid-glass--primary text-[10px] sm:text-[11.5px] h-[31px] sm:h-[35px] px-3 justify-center w-full sm:w-auto"
                   >
                     Download Resume <span aria-hidden="true">↓</span>
