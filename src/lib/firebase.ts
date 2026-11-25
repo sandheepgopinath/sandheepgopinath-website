@@ -28,6 +28,13 @@ export function getAppCheckInstance(): AppCheck {
   }
 
   if (!appCheckInstance) {
+    if (process.env.NODE_ENV === "development") {
+      (
+        window as Window & { FIREBASE_APPCHECK_DEBUG_TOKEN?: boolean | string }
+      ).FIREBASE_APPCHECK_DEBUG_TOKEN =
+        process.env.NEXT_PUBLIC_FIREBASE_APPCHECK_DEBUG_TOKEN || true;
+    }
+
     appCheckInstance = initializeAppCheck(app, {
       provider: new ReCaptchaEnterpriseProvider(RECAPTCHA_SITE_KEY),
       isTokenAutoRefreshEnabled: true,

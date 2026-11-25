@@ -31,7 +31,7 @@ export const experienceCompanies = [
   },
   {
     "company": "HRS Group",
-    "role": "Product Manager · AI & Data Products",
+    "role": "AI / Data Product Manager",
     "overview": "Product direction across three core travel-technology products and three teams totaling 23 people, spanning AI innovation, enterprise adoption and customer experience.",
     "dates": "AUG 2022 — MAR 2024",
     "duration": "1 yr 8 mos",
@@ -70,7 +70,7 @@ export const experienceCompanies = [
   },
   {
     "company": "Danfoss",
-    "role": "Product Lead · Digital Transformation",
+    "role": "Digital Transformation Process Expert",
     "overview": "Industry 4.0 product opportunities across international manufacturing sites, from frontline discovery and connected operations to predictive analytics and computer vision.",
     "dates": "SEP 2017 — AUG 2021",
     "duration": "4 years",
@@ -109,7 +109,7 @@ export const experienceCompanies = [
   },
   {
     "company": "Synapse Technologies",
-    "role": "Co-founder · Products & Operations",
+    "role": "Founding Member - Head of Products and Operation",
     "overview": "Founder-level ownership across products, people and the business: opportunity discovery, R&D, portfolio direction, commercial strategy, partnerships and operations.",
     "dates": "AUG 2014 — SEP 2017",
     "duration": "3 yrs 2 mos",

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
+import { ChevronRight, FileText, Send, Sparkles, X } from "lucide-react";
 import { FormattedChatMessage } from "./FormattedChatMessage";
 import { trackDigitalTwin } from "@/lib/analytics";
 import { getAppCheckInstance } from "@/lib/firebase";
@@ -20,17 +21,17 @@ interface DigitalTwinModalProps {
 }
 
 const STARTER_QUESTIONS = [
-  "What differentiates Sandheep as a product leader?",
-  "What business impact has he created?",
-  "What is his experience with AI and machine learning?",
-  "How does he approach product strategy and prioritization?",
-  "What types of product management roles is he suitable for?",
+  { icon: "💡", text: "What differentiates Sandheep as a product leader?" },
+  { icon: "📊", text: "What business impact has he created?" },
+  { icon: "💼", text: "What is his experience with AI and machine learning?" },
+  { icon: "🎯", text: "How does he approach product strategy and prioritization?" },
+  { icon: "🚀", text: "What types of product management roles is he suitable for?" },
 ];
 
 const INITIAL_GREETING: DisplayMessage = {
   role: "assistant",
   content:
-    "Hello! I am Sandheep's AI-powered digital twin. Ask me anything about his product leadership, 0→1 products, commercial outcomes, AI/ML initiatives, or his building philosophy.",
+    "Hello! I am Sandheep's AI powered Digital twin! Ask me anything about his professional experience and I would be happy to help you!",
 };
 
 export function DigitalTwinModal({ isOpen, onClose, initialQuestion }: DigitalTwinModalProps) {
@@ -128,50 +129,62 @@ export function DigitalTwinModal({ isOpen, onClose, initialQuestion }: DigitalTw
 
   return (
     <div
-      className="fixed right-[22px] bottom-[80px] z-50 w-[min(460px,calc(100vw-30px))] h-[min(620px,calc(100svh-100px))] bg-[#f8f9f5] border border-[#cad2c9] shadow-[0_20px_50px_rgba(23,32,25,0.3)] rounded-[6px] flex flex-col overflow-hidden animate-fade-in font-sans"
-      onClick={(e) => e.stopPropagation()}
+      className="fixed inset-0 z-50 bg-slate-900/20 backdrop-blur-sm animate-fade-in"
+      onClick={onClose}
     >
+      <div
+        className="fixed right-[22px] bottom-[80px] z-50 w-[min(460px,calc(100vw-30px))] h-[min(640px,calc(100svh-100px))] bg-white border border-[#dce6f4] shadow-[0_20px_60px_rgba(37,99,235,0.16),0_4px_20px_rgba(15,23,42,0.08)] rounded-[24px] flex flex-col overflow-hidden font-sans"
+        onClick={(e) => e.stopPropagation()}
+      >
       {/* Header */}
-      <div className="px-[18px] py-[13px] border-b border-[#e0e5dd] bg-[#eeeee9] flex justify-between items-center text-[13px] text-[#25322b]">
-        <div>
-          <div className="font-bold flex items-center gap-2">
-            <span>Sandheep AI</span>
-            <span className="w-2 h-2 rounded-full bg-[#52855f] animate-pulse" />
-            <span className="text-[10px] font-normal px-1.5 py-0.5 rounded bg-[#e1e7de] text-[#4d6051]">
-              App Check Verified
-            </span>
+      <div className="px-4 py-3.5 border-b border-[#e4ebf5] bg-gradient-to-b from-[#edf3fc] to-[#f7fafe] flex justify-between items-center">
+        <div className="flex items-center gap-3">
+          <div className="relative flex-shrink-0">
+            <img
+              src="/portrait.jpg"
+              alt="Sandheep"
+              className="w-[42px] h-[42px] rounded-full object-cover ring-2 ring-white shadow-sm"
+            />
+            <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-[#3b82f6] ring-2 ring-white" />
           </div>
-          <small className="text-[10px] text-[#78857b] block mt-0.5">
-            Interactive Digital Twin · Powered by Amazon Bedrock
-          </small>
+          <div>
+            <div className="font-bold text-[15px] text-[#0f172a] flex items-center gap-2 leading-tight">
+              <span>Sandheep AI</span>
+              <span className="w-2.5 h-2.5 rounded-full bg-[#22c55e]" />
+            </div>
+            <small className="text-[12px] text-[#64748b] block mt-0.5">
+              Interactive Digital Twin
+            </small>
+          </div>
         </div>
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-2">
           <button
             onClick={handleNewConversation}
             title="Start new conversation"
-            className="liquid-glass-button text-[11px] px-2 py-1 text-[#5b6e5f] hover:text-[#1d2720]"
+            className="bg-white border border-[#dbe4f0] rounded-full px-3.5 py-1.5 text-[12px] font-medium text-[#1e293b] shadow-sm hover:bg-[#f8fafc] transition-colors cursor-pointer"
           >
             New Chat
           </button>
           <button
             onClick={onClose}
             title="Close chat"
-            className="liquid-glass-button liquid-glass-button--icon text-[#657367] hover:text-[#111] text-[18px] leading-none px-2 py-1"
+            aria-label="Close chat"
+            className="w-8 h-8 rounded-full bg-white border border-[#dbe4f0] flex items-center justify-center text-[#334155] shadow-sm hover:bg-[#f8fafc] transition-colors cursor-pointer"
           >
-            ✕
+            <X className="w-4 h-4" />
           </button>
         </div>
       </div>
 
       {/* Messages Scroll Area */}
-      <div className="p-[15px] flex flex-col gap-[12px] flex-1 overflow-y-auto">
+      <div className="p-4 flex flex-col gap-3 flex-1 overflow-y-auto bg-white">
         {messages.map((m, idx) => (
           <div
             key={idx}
-            className={`p-[12px_15px] text-[12px] leading-[1.75] rounded-[4px] max-w-[92%] ${
+            className={`px-4 py-3.5 text-[13.5px] leading-[1.6] rounded-[16px] max-w-[92%] ${
               m.role === "user"
-                ? "bg-[#2c3a31] text-white self-end"
-                : "bg-[#ecf0e9] text-[#252a28] self-start border border-[#dce3da]"
+                ? "bg-[#2563eb] text-white self-end shadow-sm"
+                : "bg-[#f1f5fb] text-[#1e293b] self-start border border-[#e3eaf4]"
             }`}
           >
             {m.role === "user" ? (
@@ -180,11 +193,16 @@ export function DigitalTwinModal({ isOpen, onClose, initialQuestion }: DigitalTw
               <div>
                 <FormattedChatMessage content={m.content} />
 
-                {/* Sources pill list if returned */}
+                {/* Sources footer if returned */}
                 {m.sources && m.sources.length > 0 && (
-                  <div className="mt-2.5 pt-2 border-t border-[#d8e0d6] text-[10px] text-[#6b7c6e]">
-                    <span className="font-medium">Sources: </span>
-                    {m.sources.join(" · ")}
+                  <div className="mt-3 pt-2.5 border-t border-[#e0e8f3] flex items-center justify-between gap-2 text-[12px] text-[#475569]">
+                    <div className="flex items-center gap-1.5 min-w-0">
+                      <FileText className="w-3.5 h-3.5 flex-shrink-0 text-[#475569]" />
+                      <span className="truncate">
+                        Sources: {m.sources.join(" · ")}
+                      </span>
+                    </div>
+                    <ChevronRight className="w-4 h-4 flex-shrink-0 text-[#64748b]" />
                   </div>
                 )}
               </div>
@@ -193,10 +211,10 @@ export function DigitalTwinModal({ isOpen, onClose, initialQuestion }: DigitalTw
         ))}
 
         {loading && (
-          <div className="bg-[#ecf0e9] border border-[#dce3da] text-[#556358] self-start p-[10px_14px] text-[11px] rounded-[4px] flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#556358] animate-bounce [animation-delay:-0.3s]" />
-            <span className="w-1.5 h-1.5 rounded-full bg-[#556358] animate-bounce [animation-delay:-0.15s]" />
-            <span className="w-1.5 h-1.5 rounded-full bg-[#556358] animate-bounce" />
+          <div className="bg-[#f1f5fb] border border-[#e3eaf4] text-[#475569] self-start px-4 py-3 text-[12px] rounded-[16px] flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#3b82f6] animate-bounce [animation-delay:-0.3s]" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#3b82f6] animate-bounce [animation-delay:-0.15s]" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#3b82f6] animate-bounce" />
             <span className="ml-1">Consulting knowledge base...</span>
           </div>
         )}
@@ -205,15 +223,16 @@ export function DigitalTwinModal({ isOpen, onClose, initialQuestion }: DigitalTw
       </div>
 
       {/* Suggested Starter Chips */}
-      <div className="px-[12px] py-[8px] bg-[#f2f4ef] border-t border-[#e2e7df] overflow-x-auto flex gap-1.5 scrollbar-none">
+      <div className="px-3.5 py-2.5 bg-white border-t border-[#eef2f7] overflow-x-auto flex gap-2 scrollbar-none">
         {STARTER_QUESTIONS.map((chip, i) => (
           <button
             key={i}
-            onClick={() => handleSend(chip)}
+            onClick={() => handleSend(chip.text)}
             disabled={loading}
-            className="liquid-glass-button whitespace-nowrap px-[10px] py-[5px] text-[#4c5d50] hover:text-[#1d2720] text-[11px] flex-shrink-0"
+            className="bg-[#f8fafd] hover:bg-[#eef4fc] border border-[#dce6f4] rounded-[14px] px-3 py-2 text-[12px] text-[#1e293b] flex items-center gap-2 flex-shrink-0 transition-colors cursor-pointer disabled:opacity-50"
           >
-            {chip}
+            <span className="text-[14px] leading-none">{chip.icon}</span>
+            <span className="whitespace-nowrap">{chip.text}</span>
           </button>
         ))}
       </div>
@@ -224,26 +243,31 @@ export function DigitalTwinModal({ isOpen, onClose, initialQuestion }: DigitalTw
           e.preventDefault();
           handleSend();
         }}
-        className="border-t border-[#dbe2d8] p-[10px] flex gap-[8px] bg-white"
+        className="px-3.5 pb-3.5 pt-2 bg-white flex items-center gap-2.5"
       >
-        <input
-          ref={inputRef}
-          type="text"
-          value={input}
-          maxLength={1500}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Ask anything about Sandheep's experience or thinking..."
-          disabled={loading}
-          className="border border-[#ccd5ca] bg-white flex-1 min-w-0 p-[9px_12px] text-[12px] text-[#252a28] focus:outline-none focus:border-[#6f8071] rounded-[3px]"
-        />
+        <div className="flex-1 flex items-center gap-2 bg-white border border-[#bfd4f2] focus-within:border-[#3b82f6] focus-within:ring-2 focus-within:ring-[#3b82f6]/15 rounded-full px-3.5 py-2 transition-all">
+          <Sparkles className="w-4 h-4 text-[#3b82f6] flex-shrink-0" />
+          <input
+            ref={inputRef}
+            type="text"
+            value={input}
+            maxLength={1500}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Ask anything about Sandheep's experience or thinking..."
+            disabled={loading}
+            className="flex-1 min-w-0 bg-transparent text-[13px] text-[#0f172a] placeholder:text-[#64748b] focus:outline-none"
+          />
+        </div>
         <button
           type="submit"
           disabled={!input.trim() || loading}
-          className="liquid-glass-button liquid-glass-button--primary text-white px-[15px] py-[8px] text-[12px] font-medium disabled:opacity-50"
+          aria-label="Send message"
+          className="w-10 h-10 rounded-full bg-[#2563eb] hover:bg-[#1d4ed8] disabled:opacity-50 text-white flex items-center justify-center flex-shrink-0 shadow-sm transition-colors cursor-pointer"
         >
-          Send
+          <Send className="w-4 h-4" />
         </button>
       </form>
+      </div>
     </div>
   );
 }

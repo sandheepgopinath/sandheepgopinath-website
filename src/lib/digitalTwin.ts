@@ -30,7 +30,20 @@ async function makeRequest(
   conversationHistory: DigitalTwinMessage[],
   forceRefresh = false
 ) {
-  const token = await getAppCheckToken(forceRefresh);
+  let token: string;
+  try {
+    token = await getAppCheckToken(forceRefresh);
+  } catch (error) {
+    if (
+      error instanceof Error &&
+      error.message.includes("appCheck/recaptcha-error")
+    ) {
+      throw new Error(
+        "Security verification (reCAPTCHA) failed to load. Please disable any ad blockers or privacy extensions and try again."
+      );
+    }
+    throw error;
+  }
 
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT);

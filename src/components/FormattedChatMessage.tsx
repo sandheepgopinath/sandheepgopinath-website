@@ -31,7 +31,7 @@ export function FormattedChatMessage({ content }: FormattedChatMessageProps) {
             href={match[2]}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-indigo-400 hover:text-indigo-300 underline font-medium"
+            className="text-[#2563eb] hover:text-[#1d4ed8] underline font-medium"
           >
             {match[1]}
           </a>
@@ -50,7 +50,7 @@ export function FormattedChatMessage({ content }: FormattedChatMessageProps) {
           <React.Fragment key={idx}>
             {boldSegments.map((segment, bIdx) =>
               bIdx % 2 === 1 ? (
-                <strong key={bIdx} className="font-semibold text-zinc-100">
+                <strong key={bIdx} className="font-semibold text-[#0f172a]">
                   {segment}
                 </strong>
               ) : (
@@ -68,7 +68,7 @@ export function FormattedChatMessage({ content }: FormattedChatMessageProps) {
     if (trimmed.startsWith("• ") || trimmed.startsWith("- ") || trimmed.startsWith("* ")) {
       const bulletContent = trimmed.substring(2);
       return (
-        <li key={key} className="ml-4 list-disc text-zinc-300 my-1 leading-relaxed">
+        <li key={key} className="ml-4 list-disc text-[#1e293b] my-1 leading-relaxed">
           {parseBoldAndLinks(bulletContent)}
         </li>
       );
@@ -80,14 +80,14 @@ export function FormattedChatMessage({ content }: FormattedChatMessageProps) {
     }
 
     return (
-      <p key={key} className="text-zinc-300 my-1 leading-relaxed">
+      <p key={key} className="text-[#1e293b] my-1 leading-relaxed">
         {parseBoldAndLinks(line)}
       </p>
     );
   };
 
   return (
-    <div className="space-y-0.5 text-sm md:text-base">
+    <div className="space-y-0.5 text-[13.5px] !text-[#0f172a]" style={{ color: "#0f172a" }}>
       {lines.map((line, idx) => renderFormattedLine(line, idx))}
     </div>
   );

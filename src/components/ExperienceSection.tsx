@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { MapPin, X } from "lucide-react";
 import { experienceCompanies } from "@/data/experienceData";
 
-const latestFirst = ["Verint", "HRS Group", "Qure.ai", "Danfoss", "Synapse Technologies"];
+const latestFirst = ["Verint", "HRS Group", "Danfoss", "Synapse Technologies"];
 const visibleExperienceCompanies = experienceCompanies
-  .filter((item) => item.company !== "Sketch Theory · Edition36")
+  .filter((item) => item.company !== "Sketch Theory · Edition36" && item.company !== "Qure.ai")
   .sort((a, b) => latestFirst.indexOf(a.company) - latestFirst.indexOf(b.company));
 
 export function ExperienceSection() {
@@ -73,12 +73,13 @@ export function ExperienceSection() {
                 </span>
                 <span className="experience-company-copy">
                   <strong>{item.company}</strong>
-                  <small>{item.role}</small>
+                  <small className="text-[14.5px]">{item.role}</small>
+                  <time className="text-[9.5px] text-[#6d7c70] block mt-0.5 mb-1.5">
+                    {item.dates} ({item.duration})
+                  </time>
                   <span>{item.overview}</span>
                 </span>
                 <span className="experience-company-meta">
-                  <time>{item.dates}</time>
-                  <small>{item.duration}</small>
                   <button
                     ref={(node) => { if (activeCompany === index) openerRef.current = node; }}
                     type="button"

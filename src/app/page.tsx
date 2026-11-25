@@ -10,7 +10,8 @@ import { CalendlyModal } from "@/components/CalendlyModal";
 import { ExpertiseSection } from "@/components/ExpertiseSection";
 import { AmbientMusic } from "@/components/AmbientMusic";
 import { ExperienceSection } from "@/components/ExperienceSection";
-import { BrainCircuit, GraduationCap, Microchip, UsersRound, X } from "lucide-react";
+import { RecommendationsSection } from "@/components/RecommendationsSection";
+import { BrainCircuit, GraduationCap, Microchip, Sparkles, UsersRound, X } from "lucide-react";
 
 const FULL_SUMMARY_TEXT =
   "A product leader and founder with 11+ years of experience bridging product, technology, and business across diverse industries — from early-stage ventures to global organizations.";
@@ -22,10 +23,11 @@ const pageSections = [
   { id: "landing-hero", label: "01 / HOME", nextId: "experience", action: "NEXT SECTION", arrow: "↓" },
   { id: "expertise", label: "02 / EXPERTISE & IMPACT", nextId: "experience", action: "NEXT SECTION", arrow: "↓" },
   { id: "experience", label: "03 / EXPERIENCE", nextId: "education", action: "NEXT SECTION", arrow: "↓" },
-  { id: "education", label: "04 / EDUCATION", nextId: "philosophy", action: "NEXT SECTION", arrow: "↓" },
-  { id: "philosophy", label: "05 / HOW I THINK", nextId: "work", action: "NEXT SECTION", arrow: "↓" },
-  { id: "work", label: "06 / PRODUCTS, PROBLEMS, DECISIONS", nextId: "reading", action: "NEXT SECTION", arrow: "↓" },
-  { id: "reading", label: "07 / BOOKS", nextId: "landing-hero", action: "BACK TO TOP", arrow: "↑" },
+  { id: "education", label: "04 / EDUCATION", nextId: "recommendations", action: "NEXT SECTION", arrow: "↓" },
+  { id: "recommendations", label: "05 / RECOMMENDATIONS", nextId: "philosophy", action: "NEXT SECTION", arrow: "↓" },
+  { id: "philosophy", label: "06 / HOW I THINK", nextId: "work", action: "NEXT SECTION", arrow: "↓" },
+  { id: "work", label: "07 / PRODUCTS, PROBLEMS, DECISIONS", nextId: "reading", action: "NEXT SECTION", arrow: "↓" },
+  { id: "reading", label: "08 / BOOKS", nextId: "landing-hero", action: "BACK TO TOP", arrow: "↑" },
 ] as const;
 
 function TypingHeroSummary({ text }: { text: string }) {
@@ -444,6 +446,8 @@ export default function Home() {
         </section>
 
         {/* 05 / HOW I THINK (PHILOSOPHY) */}
+        <RecommendationsSection />
+
         <section className="how-section" id="philosophy" aria-labelledby="philosophy-title">
           <div className="how-landscape" aria-hidden="true"><i /><i /></div>
           <div className="wrap how-shell">
@@ -646,6 +650,21 @@ export default function Home() {
           {pageSections[activePageSection].action} <span aria-hidden="true">{pageSections[activePageSection].arrow}</span>
         </a>
       </div>
+
+      {/* Floating AI Chat Button */}
+      {!digitalTwinOpen && (
+        <button
+          type="button"
+          onClick={() => setDigitalTwinOpen(true)}
+          aria-label="Open Sandheep AI chat"
+          className="fixed right-[20px] bottom-[62px] z-40 flex items-center gap-2 rounded-full bg-[#2c3a31]/85 hover:bg-[#25322b]/95 backdrop-blur-md border border-[#8fb397]/40 text-[#f8f9f5] px-4 py-2.5 shadow-[0_10px_30px_rgba(23,32,25,0.28),inset_0_1px_0_rgba(255,255,255,0.22)] transition-transform hover:scale-105 active:scale-95 cursor-pointer"
+        >
+          <Sparkles className="w-4 h-4 text-[#a7d7b2]" />
+          <span className="text-[12.5px] font-medium tracking-wide">
+            Ask Sandheep&apos;s AI Twin
+          </span>
+        </button>
+      )}
 
       {/* Digital Twin Chat Widget */}
       <DigitalTwinModal
