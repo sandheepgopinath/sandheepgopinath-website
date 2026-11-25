@@ -55,7 +55,7 @@ export function ExperienceSection() {
                 className="experience-company-card"
               >
                 <span className="experience-company-logo">
-                  {item.logo ? (
+                  {(item.logo as string) ? (
                     <>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
@@ -110,7 +110,7 @@ export function ExperienceSection() {
               <div className="experience-detail-intro">
                 <h2 id="experience-detail-title" className="sr-only">{company.company}</h2>
                 <span className="experience-detail-logo">
-                  {company.logo ? (
+                  {(company.logo as string) ? (
                     <>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img

@@ -11,6 +11,7 @@ import { ExpertiseSection } from "@/components/ExpertiseSection";
 import { AmbientMusic } from "@/components/AmbientMusic";
 import { ExperienceSection } from "@/components/ExperienceSection";
 import { RecommendationsSection } from "@/components/RecommendationsSection";
+import { GitHubIcon, LinkedInIcon } from "@/components/Icons";
 import { BrainCircuit, GraduationCap, Microchip, Sparkles, UsersRound, X } from "lucide-react";
 
 const FULL_SUMMARY_TEXT =
@@ -360,6 +361,28 @@ export default function Home() {
                   >
                     Set up a meeting <span aria-hidden="true">↗</span>
                   </button>
+                  <div className="flex items-center gap-2">
+                    <a
+                      href="https://www.linkedin.com/in/sandheepgopinath/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Sandheep Gopinath on LinkedIn"
+                      title="LinkedIn"
+                      className="btn hero-liquid-glass h-[31px] sm:h-[35px] w-[31px] sm:w-[35px] p-0 justify-center"
+                    >
+                      <LinkedInIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                    </a>
+                    <a
+                      href="https://github.com/sandheepgopinath"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Sandheep Gopinath on GitHub"
+                      title="GitHub"
+                      className="btn hero-liquid-glass h-[31px] sm:h-[35px] w-[31px] sm:w-[35px] p-0 justify-center"
+                    >
+                      <GitHubIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

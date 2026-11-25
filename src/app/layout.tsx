@@ -54,6 +54,22 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
           rel="stylesheet"
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Sandheep Gopinath",
+              url: "https://sandheepgopinath.com",
+              jobTitle: "Product Leader & Product Manager",
+              sameAs: [
+                "https://www.linkedin.com/in/sandheepgopinath/",
+                "https://github.com/sandheepgopinath",
+              ],
+            }),
+          }}
+        />
       </head>
       <body id="top" className="antialiased selection:bg-[#cfdacb]">
         {/* Google Analytics 4 Scripts via Next.js Script component */}

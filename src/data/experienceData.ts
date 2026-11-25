@@ -113,7 +113,7 @@ export const experienceCompanies = [
     "overview": "Founder-level ownership across products, people and the business: opportunity discovery, R&D, portfolio direction, commercial strategy, partnerships and operations.",
     "dates": "AUG 2014 — SEP 2017",
     "duration": "3 yrs 2 mos",
-    "logo": "",
+    "logo": "/synapse.png",
     "location": "Cochin, Kerala, India",
     "products": [
       {
