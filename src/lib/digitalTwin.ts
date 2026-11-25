@@ -34,6 +34,7 @@ async function makeRequest(
   try {
     token = await getAppCheckToken(forceRefresh);
   } catch (error) {
+    console.error("App Check getToken error:", error);
     if (
       error instanceof Error &&
       error.message.includes("appCheck/recaptcha-error")

@@ -20,14 +20,16 @@ export const RECAPTCHA_SITE_KEY =
 
 const app: FirebaseApp = getApps().length ? getApp() : initializeApp(firebaseConfig);
 
-let appCheckInstance: AppCheck | undefined;
+const globalForAppCheck = globalThis as typeof globalThis & {
+  __firebaseAppCheckInstance?: AppCheck;
+};
 
 export function getAppCheckInstance(): AppCheck {
   if (typeof window === "undefined") {
     throw new Error("App Check requires a browser environment.");
   }
 
-  if (!appCheckInstance) {
+  if (!globalForAppCheck.__firebaseAppCheckInstance) {
     if (typeof crypto !== "undefined" && typeof crypto.randomUUID !== "function") {
       crypto.randomUUID = () =>
         "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
@@ -44,13 +46,13 @@ export function getAppCheckInstance(): AppCheck {
         process.env.NEXT_PUBLIC_FIREBASE_APPCHECK_DEBUG_TOKEN || true;
     }
 
-    appCheckInstance = initializeAppCheck(app, {
+    globalForAppCheck.__firebaseAppCheckInstance = initializeAppCheck(app, {
       provider: new ReCaptchaEnterpriseProvider(RECAPTCHA_SITE_KEY),
       isTokenAutoRefreshEnabled: true,
     });
   }
 
-  return appCheckInstance;
+  return globalForAppCheck.__firebaseAppCheckInstance;
 }
 
 export async function getAppCheckToken(forceRefresh = false): Promise<string> {
