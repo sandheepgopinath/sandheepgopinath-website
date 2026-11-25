@@ -80,6 +80,7 @@ const RECOMMENDATIONS: Recommendation[] = [
 
 export function RecommendationsSection() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const touchStartX = React.useRef<number | null>(null);
 
   const prev = () => {
     setActiveIndex((i) => (i === 0 ? RECOMMENDATIONS.length - 1 : i - 1));
@@ -87,6 +88,20 @@ export function RecommendationsSection() {
 
   const next = () => {
     setActiveIndex((i) => (i === RECOMMENDATIONS.length - 1 ? 0 : i + 1));
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) next();
+      else prev();
+    }
+    touchStartX.current = null;
   };
 
   const current = RECOMMENDATIONS[activeIndex];
@@ -109,7 +124,11 @@ export function RecommendationsSection() {
           <strong>{activeIndex + 1} OF {RECOMMENDATIONS.length}</strong>
         </div>
 
-        <article className="bg-white border border-[#dce3da] rounded-[16px] p-[24px] sm:p-[32px] shadow-[0_12px_36px_rgba(23,32,25,0.06)]">
+        <article
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          className="bg-white border border-[#dce3da] rounded-[16px] p-[24px] sm:p-[32px] shadow-[0_12px_36px_rgba(23,32,25,0.06)] touch-pan-y"
+        >
           <div className="flex items-center gap-3.5 pb-5 mb-5 border-b border-[#e8ece6]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -156,7 +175,7 @@ export function RecommendationsSection() {
             ))}
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-2">
             <button
               type="button"
               onClick={prev}

@@ -21,7 +21,7 @@ interface DigitalTwinModalProps {
 }
 
 const STARTER_QUESTIONS = [
-  { icon: "💡", text: "What differentiates Sandheep as a product leader?" },
+  { icon: "⏳", text: "What is Sandheep's total years of experience" },
   { icon: "📊", text: "What business impact has he created?" },
   { icon: "💼", text: "What is his experience with AI and machine learning?" },
   { icon: "🎯", text: "How does he approach product strategy and prioritization?" },
@@ -38,6 +38,7 @@ export function DigitalTwinModal({ isOpen, onClose, initialQuestion }: DigitalTw
   const [messages, setMessages] = useState<DisplayMessage[]>([INITIAL_GREETING]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [clickedSuggestions, setClickedSuggestions] = useState<string[]>([]);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -68,6 +69,7 @@ export function DigitalTwinModal({ isOpen, onClose, initialQuestion }: DigitalTw
   const handleNewConversation = () => {
     setMessages([INITIAL_GREETING]);
     setInput("");
+    setClickedSuggestions([]);
     trackDigitalTwin("new_conversation");
   };
 
@@ -223,19 +225,24 @@ export function DigitalTwinModal({ isOpen, onClose, initialQuestion }: DigitalTw
       </div>
 
       {/* Suggested Starter Chips */}
-      <div className="px-3.5 py-2.5 bg-white border-t border-[#eef2f7] overflow-x-auto flex gap-2 scrollbar-none">
-        {STARTER_QUESTIONS.map((chip, i) => (
-          <button
-            key={i}
-            onClick={() => handleSend(chip.text)}
-            disabled={loading}
-            className="bg-[#f8fafd] hover:bg-[#eef4fc] border border-[#dce6f4] rounded-[14px] px-3 py-2 text-[12px] text-[#1e293b] flex items-center gap-2 flex-shrink-0 transition-colors cursor-pointer disabled:opacity-50"
-          >
-            <span className="text-[14px] leading-none">{chip.icon}</span>
-            <span className="whitespace-nowrap">{chip.text}</span>
-          </button>
-        ))}
-      </div>
+      {STARTER_QUESTIONS.some((chip) => !clickedSuggestions.includes(chip.text)) && (
+        <div className="px-3.5 py-2.5 bg-white border-t border-[#eef2f7] overflow-x-auto flex gap-2 scrollbar-none">
+          {STARTER_QUESTIONS.filter((chip) => !clickedSuggestions.includes(chip.text)).map((chip, i) => (
+            <button
+              key={i}
+              onClick={() => {
+                setClickedSuggestions((prev) => [...prev, chip.text]);
+                handleSend(chip.text);
+              }}
+              disabled={loading}
+              className="bg-[#f8fafd] hover:bg-[#eef4fc] border border-[#dce6f4] rounded-[14px] px-3 py-2 text-[12px] text-[#1e293b] flex items-center gap-2 flex-shrink-0 transition-colors cursor-pointer disabled:opacity-50"
+            >
+              <span className="text-[14px] leading-none">{chip.icon}</span>
+              <span className="whitespace-nowrap">{chip.text}</span>
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Input Form */}
       <form

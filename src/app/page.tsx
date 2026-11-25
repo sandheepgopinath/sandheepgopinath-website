@@ -361,16 +361,16 @@ export default function Home() {
                   >
                     Set up a meeting <span aria-hidden="true">↗</span>
                   </button>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 w-full sm:w-auto">
                     <a
                       href="https://www.linkedin.com/in/sandheepgopinath/"
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="Sandheep Gopinath on LinkedIn"
                       title="LinkedIn"
-                      className="btn hero-liquid-glass h-[31px] sm:h-[35px] w-[31px] sm:w-[35px] p-0 justify-center"
+                      className="btn hero-liquid-glass flex-1 sm:flex-none h-[31px] sm:h-[35px] sm:w-[35px] !px-0 flex items-center !justify-center !text-[#1f2c24]"
                     >
-                      <LinkedInIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                      <LinkedInIcon className="w-4 h-4 shrink-0 text-[#1f2c24]" />
                     </a>
                     <a
                       href="https://github.com/sandheepgopinath"
@@ -378,9 +378,9 @@ export default function Home() {
                       rel="noopener noreferrer"
                       aria-label="Sandheep Gopinath on GitHub"
                       title="GitHub"
-                      className="btn hero-liquid-glass h-[31px] sm:h-[35px] w-[31px] sm:w-[35px] p-0 justify-center"
+                      className="btn hero-liquid-glass flex-1 sm:flex-none h-[31px] sm:h-[35px] sm:w-[35px] !px-0 flex items-center !justify-center !text-[#1f2c24]"
                     >
-                      <GitHubIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                      <GitHubIcon className="w-4 h-4 shrink-0 text-[#1f2c24]" />
                     </a>
                   </div>
                 </div>

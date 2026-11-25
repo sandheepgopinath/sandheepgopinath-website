@@ -178,7 +178,7 @@ export function AmbientMusic({ enabled, onToggle, onSelectChoice }: AmbientMusic
       {enabled !== null && (
         <button
           type="button"
-          className={`ambient-music-toggle liquid-glass-button ${enabled ? "is-playing" : ""} ${isScrolled ? "is-visible" : ""}`}
+          className={`ambient-music-toggle liquid-glass-button max-md:hidden ${enabled ? "is-playing" : ""} ${isScrolled ? "is-visible" : ""}`}
           onClick={() => {
             trackMusic(enabled ? "pause" : "play");
             onToggle();
